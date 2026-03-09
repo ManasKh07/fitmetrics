@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BMI Calculator | FitMetrics</title>
+
+<meta name="description" content="Calculate your Body Mass Index instantly using this free BMI calculator.">
+
+<link rel="stylesheet" href="../style.css">
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"WebApplication",
+ "name":"BMI Calculator",
+ "url":"https://quickbmi.in/calculators/bmi-calculator.html",
+ "applicationCategory":"HealthApplication",
+ "operatingSystem":"Any",
+ "description":"Calculate body mass index instantly and understand healthy weight ranges."
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+ {
+ "@type":"Question",
+ "name":"What is a healthy BMI range?",
+ "acceptedAnswer":{
+ "@type":"Answer",
+ "text":"A BMI between 18.5 and 24.9 is generally considered healthy for adults."
+ }
+ },
+ {
+ "@type":"Question",
+ "name":"Is BMI accurate for everyone?",
+ "acceptedAnswer":{
+ "@type":"Answer",
+ "text":"BMI is a useful estimate but does not account for muscle mass or body composition."
+ }
+ }
+ ]
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="container header-flex">
+
+<a href="../index.html" class="logo">⚡ FitMetrics</a>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="bmi-calculator.html">BMI</a>
+<a href="macro-calculator.html">Macros</a>
+<a href="tdee-calculator.html">TDEE</a>
+<a href="body-fat-calculator.html">Body Fat</a>
+<a href="water-calculator.html">Water</a>
+<a href="age-calculator.html">Age</a>
+<a href="percentage-calculator.html">Percentage</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<div class="calculator-layout">
+
+<div class="calc-box">
+
+<h2>BMI Calculator</h2>
+
+<div class="input-group">
+<label for="w">Weight (kg)</label>
+<input id="w" placeholder="e.g., 62">
+</div>
+
+<div class="input-group">
+<label for="h">Height (cm)</label>
+<input id="h" placeholder="e.g., 178">
+</div>
+
+<button onclick="calculateBMI()">Calculate BMI</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<div class="side-panel">
+
+<h3>BMI Categories</h3>
+
+<table>
+
+<tr>
+<th>Category</th>
+<th>Range</th>
+</tr>
+
+<tr>
+<td>Underweight</td>
+<td>Below 18.5</td>
+</tr>
+
+<tr>
+<td>Healthy Weight</td>
+<td>18.5 – 24.9</td>
+</tr>
+
+<tr>
+<td>Overweight</td>
+<td>25.0 – 29.9</td>
+</tr>
+
+<tr>
+<td>Obesity</td>
+<td>30.0+</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<article class="article">
+
+<h2>Understanding Body Mass Index</h2>
+
+<p>
+Body Mass Index (BMI) is a widely used measurement that estimates whether a person has a healthy body weight relative to their height.
+</p>
+
+<p>
+Healthcare professionals use BMI as a screening tool to identify weight categories that may lead to health risks such as cardiovascular disease, diabetes, or metabolic disorders.
+</p>
+
+<p>
+If you want a deeper understanding of daily calorie needs, you can also use our
+<a href="tdee-calculator.html">TDEE calculator</a> or estimate hydration using the
+<a href="water-calculator.html">water intake calculator</a>.
+</p>
+
+<div class="faq-section">
+<p>
+If you're new to Body Mass Index, you can learn how it works and why doctors use it in our detailed guide:
+<a href="../blog/what-is-bmi.html">What is BMI and Why It Matters</a>.
+</p>
+
+<h2>FAQs</h2>
+
+<details>
+<summary>What is considered a healthy BMI?</summary>
+<p>A BMI between 18.5 and 24.9 is considered healthy for most adults.</p>
+</details>
+
+<details>
+<summary>Is BMI always accurate?</summary>
+<p>BMI is useful for population-level screening but may not accurately reflect body composition for athletes or individuals with high muscle mass.</p>
+</details>
+
+<details>
+<summary>Why do doctors still use BMI?</summary>
+<p>Because it is simple, fast, and useful for identifying general weight categories.</p>
+</details>
+
+</div>
+
+</article>
+
+</main>
+
+
+<footer>
+
+<p>© 2026 FitMetrics</p>
+
+<a href="../privacy.html">Privacy</a>
+<a href="../terms.html">Terms</a>
+
+</footer>
+
+<script src="../script.js"></script>
+
+</body>
+</html>

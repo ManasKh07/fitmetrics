@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TDEE Calculator | FitMetrics</title>
+
+<meta name="description" content="Estimate your total daily energy expenditure and calorie needs based on activity level.">
+
+<link rel="canonical" href="https://quickbmi.in/calculators/tdee-calculator.html">
+
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"WebApplication",
+ "name":"TDEE Calculator",
+ "url":"https://quickbmi.in/calculators/tdee-calculator.html",
+ "applicationCategory":"HealthApplication",
+ "operatingSystem":"Any",
+ "description":"Estimate total daily energy expenditure and daily calorie requirements."
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+ {
+ "@type":"Question",
+ "name":"What does TDEE mean?",
+ "acceptedAnswer":{
+ "@type":"Answer",
+ "text":"TDEE stands for Total Daily Energy Expenditure and represents the calories your body burns each day."
+ }
+ },
+ {
+ "@type":"Question",
+ "name":"How can I lose weight using TDEE?",
+ "acceptedAnswer":{
+ "@type":"Answer",
+ "text":"You generally need to consume fewer calories than your TDEE to create a calorie deficit."
+ }
+ }
+ ]
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="container header-flex">
+
+<a href="../index.html" class="logo">⚡ FitMetrics</a>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="bmi-calculator.html">BMI</a>
+<a href="macro-calculator.html">Macros</a>
+<a href="tdee-calculator.html">TDEE</a>
+<a href="body-fat-calculator.html">Body Fat</a>
+<a href="water-calculator.html">Water</a>
+<a href="age-calculator.html">Age</a>
+<a href="percentage-calculator.html">Percentage</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<div class="calculator-layout">
+
+<div class="calc-box">
+
+<h2>TDEE Calculator</h2>
+
+<select id="gender">
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+
+<div class="input-group">
+<input id="age" placeholder="Age">
+</div>
+
+<div class="input-group">
+<input id="weight" placeholder="Weight (kg)">
+</div>
+
+<div class="input-group">
+<input id="height" placeholder="Height (cm)">
+</div>
+
+<select id="activity">
+
+<option value="1.2">Sedentary (Office job)</option>
+<option value="1.375">Light exercise</option>
+<option value="1.55">Moderate exercise</option>
+<option value="1.725">Very active</option>
+
+</select>
+
+<button onclick="calculateTDEE()">Calculate TDEE</button>
+
+<div id="tdee_result" class="result"></div>
+
+</div>
+
+
+<div class="side-panel">
+
+<h3>Activity Multipliers</h3>
+
+<table>
+
+<tr>
+<th>Activity Level</th>
+<th>Multiplier</th>
+</tr>
+
+<tr>
+<td>Sedentary</td>
+<td>1.2</td>
+</tr>
+
+<tr>
+<td>Light Activity</td>
+<td>1.375</td>
+</tr>
+
+<tr>
+<td>Moderate Activity</td>
+<td>1.55</td>
+</tr>
+
+<tr>
+<td>Very Active</td>
+<td>1.725</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<section class="article">
+
+<h2>What is Total Daily Energy Expenditure?</h2>
+
+<p>
+Total Daily Energy Expenditure (TDEE) represents the total number of calories your body burns each day. It combines your basal metabolic rate with calories burned through physical activity and digestion.
+</p>
+
+<p>
+Understanding your TDEE helps determine how many calories you should consume to maintain, lose or gain weight.
+</p>
+
+<p>
+You can combine this information with our
+<a href="macro-calculator.html">macro calculator</a>
+to determine the optimal distribution of protein, carbohydrates and fats.
+</p>
+<p>
+Want to understand how calorie needs are calculated? Read our full explanation in
+<a href="../blog/calories-per-day.html">How Many Calories Should You Eat Daily</a>.
+</p>
+<div class="faq-section">
+
+<h2>FAQs</h2>
+
+<details>
+<summary>Why is TDEE important?</summary>
+<p>Your TDEE determines how many calories you should eat to maintain your current weight.</p>
+</details>
+
+<details>
+<summary>How do I lose weight using TDEE?</summary>
+<p>To lose weight you generally consume fewer calories than your TDEE, creating a calorie deficit.</p>
+</details>
+
+<details>
+<summary>Does exercise increase TDEE?</summary>
+<p>Yes. Physical activity increases daily energy expenditure and therefore increases TDEE.</p>
+</details>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>© 2026 FitMetrics</p>
+
+<a href="../privacy.html">Privacy</a>
+<a href="../terms.html">Terms</a>
+
+</footer>
+
+<script src="../script.js"></script>
+
+</body>
+</html>
