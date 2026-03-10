@@ -205,23 +205,24 @@ document.getElementById("imperialInputs").style.display="block";
 }
 
 }
-function toggleHeightInputs(){
+function toggleHeightInputs() {
     let unit = document.getElementById("height_unit").value;
     
     let cmInput = document.getElementById("height");
     let ftInput = document.getElementById("height_ft_input");
     let inInput = document.getElementById("height_in_input");
 
-    if(unit === "cm"){
-        cmInput.style.display = ""; 
+    if (unit === "cm") {
+        cmInput.style.display = "block"; 
         ftInput.style.display = "none";
         inInput.style.display = "none";
     } else {
         cmInput.style.display = "none";
-        ftInput.style.display = ""; 
-        inInput.style.display = ""; 
+        ftInput.style.display = "block"; 
+        inInput.style.display = "block"; 
     }
 }
+
 
 
 
