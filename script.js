@@ -27,7 +27,7 @@ else{
 let ft = parseFloat(document.getElementById("height_ft_input").value);
 let inch = parseFloat(document.getElementById("height_in_input").value);
 
-height=((ft*12)+parseFloat(inch))*0.0254;
+height = ((ft * 12) + inch) * 0.0254;
 }
 
 let bmi=weight/(height*height);
@@ -227,6 +227,7 @@ ft.style.display = "flex";
 }
 
 }
+
 
 
 
