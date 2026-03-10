@@ -91,42 +91,47 @@
 <h2>BMI Calculator</h2>
 
 <div class="input-group">
-<label for="unit">Unit System</label>
-<select id="unit" onchange="toggleBMIUnit()">
-<option value="metric">Metric (kg, cm)</option>
-<option value="imperial">Imperial (lb, ft/in)</option>
+<label for="weight">Weight</label>
+<input id="weight" placeholder="e.g., 62">
+
+<select id="weight_unit">
+<option value="kg">kg</option>
+<option value="lb">lb</option>
 </select>
 </div>
 
-<div id="metricInputs">
 
 <div class="input-group">
-<label for="w">Weight (kg)</label>
-<input id="w" placeholder="e.g., 62">
+<label for="height_unit">Height Unit</label>
+<select id="height_unit" onchange="toggleHeightInputs()">
+<option value="cm">cm</option>
+<option value="ft">ft + in</option>
+</select>
+</div>
+
+
+<div id="height_cm">
+
+<div class="input-group">
+<label for="height">Height (cm)</label>
+<input id="height" placeholder="e.g., 178">
+</div>
+
+</div>
+
+
+<div id="height_ft" style="display:none;">
+
+<div class="input-group">
+<label for="height_ft">Feet</label>
+<input id="height_ft" placeholder="e.g., 5">
 </div>
 
 <div class="input-group">
-<label for="h">Height (cm)</label>
-<input id="h" placeholder="e.g., 178">
+<label for="height_in">Inches</label>
+<input id="height_in" placeholder="e.g., 9">
 </div>
 
-</div>
-
-<div id="imperialInputs" style="display:none;">
-
-<div class="input-group">
-<label for="w_lb">Weight (lb)</label>
-<input id="w_lb" placeholder="e.g., 150">
-</div>
-
-<div class="input-group">
-<label for="h_ft">Height (feet)</label>
-<input id="h_ft" placeholder="e.g., 5">
-</div>
-
-<div class="input-group">
-<label for="h_in">Height (inches)</label>
-<input id="h_in" placeholder="e.g., 9">
 </div>
 
 </div>
@@ -237,4 +242,5 @@ If you're new to Body Mass Index, you can learn how it works and why doctors use
 </body>
 
 </html>
+
 
