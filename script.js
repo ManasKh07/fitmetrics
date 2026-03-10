@@ -36,7 +36,7 @@ showResult("result","BMI: "+bmi.toFixed(2));
 
 }
 
-}
+
 
 
 /* AGE */
@@ -227,6 +227,7 @@ ft.style.display = "flex";
 }
 
 }
+
 
 
 
