@@ -244,9 +244,12 @@ margin:0 10px;
 
 
 }
+/* INPUT ROW FOR UNIT + VALUE */
+
 .input-row{
 display:flex;
 gap:10px;
+align-items:center;
 }
 
 .input-row input{
@@ -255,5 +258,13 @@ flex:1;
 
 .input-row select{
 width:90px;
+flex-shrink:0;
 }
+
+/* HEIGHT FT + IN */
+
+#height_ft .input-row input{
+flex:1;
+}
+
 
