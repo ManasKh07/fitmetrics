@@ -244,3 +244,16 @@ margin:0 10px;
 
 
 }
+.input-row{
+display:flex;
+gap:10px;
+}
+
+.input-row input{
+flex:1;
+}
+
+.input-row select{
+width:90px;
+}
+
