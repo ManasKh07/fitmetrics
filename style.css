@@ -36,9 +36,6 @@ align-items:center;
 .logo{
 font-size:22px;
 font-weight:700;
-}
-
-.logo{
 color:white;
 text-decoration:none;
 }
@@ -103,14 +100,24 @@ border-radius:12px;
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-.calc-box input,
-.calc-box select{
+/* INPUTS */
+
+.calc-box input{
 width:100%;
 padding:12px;
 margin-bottom:12px;
 border:1px solid #e5e7eb;
 border-radius:8px;
 }
+
+.calc-box select{
+padding:12px;
+margin-bottom:12px;
+border:1px solid #e5e7eb;
+border-radius:8px;
+}
+
+/* BUTTON */
 
 .calc-box button{
 width:100%;
@@ -127,6 +134,8 @@ font-size:16px;
 .calc-box button:hover{
 opacity:.9;
 }
+
+/* RESULT */
 
 .result{
 display:none;
@@ -225,6 +234,32 @@ footer a:hover{
 color:white;
 }
 
+/* INPUT ROW (Weight + Unit) */
+
+.input-row{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.input-row input{
+flex:1;
+width:auto;
+margin-bottom:0;
+}
+
+.input-row select{
+width:90px;
+flex-shrink:0;
+margin-bottom:0;
+}
+
+/* HEIGHT FT + IN */
+
+#height_ft .input-row input{
+flex:1;
+}
+
 /* MOBILE */
 
 @media(max-width:800px){
@@ -242,40 +277,4 @@ nav a{
 margin:0 10px;
 }
 
-
 }
-/* INPUT ROW FOR UNIT + VALUE */
-
-.input-row{
-display:flex;
-gap:10px;
-align-items:center;
-}
-
-.input-row input{
-flex:1;
-}
-
-.input-row select{
-width:90px;
-flex-shrink:0;
-}
-
-/* HEIGHT FT + IN */
-
-#height_ft .input-row input{
-flex:1;
-}
-.input-row input{
-flex:1;
-width:auto;
-margin-bottom:0;
-}
-
-.input-row select{
-width:90px;
-margin-bottom:0;
-}
-
-
-
