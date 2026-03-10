@@ -105,22 +105,19 @@
 </div>
 
 <div class="input-group">
-<label>Height</label>
+    <label>Height</label>
 
-<select id="height_unit" onchange="toggleHeightInputs()">
-<option value="cm">cm</option>
-<option value="ft">ft + in</option>
-</select>
+    <div class="input-row">
+        <input id="height" placeholder="e.g., 178">
+        
+        <input id="height_ft_input" placeholder="ft" style="display:none;">
+        <input id="height_in_input" placeholder="in" style="display:none;">
 
-<div id="height_cm">
-<input id="height" placeholder="e.g., 178">
-</div>
-
-<div id="height_ft" style="display:none;" class="input-row">
-<input id="height_ft_input" placeholder="ft">
-<input id="height_in_input" placeholder="in">
-</div>
-
+        <select id="height_unit" onchange="toggleHeightInputs()">
+            <option value="cm">cm</option>
+            <option value="ft">ft + in</option>
+        </select>
+    </div>
 </div>
 
 <button onclick="calculateBMI()">Calculate BMI</button>
@@ -228,6 +225,7 @@ If you're new to Body Mass Index, you can learn how it works and why doctors use
 </body>
 
 </html>
+
 
 
 
