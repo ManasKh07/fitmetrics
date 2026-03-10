@@ -215,16 +215,20 @@ function toggleHeightInputs(){
 
 let unit=document.getElementById("height_unit").value;
 
+let cm=document.getElementById("height_cm");
+let ft=document.getElementById("height_ft");
+
 if(unit==="cm"){
-document.getElementById("height_cm").style.display="block";
-document.getElementById("height_ft").style.display="none";
+cm.style.display="block";
+ft.style.display="none";
 }
 else{
-document.getElementById("height_cm").style.display="none";
-document.getElementById("height_ft").style.display="block";
+cm.style.display="none";
+ft.style.display="flex";
 }
 
 }
+
 
 
 
