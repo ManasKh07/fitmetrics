@@ -266,5 +266,16 @@ flex-shrink:0;
 #height_ft .input-row input{
 flex:1;
 }
+.input-row input{
+flex:1;
+width:auto;
+margin-bottom:0;
+}
+
+.input-row select{
+width:90px;
+margin-bottom:0;
+}
+
 
 
