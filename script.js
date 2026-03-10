@@ -33,7 +33,7 @@ height=((ft*12)+parseFloat(inches))*0.0254;
 
 let bmi=weight/(height*height);
 
-document.getElementById("bmi_result").innerHTML="BMI: "+bmi.toFixed(2);
+showResult("result","BMI: "+bmi.toFixed(2));
 
 }
 
@@ -225,5 +225,6 @@ document.getElementById("height_ft").style.display="block";
 }
 
 }
+
 
 
