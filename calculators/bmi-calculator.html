@@ -91,6 +91,16 @@
 <h2>BMI Calculator</h2>
 
 <div class="input-group">
+<label for="unit">Unit System</label>
+<select id="unit" onchange="toggleBMIUnit()">
+<option value="metric">Metric (kg, cm)</option>
+<option value="imperial">Imperial (lb, ft/in)</option>
+</select>
+</div>
+
+<div id="metricInputs">
+
+<div class="input-group">
 <label for="w">Weight (kg)</label>
 <input id="w" placeholder="e.g., 62">
 </div>
@@ -98,6 +108,27 @@
 <div class="input-group">
 <label for="h">Height (cm)</label>
 <input id="h" placeholder="e.g., 178">
+</div>
+
+</div>
+
+<div id="imperialInputs" style="display:none;">
+
+<div class="input-group">
+<label for="w_lb">Weight (lb)</label>
+<input id="w_lb" placeholder="e.g., 150">
+</div>
+
+<div class="input-group">
+<label for="h_ft">Height (feet)</label>
+<input id="h_ft" placeholder="e.g., 5">
+</div>
+
+<div class="input-group">
+<label for="h_in">Height (inches)</label>
+<input id="h_in" placeholder="e.g., 9">
+</div>
+
 </div>
 
 <button onclick="calculateBMI()">Calculate BMI</button>
@@ -206,3 +237,4 @@ If you're new to Body Mass Index, you can learn how it works and why doctors use
 </body>
 
 </html>
+
