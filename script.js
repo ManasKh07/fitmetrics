@@ -14,7 +14,6 @@ let weight=document.getElementById("weight").value;
 let weight_unit=document.getElementById("weight_unit").value;
 
 let height_unit=document.getElementById("height_unit").value;
-
 let height;
 
 if(weight_unit==="lb"){
@@ -25,10 +24,10 @@ if(height_unit==="cm"){
 height=document.getElementById("height").value/100;
 }
 else{
-let ft=document.getElementById("height_ft").value;
-let inches=document.getElementById("height_in").value;
+let ft=document.getElementById("height_ft_input").value;
+let inch=document.getElementById("height_in_input").value;
 
-height=((ft*12)+parseFloat(inches))*0.0254;
+height=((ft*12)+parseFloat(inch))*0.0254;
 }
 
 let bmi=weight/(height*height);
@@ -228,6 +227,7 @@ ft.style.display="flex";
 }
 
 }
+
 
 
 
