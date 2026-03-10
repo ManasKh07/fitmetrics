@@ -10,17 +10,32 @@ box.innerHTML=text;
 
 function calculateBMI(){
 
-let w=parseFloat(document.getElementById("w").value);
-let h=parseFloat(document.getElementById("h").value)/100;
+let weight=document.getElementById("weight").value;
+let weight_unit=document.getElementById("weight_unit").value;
 
-if(isNaN(w)||isNaN(h)||h<=0){
-showResult("result","Enter valid numbers");
-return;
+let height_unit=document.getElementById("height_unit").value;
+
+let height;
+
+if(weight_unit==="lb"){
+weight=weight*0.453592;
 }
 
-let bmi=(w/(h*h)).toFixed(2);
+if(height_unit==="cm"){
+height=document.getElementById("height").value/100;
+}
+else{
+let ft=document.getElementById("height_ft").value;
+let inches=document.getElementById("height_in").value;
 
-showResult("result","BMI: "+bmi);
+height=((ft*12)+parseFloat(inches))*0.0254;
+}
+
+let bmi=weight/(height*height);
+
+document.getElementById("bmi_result").innerHTML="BMI: "+bmi.toFixed(2);
+
+}
 
 }
 
@@ -210,3 +225,4 @@ document.getElementById("height_ft").style.display="block";
 }
 
 }
+
