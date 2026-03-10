@@ -24,8 +24,8 @@ if(height_unit==="cm"){
 height=document.getElementById("height").value/100;
 }
 else{
-let ft=document.getElementById("height_ft_input").value;
-let inch=document.getElementById("height_in_input").value;
+let ft = parseFloat(document.getElementById("height_ft_input").value);
+let inch = parseFloat(document.getElementById("height_in_input").value);
 
 height=((ft*12)+parseFloat(inch))*0.0254;
 }
@@ -227,6 +227,7 @@ ft.style.display = "flex";
 }
 
 }
+
 
 
 
