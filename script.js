@@ -212,22 +212,21 @@ document.getElementById("imperialInputs").style.display="block";
 }
 function toggleHeightInputs(){
 
-let unit=document.getElementById("height_unit").value;
+let unit = document.getElementById("height_unit").value;
 
-let cm=document.getElementById("height_cm");
-let ft=document.getElementById("height_ft");
+let cm = document.getElementById("height_cm");
+let ft = document.getElementById("height_ft");
 
-if(unit==="cm"){
-cm.style.display="block";
-ft.style.display="none";
+if(unit === "cm"){
+cm.style.display = "block";
+ft.style.display = "none";
 }
 else{
-cm.style.display="none";
-ft.style.display="flex";
+cm.style.display = "none";
+ft.style.display = "flex";
 }
 
 }
-
 
 
 
