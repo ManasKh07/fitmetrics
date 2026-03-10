@@ -180,4 +180,19 @@ showResult("mac_result",
 "Carbs: "+Math.round(carbs)+" g<br>"+
 "Fat: "+Math.round(fat)+" g");
 
+
+}
+function toggleBMIUnit(){
+
+let unit=document.getElementById("unit").value;
+
+if(unit==="metric"){
+document.getElementById("metricInputs").style.display="block";
+document.getElementById("imperialInputs").style.display="none";
+}
+else{
+document.getElementById("metricInputs").style.display="none";
+document.getElementById("imperialInputs").style.display="block";
+}
+
 }
