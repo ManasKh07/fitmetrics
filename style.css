@@ -129,6 +129,7 @@ font-weight:600;
 border-radius:8px;
 cursor:pointer;
 font-size:16px;
+margin-top: 15px;
 }
 
 .calc-box button:hover{
@@ -278,4 +279,5 @@ margin:0 10px;
 }
 
 }
+
 
