@@ -93,6 +93,7 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:40px;
 margin:40px 0;
+align-items:start;
 }
 
 .calc-box{
@@ -240,5 +241,6 @@ gap:15px;
 nav a{
 margin:0 10px;
 }
+
 
 }
