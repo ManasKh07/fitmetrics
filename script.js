@@ -9,33 +9,28 @@ box.innerHTML=text;
 /* BMI */
 
 function calculateBMI(){
+    let weight = parseFloat(document.getElementById("weight").value);
+    let weight_unit = document.getElementById("weight_unit").value;
+    let height_unit = document.getElementById("height_unit").value;
+    let height;
 
-let weight=document.getElementById("weight").value;
-let weight_unit=document.getElementById("weight_unit").value;
+    if(weight_unit === "lb"){
+        weight = weight * 0.453592;
+    }
 
-let height_unit=document.getElementById("height_unit").value;
-let height;
+    if(height_unit === "cm"){
+        height = parseFloat(document.getElementById("height").value) / 100;
+    } else {
+        // Added "|| 0" to prevent NaN errors if a box is left empty
+        let ft = parseFloat(document.getElementById("height_ft_input").value) || 0;
+        let inch = parseFloat(document.getElementById("height_in_input").value) || 0;
+        height = ((ft * 12) + inch) * 0.0254;
+    }
 
-if(weight_unit==="lb"){
-weight=weight*0.453592;
+    let bmi = weight / (height * height);
+
+    showResult("result", "BMI: " + bmi.toFixed(2));
 }
-
-if(height_unit==="cm"){
-height=document.getElementById("height").value/100;
-}
-else{
-let ft = parseFloat(document.getElementById("height_ft_input").value);
-let inch = parseFloat(document.getElementById("height_in_input").value);
-
-height = ((ft * 12) + inch) * 0.0254;
-}
-
-let bmi=weight/(height*height);
-
-showResult("result","BMI: "+bmi.toFixed(2));
-
-}
-
 
 
 
@@ -211,22 +206,23 @@ document.getElementById("imperialInputs").style.display="block";
 
 }
 function toggleHeightInputs(){
+    let unit = document.getElementById("height_unit").value;
+    
+    let cmInput = document.getElementById("height");
+    let ftInput = document.getElementById("height_ft_input");
+    let inInput = document.getElementById("height_in_input");
 
-let unit = document.getElementById("height_unit").value;
-
-let cm = document.getElementById("height_cm");
-let ft = document.getElementById("height_ft");
-
-if(unit === "cm"){
-cm.style.display = "block";
-ft.style.display = "none";
+    if(unit === "cm"){
+        cmInput.style.display = ""; 
+        ftInput.style.display = "none";
+        inInput.style.display = "none";
+    } else {
+        cmInput.style.display = "none";
+        ftInput.style.display = ""; 
+        inInput.style.display = ""; 
+    }
 }
-else{
-cm.style.display = "none";
-ft.style.display = "flex";
-}
 
-}
 
 
 
