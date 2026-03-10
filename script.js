@@ -196,3 +196,17 @@ document.getElementById("imperialInputs").style.display="block";
 }
 
 }
+function toggleHeightInputs(){
+
+let unit=document.getElementById("height_unit").value;
+
+if(unit==="cm"){
+document.getElementById("height_cm").style.display="block";
+document.getElementById("height_ft").style.display="none";
+}
+else{
+document.getElementById("height_cm").style.display="none";
+document.getElementById("height_ft").style.display="block";
+}
+
+}
