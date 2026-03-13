@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Is BMI and Why It Matters | FitMetrics Blog</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
@@ -10,9 +12,20 @@
 <link rel="canonical" href="https://quickbmi.in/blog/what-is-bmi.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What Is BMI and Why It Matters","author":{"@type":"Organization","name":"FitMetrics"},"publisher":{"@type":"Organization","name":"FitMetrics"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://quickbmi.in/blog/what-is-bmi.html"}}</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="What Is BMI and Why It Matters | FitMetrics Blog">
+<meta property="og:description" content="Learn what Body Mass Index is, how it is calculated, and why doctors use it to assess your health.">
+<meta property="og:url" content="https://quickbmi.in/blog/what-is-bmi.html">
+<meta property="og:site_name" content="FitMetrics">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Is BMI and Why It Matters | FitMetrics Blog">
+<meta name="twitter:description" content="Learn what Body Mass Index is, how it is calculated, and why doctors use it to assess your health.">
+<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
 </head>
 <body>
 
@@ -32,7 +45,7 @@
     <a href="../calculators/bmi-calculator.html" class="nav-cta">Try a Calculator</a>
   </div>
 </header>
-
+<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Blog</span> <span class="bc-sep">›</span> <span>What Is BMI</span></div></nav>
 <div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Guide · BMI</div>
@@ -88,6 +101,13 @@ BMI = weight (kg) ÷ height² (m)
 </ul>
 <p>Because of these limitations, BMI is often used alongside other measurements such as <a href="../calculators/body-fat-calculator.html">body fat percentage</a>, waist circumference, and overall fitness levels.</p>
 
+<div class="blog-cta">
+  <div class="blog-cta-text">
+    <strong>Ready to check your BMI?</strong>
+    <span>Use our free calculator — no sign-up, instant results.</span>
+  </div>
+  <a href="../calculators/bmi-calculator.html" class="btn-primary">Calculate BMI →</a>
+</div>
 </article>
 </main>
 
@@ -101,5 +121,16 @@ BMI = weight (kg) ÷ height² (m)
   </div>
 </footer>
 
+<script>
+(function(){
+  var links = document.querySelectorAll('nav a');
+  var path = window.location.pathname;
+  links.forEach(function(a){
+    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
+      a.classList.add('active');
+    }
+  });
+})();
+</script>
 </body>
 </html>
