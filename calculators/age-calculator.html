@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Age Calculator | FitMetrics</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
@@ -10,9 +12,20 @@
 <link rel="canonical" href="https://quickbmi.in/calculators/age-calculator.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","url":"https://quickbmi.in/calculators/age-calculator.html","applicationCategory":"CalculatorApplication","operatingSystem":"Any"}</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Age Calculator — Calculate Your Exact Age | FitMetrics">
+<meta property="og:description" content="Calculate your exact age in years, months and days from your date of birth.">
+<meta property="og:url" content="https://quickbmi.in/calculators/age-calculator.html">
+<meta property="og:site_name" content="FitMetrics">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Age Calculator — Calculate Your Exact Age | FitMetrics">
+<meta name="twitter:description" content="Calculate your exact age in years, months and days from your date of birth.">
+<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
 </head>
 <body>
 
@@ -32,7 +45,7 @@
     <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
   </div>
 </header>
-
+<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Age Calculator</span></div></nav>
 <div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Health Tool</div>
@@ -93,5 +106,16 @@
 </footer>
 
 <script src="../script.js"></script>
+<script>
+(function(){
+  var links = document.querySelectorAll('nav a');
+  var path = window.location.pathname;
+  links.forEach(function(a){
+    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
+      a.classList.add('active');
+    }
+  });
+})();
+</script>
 </body>
 </html>
