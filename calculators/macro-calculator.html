@@ -3,219 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Macro Calculator | FitMetrics</title>
- <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SE671355DP');
-</script>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
 <meta name="description" content="Calculate your daily macronutrient targets including protein, carbohydrates and fat.">
-
 <link rel="canonical" href="https://quickbmi.in/calculators/macro-calculator.html">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebApplication",
- "name":"Macro Calculator",
- "url":"https://quickbmi.in/calculators/macro-calculator.html",
- "applicationCategory":"HealthApplication",
- "operatingSystem":"Any",
- "description":"Calculate daily macronutrient targets including protein, carbohydrates and fat."
-}
-</script>
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"FAQPage",
- "mainEntity":[
- {
- "@type":"Question",
- "name":"What are macronutrients?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"Macronutrients are protein, carbohydrates and fats which provide energy for the body."
- }
- },
- {
- "@type":"Question",
- "name":"How many calories are in each macro?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"Protein and carbohydrates contain 4 calories per gram while fats contain 9 calories per gram."
- }
- }
- ]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Macro Calculator","url":"https://quickbmi.in/calculators/macro-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
 </head>
-
 <body>
 
 <header class="header">
-
-<div class="container header-flex">
-
-<a href="../index.html" class="logo">⚡ FitMetrics</a>
-
-<nav>
-<a href="../index.html">Home</a>
-<a href="bmi-calculator.html">BMI</a>
-<a href="macro-calculator.html">Macros</a>
-<a href="tdee-calculator.html">TDEE</a>
-<a href="body-fat-calculator.html">Body Fat</a>
-<a href="water-calculator.html">Water</a>
-<a href="age-calculator.html">Age</a>
-<a href="percentage-calculator.html">Percentage</a>
-</nav>
-
-</div>
-
+  <div class="container header-flex">
+    <a href="../index.html" class="logo">FitMetrics</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="bmi-calculator.html">BMI</a>
+      <a href="macro-calculator.html">Macros</a>
+      <a href="tdee-calculator.html">TDEE</a>
+      <a href="body-fat-calculator.html">Body Fat</a>
+      <a href="water-calculator.html">Water</a>
+      <a href="age-calculator.html">Age</a>
+      <a href="percentage-calculator.html">%</a>
+    </nav>
+    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+  </div>
 </header>
 
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">Health Tool</div>
+    <h1>Macro Calculator</h1>
+    <p>Get your daily protein, carb, and fat targets based on your goals.</p>
+  </div>
+</div>
+
 <main class="container">
+  <div class="calculator-layout">
 
-<div class="calculator-layout">
+    <div class="calc-box">
+      <div class="input-group">
+        <label for="mac_gender">Sex</label>
+        <select id="mac_gender"><option value="male">Male</option><option value="female">Female</option></select>
+      </div>
+      <div class="input-group">
+        <label for="mac_age">Age</label>
+        <input type="number" id="mac_age" placeholder="e.g., 28">
+      </div>
+      <div class="input-group">
+        <label for="mac_w">Weight (kg)</label>
+        <input type="number" id="mac_w" placeholder="e.g., 75">
+      </div>
+      <div class="input-group">
+        <label for="mac_h">Height (cm)</label>
+        <input type="number" id="mac_h" placeholder="e.g., 178">
+      </div>
+      <div class="input-group">
+        <label for="mac_activity">Activity Level</label>
+        <select id="mac_activity">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Light Exercise</option>
+          <option value="1.55">Moderate Exercise</option>
+          <option value="1.725">Very Active</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="mac_goal">Goal</label>
+        <select id="mac_goal">
+          <option value="-500">Lose Weight</option>
+          <option value="0">Maintain Weight</option>
+          <option value="300">Gain Muscle</option>
+        </select>
+      </div>
+      <button onclick="calculateMacros()">Calculate Macros</button>
+      <div id="mac_result" class="result"></div>
+    </div>
 
-<div class="calc-box">
+    <div class="side-panel">
+      <h3>Popular Macro Splits</h3>
+      <table>
+        <tr><th>Goal</th><th>P / C / F</th></tr>
+        <tr><td>Balanced</td><td>30 / 40 / 30</td></tr>
+        <tr><td>Low Carb</td><td>40 / 20 / 40</td></tr>
+        <tr><td>Bodybuilding</td><td>40 / 40 / 20</td></tr>
+      </table>
+    </div>
 
-<h2>Macro Calculator</h2>
+  </div>
 
-<select id="mac_gender">
-<option value="male">Male</option>
-<option value="female">Female</option>
-</select>
+  <article class="article">
+    <h2>Understanding Macronutrients</h2>
+    <p>Macronutrients — commonly called "macros" — are the three primary nutrients your body needs in large amounts: protein, carbohydrates and fats. Each plays a specific role in energy production and overall health.</p>
+    <p>Protein supports muscle growth and repair, carbohydrates provide energy for daily activity, and fats support hormone production and nutrient absorption.</p>
+    <p>Your macro requirements depend on body weight, activity level and fitness goals. Determine your calorie baseline first with our <a href="tdee-calculator.html">TDEE calculator</a>. Or learn the fundamentals in our guide <a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>.</p>
 
-<div class="input-group">
-<input type="number" id="mac_age" placeholder="Age">
-</div>
-
-<div class="input-group">
-<input type="number" id="mac_w" placeholder="Weight (kg)">
-</div>
-
-<div class="input-group">
-<input type="number" id="mac_h" placeholder="Height (cm)">
-</div>
-
-<select id="mac_activity">
-<option value="1.2">Sedentary</option>
-<option value="1.375">Light Exercise</option>
-<option value="1.55">Moderate Exercise</option>
-<option value="1.725">Very Active</option>
-</select>
-
-<select id="mac_goal">
-<option value="-500">Lose Weight</option>
-<option value="0">Maintain</option>
-<option value="300">Gain Muscle</option>
-</select>
-
-<button onclick="calculateMacros()">Calculate Macros</button>
-
-<div id="mac_result" class="result"></div>
-
-</div>
-
-
-<div class="side-panel">
-
-<h3>Popular Macro Splits</h3>
-
-<table>
-
-<tr>
-<th>Goal</th>
-<th>P / C / F</th>
-</tr>
-
-<tr>
-<td>Balanced</td>
-<td>30 / 40 / 30</td>
-</tr>
-
-<tr>
-<td>Low Carb</td>
-<td>40 / 20 / 40</td>
-</tr>
-
-<tr>
-<td>Bodybuilding</td>
-<td>40 / 40 / 20</td>
-</tr>
-
-</table>
-
-</div>
-
-</div>
-
-
-<article class="article">
-
-<h2>Understanding Macronutrients</h2>
-
-<p>
-Macronutrients, commonly referred to as "macros", are the three primary nutrients your body needs in large amounts: protein, carbohydrates and fats. Each macro plays a specific role in energy production and overall health.
-</p>
-
-<p>
-Protein supports muscle growth and repair, carbohydrates provide energy for daily activity, and fats support hormone production and nutrient absorption.
-</p>
-
-<p>
-Your macro requirements depend on several factors including body weight, activity level and fitness goals. If you want to determine your daily calorie needs first, you can use the
-<a href="tdee-calculator.html">TDEE calculator</a>.
-</p>
-
-<p>
-Not sure what macronutrients are or how they affect your diet? Learn the basics in our guide
-<a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>.
-</p>
-<div class="faq-section">
-
-<h2>FAQs</h2>
-
-<details>
-<summary>How many calories are in each macro?</summary>
-<p>Protein and carbohydrates contain 4 calories per gram, while fats contain 9 calories per gram.</p>
-</details>
-
-<details>
-<summary>Do macros matter for weight loss?</summary>
-<p>Yes. While calorie balance determines weight change, macronutrient balance influences energy levels, hunger and muscle retention.</p>
-</details>
-
-<details>
-<summary>Should I track macros every day?</summary>
-<p>Tracking macros can help maintain consistency, especially for individuals trying to build muscle or reduce body fat.</p>
-</details>
-
-</div>
-
-</article>
-
+    <div class="faq-section">
+      <h2>FAQs</h2>
+      <details><summary>How many calories are in each macro?</summary><p>Protein and carbohydrates contain 4 calories per gram, while fats contain 9 calories per gram.</p></details>
+      <details><summary>Do macros matter for weight loss?</summary><p>Yes. While calorie balance determines weight change, macronutrient balance influences energy levels, hunger and muscle retention.</p></details>
+      <details><summary>Should I track macros every day?</summary><p>Tracking macros can help maintain consistency, especially for individuals trying to build muscle or reduce body fat.</p></details>
+    </div>
+  </article>
 </main>
 
 <footer>
-
-<p>© 2026 FitMetrics</p>
-
-<a href="../privacy.html">Privacy</a>
-<a href="../terms.html">Terms</a>
-
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-links">
+      <a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a>
+    </div>
+    <p class="footer-copy">© 2026 FitMetrics</p>
+  </div>
 </footer>
 
 <script src="../script.js"></script>
-
 </body>
-
 </html>
