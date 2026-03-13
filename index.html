@@ -1,199 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>FitMetrics | Free Health Calculators</title>
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SE671355DP');
-</script>
-
 <meta name="description" content="Free online health calculators including BMI, macros, TDEE, body fat, water intake and more.">
-
 <link rel="canonical" href="https://quickbmi.in/">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 <script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebSite",
- "name":"FitMetrics",
- "url":"https://quickbmi.in",
- "potentialAction":{
- "@type":"SearchAction",
- "target":"https://quickbmi.in/?q={search_term_string}",
- "query-input":"required name=search_term_string"
- }
-}
+{"@context":"https://schema.org","@type":"WebSite","name":"FitMetrics","url":"https://quickbmi.in"}
 </script>
-
 </head>
-
 <body>
 
 <header class="header">
-    <div class="container header-flex">
-        <a href="index.html" class="logo">⚡ FitMetrics</a>
-        
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="calculators/bmi-calculator.html">BMI</a>
-            <a href="calculators/macro-calculator.html">Macros</a>
-            <a href="calculators/tdee-calculator.html">TDEE</a>
-            <a href="calculators/body-fat-calculator.html">Body Fat</a>
-            <a href="calculators/water-calculator.html">Water</a>
-            <a href="calculators/age-calculator.html">Age</a>
-            <a href="calculators/percentage-calculator.html">Percentage</a>
-        </nav>
-    </div>
+  <div class="container header-flex">
+    <a href="index.html" class="logo">FitMetrics</a>
+    <nav>
+      <a href="calculators/bmi-calculator.html">BMI</a>
+      <a href="calculators/macro-calculator.html">Macros</a>
+      <a href="calculators/tdee-calculator.html">TDEE</a>
+      <a href="calculators/body-fat-calculator.html">Body Fat</a>
+      <a href="calculators/water-calculator.html">Water</a>
+      <a href="calculators/age-calculator.html">Age</a>
+      <a href="calculators/percentage-calculator.html">%</a>
+    </nav>
+    <a href="calculators/bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+  </div>
 </header>
 
 <section class="hero">
-    <h1>Smart Health Calculators</h1>
-    <p>Calculate BMI, calories, macros and hydration instantly with science-based tools.</p>
+  <div class="container hero-inner">
+    <div class="hero-label">Science-backed tools</div>
+    <h1>Know your body.<br>Make smarter choices.</h1>
+    <p class="hero-sub">Free calculators for BMI, calories, macros, hydration and more — no sign-up needed.</p>
+    <div class="hero-actions">
+      <a href="calculators/bmi-calculator.html" class="btn-primary">Calculate BMI</a>
+      <a href="calculators/tdee-calculator.html" class="btn-ghost">TDEE & Calories →</a>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <span>BMI</span><span>·</span>
+    <span>Macros</span><span>·</span>
+    <span>TDEE</span><span>·</span>
+    <span>Body Fat</span><span>·</span>
+    <span>Hydration</span><span>·</span>
+    <span>Age</span><span>·</span>
+    <span>Percentage</span><span>·</span>
+    <span>BMI</span><span>·</span>
+    <span>Macros</span><span>·</span>
+    <span>TDEE</span>
+  </div>
 </section>
-
 
 <main class="container">
 
-<h2 class="section-title">Popular Calculators</h2>
+  <div class="section-head">
+    <span class="tag">Calculators</span>
+    <h2>Pick a tool</h2>
+  </div>
 
-<div class="grid">
+  <div class="calc-grid">
 
-    <a href="calculators/bmi-calculator.html" class="card">
-    <span>⚖</span>
-    <h3>BMI Calculator</h3>
-    <p>Check body mass index instantly.</p>
+    <a href="calculators/bmi-calculator.html" class="calc-card featured">
+      <div class="calc-icon">⚖</div>
+      <div class="calc-info">
+        <h3>BMI Calculator</h3>
+        <p>Body mass index from weight & height</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/macro-calculator.html" class="card">
-    <span>🥗</span>
-    <h3>Macro Calculator</h3>
-    <p>Protein, carbs and fat targets.</p>
+    <a href="calculators/macro-calculator.html" class="calc-card">
+      <div class="calc-icon">🥗</div>
+      <div class="calc-info">
+        <h3>Macro Calculator</h3>
+        <p>Protein, carbs & fat targets</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/tdee-calculator.html" class="card">
-    <span>🔥</span>
-    <h3>TDEE Calculator</h3>
-    <p>Daily calorie expenditure.</p>
+    <a href="calculators/tdee-calculator.html" class="calc-card">
+      <div class="calc-icon">🔥</div>
+      <div class="calc-info">
+        <h3>TDEE Calculator</h3>
+        <p>Total daily calorie burn</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/body-fat-calculator.html" class="card">
-    <span>📊</span>
-    <h3>Body Fat Calculator</h3>
-    <p>Estimate fat percentage.</p>
+    <a href="calculators/body-fat-calculator.html" class="calc-card">
+      <div class="calc-icon">📊</div>
+      <div class="calc-info">
+        <h3>Body Fat Calculator</h3>
+        <p>Estimate fat percentage</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/water-calculator.html" class="card">
-    <span>💧</span>
-    <h3>Water Intake</h3>
-    <p>Daily hydration estimate.</p>
+    <a href="calculators/water-calculator.html" class="calc-card">
+      <div class="calc-icon">💧</div>
+      <div class="calc-info">
+        <h3>Water Intake</h3>
+        <p>Daily hydration estimate</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/age-calculator.html" class="card">
-    <span>🎂</span>
-    <h3>Age Calculator</h3>
-    <p>Calculate exact age.</p>
+    <a href="calculators/age-calculator.html" class="calc-card">
+      <div class="calc-icon">🎂</div>
+      <div class="calc-info">
+        <h3>Age Calculator</h3>
+        <p>Exact age in years, months & days</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-    <a href="calculators/percentage-calculator.html" class="card">
-    <span>%</span>
-    <h3>Percentage Calculator</h3>
-    <p>Quick percentage calculations.</p>
+    <a href="calculators/percentage-calculator.html" class="calc-card">
+      <div class="calc-icon">%</div>
+      <div class="calc-info">
+        <h3>Percentage Calculator</h3>
+        <p>Quick percentage math</p>
+      </div>
+      <span class="calc-arrow">↗</span>
     </a>
 
-</div>
+  </div>
 
+  <div class="trust-strip">
+    <div class="trust-item"><strong>100%</strong><span>Free forever</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><strong>No sign-up</strong><span>Just calculate</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><strong>Science-based</strong><span>Proven formulas</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><strong>7 tools</strong><span>& growing</span></div>
+  </div>
 
-<section class="article blog-preview">
+  <div class="section-head">
+    <span class="tag">Guides</span>
+    <h2>Health reads</h2>
+  </div>
 
-<h2>Health Guides</h2>
+  <div class="blog-grid">
 
-<div class="grid">
+    <a href="blog/what-is-bmi.html" class="blog-card large">
+      <div class="blog-tag">BMI</div>
+      <h3>What is BMI and Why It Matters</h3>
+      <p>Learn how Body Mass Index is calculated and what it means for your health.</p>
+      <span class="blog-link">Read guide →</span>
+    </a>
 
-<a href="blog/what-is-bmi.html" class="card">
-<h3>What is BMI and Why It Matters</h3>
-<p>Learn how Body Mass Index is calculated and what it means for your health.</p>
-</a>
+    <a href="blog/calories-per-day.html" class="blog-card">
+      <div class="blog-tag">Nutrition</div>
+      <h3>How Many Calories Should You Eat Daily</h3>
+      <p>Calorie needs based on metabolism and activity.</p>
+      <span class="blog-link">Read →</span>
+    </a>
 
-<a href="blog/calories-per-day.html" class="card">
-<h3>How Many Calories Should You Eat Daily</h3>
-<p>Understand calorie needs based on metabolism and activity level.</p>
-</a>
+    <a href="blog/macro-nutrition-guide.html" class="blog-card">
+      <div class="blog-tag">Macros</div>
+      <h3>Understanding Macronutrients</h3>
+      <p>Protein, carbs and fats — what they actually do.</p>
+      <span class="blog-link">Read →</span>
+    </a>
 
-<a href="blog/macro-nutrition-guide.html" class="card">
-<h3>Understanding Macronutrients</h3>
-<p>Discover the role of protein, carbohydrates and fats in your diet.</p>
-</a>
+    <a href="blog/hydration-guide.html" class="blog-card">
+      <div class="blog-tag">Hydration</div>
+      <h3>Daily Water Intake Guide</h3>
+      <p>How much water you really need per day.</p>
+      <span class="blog-link">Read →</span>
+    </a>
 
-<a href="blog/hydration-guide.html" class="card">
-<h3>Daily Water Intake Guide</h3>
-<p>Find out how much water you should drink every day.</p>
-</a>
+    <a href="blog/body-fat-guide.html" class="blog-card">
+      <div class="blog-tag">Body Fat</div>
+      <h3>Healthy Body Fat Percentage</h3>
+      <p>Ranges and what they mean for your health.</p>
+      <span class="blog-link">Read →</span>
+    </a>
 
-<a href="blog/body-fat-guide.html" class="card">
-<h3>Healthy Body Fat Percentage</h3>
-<p>Understand body fat ranges and what they mean for your health.</p>
-</a>
+  </div>
 
-</div>
-
-</section>
-
-<section class="article">
-
-    <h2>Why Use Health Calculators?</h2>
-
-    <p>
-    Health calculators help estimate important metrics such as body mass index,
-    daily calorie needs and hydration levels. These measurements provide a quick
-    overview of your current health and fitness status.
-    </p>
-
-    <p>
-    Our tools are based on widely used formulas in nutrition science and sports
-    medicine. They allow anyone to obtain useful insights without installing
-    complex apps or software.
-    </p>
-
-    <p>
-    For example, you can calculate your
-    <a href="calculators/bmi-calculator.html">BMI</a>,
-    estimate your
-    <a href="calculators/tdee-calculator.html">daily calorie needs</a>,
-    or determine your ideal
-    <a href="calculators/macro-calculator.html">macro nutrients</a>
-    for muscle gain or weight loss.
-    </p>
-
-</section>
+  <section class="why-section">
+    <div class="why-text">
+      <span class="tag">Why FitMetrics</span>
+      <h2>Tools built for real people</h2>
+      <p>Health calculators help estimate body mass index, daily calorie needs and hydration levels — giving you a quick overview of your fitness without signing up for another app.</p>
+      <p>Our formulas come from established nutrition science and sports medicine. Calculate your <a href="calculators/bmi-calculator.html">BMI</a>, find your <a href="calculators/tdee-calculator.html">daily calorie needs</a>, or set your <a href="calculators/macro-calculator.html">macro targets</a> in seconds.</p>
+    </div>
+    <div class="why-stats">
+      <div class="stat-box">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Free calculators</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Sign-ups needed</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Uses, always free</div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-
 <footer>
-
-    <p>© 2026 FitMetrics</p>
-    <a href="about.html">About</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="contact.html">Contact</a>
-    <a href="disclaimer.html">Disclaimer</a>
-
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo">FitMetrics</span>
+      <p>Free health calculators for everyone.</p>
+    </div>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+    <p class="footer-copy">© 2026 FitMetrics</p>
+  </div>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
-
 </html>
