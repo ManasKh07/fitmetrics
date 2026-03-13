@@ -1,174 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Age Calculator | FitMetrics</title>
- <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SE671355DP');
-</script>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
 <meta name="description" content="Calculate your exact age quickly using this free age calculator.">
-
 <link rel="canonical" href="https://quickbmi.in/calculators/age-calculator.html">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebApplication",
- "name":"Age Calculator",
- "url":"https://quickbmi.in/calculators/age-calculator.html",
- "applicationCategory":"CalculatorApplication",
- "operatingSystem":"Any",
- "description":"Calculate your exact age from your date of birth."
-}
-</script>
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"FAQPage",
- "mainEntity":[
- {
- "@type":"Question",
- "name":"What is chronological age?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"Chronological age represents the amount of time that has passed since a person's birth."
- }
- },
- {
- "@type":"Question",
- "name":"Does leap year affect age calculation?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"Yes leap years add an extra day every four years which must be considered for accurate calculations."
- }
- }
- ]
-}
-</script>
-
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","url":"https://quickbmi.in/calculators/age-calculator.html","applicationCategory":"CalculatorApplication","operatingSystem":"Any"}</script>
 </head>
-
 <body>
 
 <header class="header">
-
-<div class="container header-flex">
-
-<a href="../index.html" class="logo">⚡ FitMetrics</a>
-
-<nav>
-<a href="../index.html">Home</a>
-<a href="bmi-calculator.html">BMI</a>
-<a href="macro-calculator.html">Macros</a>
-<a href="tdee-calculator.html">TDEE</a>
-<a href="body-fat-calculator.html">Body Fat</a>
-<a href="water-calculator.html">Water</a>
-<a href="age-calculator.html">Age</a>
-<a href="percentage-calculator.html">Percentage</a>
-</nav>
-
-</div>
-
+  <div class="container header-flex">
+    <a href="../index.html" class="logo">FitMetrics</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="bmi-calculator.html">BMI</a>
+      <a href="macro-calculator.html">Macros</a>
+      <a href="tdee-calculator.html">TDEE</a>
+      <a href="body-fat-calculator.html">Body Fat</a>
+      <a href="water-calculator.html">Water</a>
+      <a href="age-calculator.html">Age</a>
+      <a href="percentage-calculator.html">%</a>
+    </nav>
+    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+  </div>
 </header>
 
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">Health Tool</div>
+    <h1>Age Calculator</h1>
+    <p>Calculate your exact age in years, months and days.</p>
+  </div>
+</div>
 
 <main class="container">
+  <div class="calculator-layout">
 
-<div style="max-width:500px;margin:40px auto;">
+    <div class="calc-box" style="max-width:500px;">
+      <div class="input-group">
+        <label for="birthdate">Date of Birth</label>
+        <input type="date" id="birthdate">
+      </div>
+      <button onclick="calculateAge()">Calculate Age</button>
+      <div id="age_result" class="result"></div>
+    </div>
 
-<div class="calc-box">
+    <div class="side-panel">
+      <h3>Age & Health</h3>
+      <p style="font-size:14px;color:var(--ink-soft);margin-bottom:12px;">Age is a key factor in several health calculations.</p>
+      <table>
+        <tr><th>Calculator</th><th>Uses Age?</th></tr>
+        <tr><td>BMI</td><td>No</td></tr>
+        <tr><td>TDEE</td><td>Yes</td></tr>
+        <tr><td>Macros</td><td>Yes</td></tr>
+        <tr><td>Body Fat</td><td>No</td></tr>
+      </table>
+    </div>
 
-<h2>Chronological Age Calculator</h2>
+  </div>
 
-<p>Calculate your exact age based on your date of birth.</p>
+  <article class="article">
+    <h2>What is Chronological Age?</h2>
+    <p>Chronological age represents the exact amount of time that has passed since a person's birth. It is commonly used in official documents, medical records and demographic statistics.</p>
+    <p>Age calculations can become complex due to leap years and differences in calendar systems. Using a calculator ensures accuracy based on the current date.</p>
+    <p>Combine age with other health indicators such as <a href="bmi-calculator.html">BMI</a> or <a href="tdee-calculator.html">daily calorie expenditure</a> to better understand overall health.</p>
 
-<div class="input-group">
-<label for="birthdate">Date of Birth</label>
-<input type="date" id="birthdate">
-</div>
-
-<button onclick="calculateAge()">Calculate Age</button>
-
-<div id="age_result" class="result"></div>
-
-</div>
-
-</div>
-
-
-<article class="article">
-
-<h2>What is Chronological Age?</h2>
-
-<p>
-Chronological age represents the exact amount of time that has passed since a person's birth. It is commonly used in official documents, medical records and demographic statistics.
-</p>
-
-<p>
-Age calculations can sometimes become complex due to leap years and differences in calendar systems. Using a calculator ensures that the age calculation is accurate based on the current date.
-</p>
-
-<p>
-You can combine age with other health indicators such as
-<a href="bmi-calculator.html">BMI</a>
-or
-<a href="tdee-calculator.html">daily calorie expenditure</a>
-to better understand overall health.
-</p>
-
-
-<div class="faq-section">
-
-<h2>FAQs</h2>
-
-<details>
-<summary>Does leap year affect age calculation?</summary>
-<p>Yes. Leap years introduce an extra day every four years, which must be considered when calculating exact age.</p>
-</details>
-
-<details>
-<summary>What is the difference between chronological and biological age?</summary>
-<p>Chronological age measures time since birth, while biological age estimates how old your body appears based on health and lifestyle factors.</p>
-</details>
-
-<details>
-<summary>Why do cultures calculate age differently?</summary>
-<p>Some cultures use alternative age systems where individuals are considered one year old at birth or increase age during the new year.</p>
-</details>
-
-</div>
-
-</article>
-
+    <div class="faq-section">
+      <h2>FAQs</h2>
+      <details><summary>Does leap year affect age calculation?</summary><p>Yes. Leap years introduce an extra day every four years, which must be considered when calculating exact age.</p></details>
+      <details><summary>What is the difference between chronological and biological age?</summary><p>Chronological age measures time since birth, while biological age estimates how old your body appears based on health and lifestyle factors.</p></details>
+      <details><summary>Why do cultures calculate age differently?</summary><p>Some cultures use alternative age systems where individuals are considered one year old at birth or age increases during the new year.</p></details>
+    </div>
+  </article>
 </main>
 
-
 <footer>
-
-<p>© 2026 FitMetrics</p>
-
-<a href="../privacy.html">Privacy</a>
-<a href="../terms.html">Terms</a>
-
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-links">
+      <a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a>
+    </div>
+    <p class="footer-copy">© 2026 FitMetrics</p>
+  </div>
 </footer>
 
 <script src="../script.js"></script>
-
 </body>
-
-
 </html>
