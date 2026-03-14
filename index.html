@@ -425,5 +425,67 @@ function scrollToCalcs() {
   if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
 }
 </script>
+<script>
+var CALC_LIST_HOME=[
+  {name:"BMI Calculator",url:"calculators/bmi-calculator.html"},
+  {name:"TDEE Calculator",url:"calculators/tdee-calculator.html"},
+  {name:"Macro Calculator",url:"calculators/macro-calculator.html"},
+  {name:"Body Fat Calculator",url:"calculators/body-fat-calculator.html"},
+  {name:"Water Intake Calculator",url:"calculators/water-calculator.html"},
+  {name:"Age Calculator",url:"calculators/age-calculator.html"},
+  {name:"Percentage Calculator",url:"calculators/percentage-calculator.html"},
+  {name:"Ideal Weight Calculator",url:"calculator.html?id=ideal-weight"},
+  {name:"Calorie Deficit Calculator",url:"calculator.html?id=calorie-deficit"},
+  {name:"Calorie Surplus Calculator",url:"calculator.html?id=calorie-surplus"},
+  {name:"Protein Intake Calculator",url:"calculator.html?id=protein-intake"},
+  {name:"Heart Rate Zones",url:"calculator.html?id=heart-rate-zones"},
+  {name:"VO2 Max Estimator",url:"calculator.html?id=vo2max"},
+  {name:"One Rep Max (1RM)",url:"calculator.html?id=one-rep-max"},
+  {name:"Running Pace Calculator",url:"calculator.html?id=running-pace"},
+  {name:"Sleep Calculator",url:"calculator.html?id=sleep-calculator"},
+  {name:"Waist-to-Height Ratio",url:"calculator.html?id=waist-to-height"},
+  {name:"Waist-to-Hip Ratio",url:"calculator.html?id=waist-to-hip"},
+  {name:"Army Body Fat",url:"calculator.html?id=army-body-fat"},
+  {name:"Steps to Calories",url:"calculator.html?id=steps-to-calories"},
+  {name:"Lean Body Mass",url:"calculator.html?id=lean-body-mass"},
+  {name:"Carbohydrate Intake",url:"calculator.html?id=carb-intake"},
+  {name:"Fibre Intake",url:"calculator.html?id=fiber-intake"},
+  {name:"Resting Metabolic Rate",url:"calculator.html?id=resting-metabolic-rate"},
+  {name:"Alcohol Units Calculator",url:"calculator.html?id=alcohol-units"},
+  {name:"BMI for Children",url:"calculator.html?id=bmi-children"},
+  {name:"Pregnancy Weight Gain",url:"calculator.html?id=pregnancy-weight"},
+  {name:"Due Date Calculator",url:"calculator.html?id=due-date"},
+  {name:"Push-Up Fitness Test",url:"calculator.html?id=push-up-test"},
+  {name:"Exercise Calorie Burn",url:"calculator.html?id=calorie-burn-exercise"},
+  {name:"Pace to Speed Converter",url:"calculator.html?id=pace-to-speed"},
+  {name:"Fat Intake Calculator",url:"calculator.html?id=fat-intake"},
+  {name:"BMI Prime",url:"calculator.html?id=bmi-prime"},
+  {name:"Body Surface Area",url:"calculator.html?id=body-surface-area"},
+  {name:"Child Calorie Calculator",url:"calculator.html?id=calorie-intake-children"},
+  {name:"Nicotine Intake Calculator",url:"calculator.html?id=nicotine-calculator"}
+];
+function syncSearch(q){
+  var s=document.getElementById('calc-search');
+  if(s&&s.value!==q)s.value=q;
+  // Also show dropdown from header
+  var box=document.getElementById('hdr-results-home');
+  q=(q||'').toLowerCase().trim();
+  if(!q){if(box)box.style.display='none';return;}
+  var m=CALC_LIST_HOME.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,6);
+  if(!box)return;
+  if(!m.length){box.innerHTML='<div class="hdr-no-result">No results — scroll down to see filtered cards</div>';box.style.display='block';return;}
+  box.innerHTML=m.map(function(c){return '<a href="'+c.url+'" class="hdr-result-item">'+c.name+'</a>';}).join('');
+  box.style.display='block';
+}
+function goRandomHome(e){
+  e.preventDefault();
+  window.location=CALC_LIST_HOME[Math.floor(Math.random()*CALC_LIST_HOME.length)].url;
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#header-search')&&!e.target.closest('#hdr-results-home')){
+    var b=document.getElementById('hdr-results-home');if(b)b.style.display='none';
+  }
+});
+</script>
 </body>
 </html>

@@ -40,7 +40,8 @@ const CALCULATORS = {
     { id:"lbm_height", label:"Height", type:"number", placeholder:"e.g. 175",
       unit:{ id:"lbm_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
-  calculate(f) {
+
+  stats: { title:"Ideal Weight by Height", header:["Height","Ideal Weight (M / F)"], rows:[["160 cm","54 / 49 kg"],["165 cm","57 / 53 kg"],["170 cm","61 / 56 kg"],["175 cm","65 / 60 kg"],["180 cm","69 / 63 kg"],["185 cm","73 / 67 kg"]], note:"Devine formula. ±5 kg for frame size." },  calculate(f) {
     let w = parseFloat(f.lbm_weight), h = parseFloat(f.lbm_height);
     if (!w || !h) return null;
     if (f.lbm_wu==="lb") w = w*0.4536;
@@ -103,7 +104,8 @@ const CALCULATORS = {
     { id:"cs_activity", label:"Activity Level", type:"select", options:[["1.2","Sedentary"],["1.375","Light exercise"],["1.55","Moderate exercise"],["1.725","Very active"]] },
     { id:"cs_goal", label:"Surplus size", type:"select", options:[["200","Lean bulk (+200 kcal)"],["350","Moderate bulk (+350 kcal)"],["500","Aggressive bulk (+500 kcal)"]] }
   ],
-  calculate(f) {
+
+  stats: { title:"Deficit vs Weekly Loss", header:["Daily Deficit","~Weekly Loss"], rows:[["250 kcal","~0.25 kg"],["500 kcal","~0.5 kg"],["750 kcal","~0.75 kg"],["1,000 kcal","~1 kg"]], note:"1 kg fat ≈ 7,700 kcal. Min 1,200 kcal/day (F), 1,500 (M)." },  calculate(f) {
     let w=parseFloat(f.cs_weight), h=parseFloat(f.cs_height);
     const age=parseFloat(f.cs_age), act=parseFloat(f.cs_activity), surplus=parseFloat(f.cs_goal);
     if (!age||!w||!h) return null;
@@ -155,7 +157,8 @@ const CALCULATORS = {
     { id:"fi_calories", label:"Daily Calorie Target (kcal)", type:"number", placeholder:"e.g. 2000" },
     { id:"fi_pct", label:"Fat percentage of diet", type:"select", options:[["20","20% (low fat)"],["30","30% (standard)"],["35","35% (moderate high)"],["40","40% (high fat / keto)"]] }
   ],
-  calculate(f) {
+
+  stats: { title:"Protein in Common Foods", header:["Food (100g)","Protein"], rows:[["Chicken breast","31g"],["Tuna (canned)","26g"],["Eggs (whole)","13g"],["Greek yogurt","10g"],["Tofu (firm)","17g"],["Lentils (cooked)","9g"]], note:"Protein provides 4 kcal per gram." },  calculate(f) {
     const cal=parseFloat(f.fi_calories), pct=parseFloat(f.fi_pct);
     if (!cal) return null;
     const grams=Math.round((cal*pct/100)/9);
@@ -197,7 +200,8 @@ const CALCULATORS = {
     { id:"fib_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
     { id:"fib_age", label:"Age", type:"number", placeholder:"e.g. 30" }
   ],
-  calculate(f) {
+
+  stats: { title:"Carbs in Common Foods", header:["Food (100g)","Carbs"], rows:[["Oats (dry)","66g"],["Brown rice (cooked)","23g"],["Sweet potato","20g"],["Banana","23g"],["Lentils (cooked)","20g"],["Wholegrain bread","41g"]], note:"Carbs provide 4 kcal per gram." },  calculate(f) {
     const age=parseFloat(f.fib_age);
     if (!age) return null;
     let target = f.fib_gender==="male" ? (age<=50?38:30) : (age<=50?25:21);
@@ -244,7 +248,8 @@ const CALCULATORS = {
     { id:"vo2_age", label:"Age", type:"number", placeholder:"e.g. 30" },
     { id:"vo2_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] }
   ],
-  calculate(f) {
+
+  stats: { title:"Zone Training Benefits", header:["Zone","Primary Benefit"], rows:[["Z1 (50–60%)","Active recovery"],["Z2 (60–70%)","Fat burning & aerobic base"],["Z3 (70–80%)","Aerobic fitness"],["Z4 (80–90%)","Lactate threshold"],["Z5 (90–100%)","Peak speed & VO2 max"]], note:"MHR = 220 − age (estimated)." },  calculate(f) {
     const t=parseFloat(f.vo2_time), age=parseFloat(f.vo2_age);
     if (!t||!age) return null;
     const vo2=(3.5+(483/t)).toFixed(1);
@@ -298,7 +303,8 @@ const CALCULATORS = {
     { id:"put_age", label:"Age", type:"number", placeholder:"e.g. 30" },
     { id:"put_reps", label:"Push-ups completed", type:"number", placeholder:"e.g. 25" }
   ],
-  calculate(f) {
+
+  stats: { title:"Training % of 1RM", header:["Goal","% of 1RM","Reps"], rows:[["Max strength","90–100%","1–3"],["Strength","80–90%","3–6"],["Hypertrophy","65–80%","6–12"],["Endurance","50–65%","12–20+"]], note:"Recalculate every 4–6 weeks as strength improves." },  calculate(f) {
     const age=parseFloat(f.put_age), reps=parseFloat(f.put_reps);
     if (!age||!reps) return null;
     const std={ male:[[17,21],[21,27],[15,21],[13,17],[11,15]], female:[[12,16],[13,18],[11,14],[9,12],[7,10]] };
@@ -355,7 +361,8 @@ const CALCULATORS = {
     { id:"stc_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
       unit:{ id:"stc_wu", options:[["kg","kg"],["lb","lb"]] } }
   ],
-  calculate(f) {
+
+  stats: { title:"Common Race Finish Times", header:["Race","Good Amateur Pace"], rows:[["5K","5:00–6:30 /km"],["10K","5:15–6:45 /km"],["Half Marathon","5:30–7:00 /km"],["Marathon","5:45–7:30 /km"]], note:"Improve ~3–5% per year with consistent training." },  calculate(f) {
     let w=parseFloat(f.stc_weight);
     const steps=parseFloat(f.stc_steps);
     if (!steps||!w) return null;
@@ -409,7 +416,8 @@ const CALCULATORS = {
     { id:"bp_height", label:"Height", type:"number", placeholder:"e.g. 175",
       unit:{ id:"bp_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
-  calculate(f) {
+
+  stats: { title:"Sleep Needs by Age (NSF)", header:["Age Group","Recommended"], rows:[["Teenagers (14–17)","8–10 hours"],["Young adults (18–25)","7–9 hours"],["Adults (26–64)","7–9 hours"],["Older adults (65+)","7–8 hours"]], note:"Each 90-min cycle = light + deep + REM sleep." },  calculate(f) {
     let w=parseFloat(f.bp_weight), h=parseFloat(f.bp_height);
     if (!w||!h) return null;
     if (f.bp_wu==="lb") w=w*0.4536;
@@ -464,7 +472,8 @@ const CALCULATORS = {
     { id:"wh_hip", label:"Hip circumference", type:"number", placeholder:"e.g. 100",
       unit:{ id:"wh_hu", options:[["cm","cm"],["in","inches"]] } }
   ],
-  calculate(f) {
+
+  stats: { title:"Waist-to-Height Reference", header:["Ratio","Category"], rows:[["< 0.4","Underweight"],["0.4 – 0.5","Healthy"],["0.5 – 0.6","Overweight"],["≥ 0.6","Obese"]], note:"Keep your waist less than half your height." },  calculate(f) {
     let w=parseFloat(f.wh_waist), h=parseFloat(f.wh_hip);
     if (!w||!h) return null;
     if (f.wh_wu==="in") w=w*2.54;
@@ -529,7 +538,8 @@ const CALCULATORS = {
       unit:{ id:"cbe_wu", options:[["kg","kg"],["lb","lb"]] } },
     { id:"cbe_exercise", label:"Exercise type", type:"select", options:[
       ["8","Running (8 km/h — jogging)"],["11","Running (11 km/h — fast)"],["4","Walking (brisk)"],
-      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
+
+  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
       ["5","Weight training"],["9","HIIT"],["3","Yoga / stretching"],["6","Jump rope"]
     ]},
     { id:"cbe_mins", label:"Duration (minutes)", type:"number", placeholder:"e.g. 45" }
@@ -589,7 +599,8 @@ const CALCULATORS = {
     { id:"dd_lmp", label:"First day of last menstrual period", type:"date" },
     { id:"dd_cycle", label:"Average cycle length (days)", type:"number", placeholder:"e.g. 28" }
   ],
-  calculate(f) {
+
+  stats: { title:"Weight Gain by Pre-Preg BMI", header:["BMI Category","Recommended Gain"], rows:[["Underweight (<18.5)","12.5–18 kg"],["Healthy (18.5–24.9)","11.5–16 kg"],["Overweight (25–29.9)","7–11.5 kg"],["Obese (≥30)","5–9 kg"]], note:"Source: Institute of Medicine (IOM)." },  calculate(f) {
     const lmp=new Date(f.dd_lmp), cycle=parseFloat(f.dd_cycle)||28;
     if (isNaN(lmp.getTime())) return null;
     const due=new Date(lmp);
@@ -639,7 +650,8 @@ const CALCULATORS = {
     { id:"nic_type", label:"Product type", type:"select", options:[["12","Cigarette (standard)"],["20","Cigarette (strong)"],["4","Light cigarette"],["8","Cigar"],["0.5","Nicotine patch (mg/h)"]] },
     { id:"nic_count", label:"Number per day", type:"number", placeholder:"e.g. 10" }
   ],
-  calculate(f) {
+
+  stats: { title:"Average BSA Reference", header:["Group","Average BSA"], rows:[["Adult male","1.9 m²"],["Adult female","1.6 m²"],["Child (10 yrs)","1.14 m²"],["Child (5 yrs)","0.76 m²"],["Neonate","0.25 m²"]], note:"Mosteller formula: √(height × weight ÷ 3600)." },  calculate(f) {
     const mg=parseFloat(f.nic_type), count=parseFloat(f.nic_count);
     if (!count) return null;
     const absorbed=(mg*0.1*count).toFixed(1);
@@ -687,7 +699,8 @@ const CALCULATORS = {
     { id:"au_volume", label:"Volume (ml)", type:"number", placeholder:"e.g. 500" },
     { id:"au_abv", label:"ABV / Strength (%)", type:"number", placeholder:"e.g. 5" }
   ],
-  calculate(f) {
+
+  stats: { title:"Child Calorie Needs (Moderate Activity)", header:["Age","Boys","Girls"], rows:[["2–3","1,000–1,400","1,000–1,200"],["4–8","1,200–1,600","1,200–1,400"],["9–13","1,600–2,000","1,400–1,800"],["14–18","2,000–2,600","1,800–2,000"]], note:"Source: USDA Dietary Guidelines." },  calculate(f) {
     const vol=parseFloat(f.au_volume), abv=parseFloat(f.au_abv);
     if (!vol||!abv) return null;
     const units=(vol*abv)/1000;
@@ -741,7 +754,8 @@ const CALCULATORS = {
     { id:"pts_pace_sec", label:"Pace — Seconds", type:"number", placeholder:"e.g. 30" },
     { id:"pts_unit", label:"Pace unit", type:"select", options:[["km","per km"],["mi","per mile"]] }
   ],
-  calculate(f) {
+
+  stats: { title:"BMI-for-Age Percentile (CDC)", header:["Percentile","Category"], rows:[["Below 5th","Underweight"],["5th – 84th","Healthy weight"],["85th – 94th","Overweight"],["95th and above","Obese"]], note:"Children require age- and sex-specific charts — adult cutoffs do not apply." },  calculate(f) {
     const m=parseFloat(f.pts_pace_min)||0, s=parseFloat(f.pts_pace_sec)||0;
     if (!m&&!s) return null;
     const totalMin=m+s/60;
@@ -759,7 +773,8 @@ const CALCULATORS = {
   related:["running-pace","heart-rate-zones","calorie-burn-exercise"]
 },
 
-"resting-metabolic-rate": {
+"r
+  stats: { title:"Average RMR by Age & Sex", header:["Age","Men","Women"], rows:[["20–29","1,800–2,000","1,450–1,600"],["30–39","1,750–1,950","1,400–1,550"],["40–49","1,700–1,900","1,350–1,500"],["50–59","1,650–1,850","1,300–1,450"],["60+","1,550–1,750","1,250–1,400"]], note:"RMR decreases ~1–2% per decade after age 30." },esting-metabolic-rate": {
   title: "Resting Metabolic Rate (RMR) Calculator",
   desc: "Calculate your resting metabolic rate — the calories your body burns at complete rest.",
   icon: "🧪", category: "Nutrition",
@@ -793,16 +808,16 @@ const CALCULATORS = {
 
 // Related calculator display name map
 const CALC_NAMES = {
-  "bmi-calculator":        { name:"BMI Calculator",          icon:"⚖", link:"/calculators/bmi-calculator.html" },
-  "macro-calculator":      { name:"Macro Calculator",        icon:"🥗", link:"/calculators/macro-calculator.html" },
-  "tdee-calculator":       { name:"TDEE Calculator",         icon:"🔥", link:"/calculators/tdee-calculator.html" },
-  "body-fat-calculator":   { name:"Body Fat Calculator",     icon:"📊", link:"/calculators/body-fat-calculator.html" },
-  "water-calculator":      { name:"Water Intake",            icon:"💧", link:"/calculators/water-calculator.html" },
-  "age-calculator":        { name:"Age Calculator",          icon:"🎂", link:"/calculators/age-calculator.html" },
-  "percentage-calculator": { name:"Percentage Calculator",   icon:"%",  link:"/calculators/percentage-calculator.html" },
+  "bmi-calculator": { desc:"Body mass index check", name:"BMI Calculator",          icon:"⚖", link:"/calculators/bmi-calculator.html" },
+  "macro-calculator": { desc:"Protein, carbs & fat split", name:"Macro Calculator",        icon:"🥗", link:"/calculators/macro-calculator.html" },
+  "tdee-calculator": { desc:"Daily calorie burn", name:"TDEE Calculator",         icon:"🔥", link:"/calculators/tdee-calculator.html" },
+  "body-fat-calculator": { desc:"Body fat % estimate", name:"Body Fat Calculator",     icon:"📊", link:"/calculators/body-fat-calculator.html" },
+  "water-calculator": { desc:"Daily hydration goal", name:"Water Intake",            icon:"💧", link:"/calculators/water-calculator.html" },
+  "age-calculator": { desc:"Exact age calculation", name:"Age Calculator",          icon:"🎂", link:"/calculators/age-calculator.html" },
+  "percentage-calculator": { desc:"Quick percentage math", name:"Percentage Calculator",   icon:"%",  link:"/calculators/percentage-calculator.html" },
 };
 Object.keys(CALCULATORS).forEach(id => {
   if (!CALC_NAMES[id]) {
-    CALC_NAMES[id] = { name:CALCULATORS[id].title, icon:CALCULATORS[id].icon, link:"/calculator.html?id="+id };
+    CALC_NAMES[id] = { name:CALCULATORS[id].title, icon:CALCULATORS[id].icon, desc:CALCULATORS[id].desc ? CALCULATORS[id].desc.slice(0,50) : "", link:"/calculator.html?id="+id };
   }
 });

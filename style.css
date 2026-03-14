@@ -58,8 +58,8 @@ h1, h2, h3, h4 {
 .header-flex {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 16px 0;
+  gap: 16px;
+  padding: 14px 0;
 }
 
 .logo {
@@ -75,7 +75,6 @@ h1, h2, h3, h4 {
 nav {
   display: flex;
   gap: 4px;
-  flex: 1;
 }
 
 nav a {
@@ -874,29 +873,29 @@ nav a.active {
 
 .header-search-wrap {
   flex: 1;
-  max-width: 320px;
-  margin: 0 16px;
+  max-width: 260px;
 }
 
 .header-search-input {
   width: 100%;
-  padding: 8px 14px;
+  padding: 8px 16px;
   font-size: 13px;
   font-family: 'DM Sans', sans-serif;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--card-bg);
-  color: var(--ink-muted);
+  color: var(--ink);
   outline: none;
-  cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .header-search-input:focus,
 .header-search-input:hover {
-  border-color: var(--border-dark);
+  border-color: var(--ink);
   background: var(--white);
 }
+
+.header-search-input::placeholder { color: var(--ink-muted); }
 
 /* ─── RESULT INTERPRETATION ──────────────── */
 
@@ -948,6 +947,7 @@ nav a.active {
   text-decoration: none;
   color: var(--ink);
   transition: border-color 0.15s, transform 0.15s;
+  min-width: 0;
 }
 
 .recommended-card:hover {
@@ -956,9 +956,10 @@ nav a.active {
 }
 
 .rec-icon {
-  font-size: 20px;
+  font-size: 18px;
   width: 36px;
   height: 36px;
+  min-width: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -969,26 +970,37 @@ nav a.active {
 
 .rec-info {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow: hidden;
 }
 
 .rec-info strong {
   font-size: 13px;
   font-weight: 600;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .rec-info span {
   font-size: 12px;
   color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .rec-arrow {
   font-size: 14px;
   color: var(--ink-muted);
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* ─── UNIT SELECT ────────────────────────── */
@@ -1003,3 +1015,41 @@ nav a.active {
   .header-search-wrap { display: none; }
   .recommended-grid { grid-template-columns: 1fr; }
 }
+
+/* ─── SEARCH DROPDOWN ────────────────────── */
+
+.hdr-search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 999;
+  overflow: hidden;
+}
+
+.hdr-result-item {
+  display: block;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.hdr-result-item:last-child { border-bottom: none; }
+.hdr-result-item:hover { background: var(--card-bg); }
+
+.hdr-no-result {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+/* Make search wrap position:relative so dropdown positions correctly */
+.header-search-wrap { position: relative; }

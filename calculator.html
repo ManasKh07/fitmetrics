@@ -59,7 +59,14 @@
       <a href="/calculators/body-fat-calculator.html">Body Fat</a>
       <a href="/calculators/water-calculator.html">Water</a>
     </nav>
-    <a href="/calculators/bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" id="hdr-search"
+        placeholder="Search calculators..."
+        oninput="searchCalcs(this.value)"
+        autocomplete="off">
+      <div class="hdr-search-results" id="hdr-results"></div>
+    </div>
+    <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
   </div>
 </header>
 
@@ -97,8 +104,9 @@
     </div>
 
     <div class="side-panel" id="side-panel">
-      <h3>Related Calculators</h3>
-      <div class="related-grid" id="related-container"></div>
+      <h3 id="stats-title">Quick Reference</h3>
+      <table id="stats-table" style="margin-top:8px;"></table>
+      <p id="stats-note" style="font-size:12px;color:var(--ink-muted);margin-top:10px;"></p>
     </div>
 
   </div>
@@ -115,6 +123,11 @@
       <a href="/index.html" class="btn-primary">See All Calculators →</a>
     </div>
   </article>
+
+  <div class="recommended-section" id="rec-section" style="display:none;">
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid" id="rec-container"></div>
+  </div>
 
 </main>
 
@@ -211,18 +224,33 @@ function renderCalc(id, calc) {
     container.appendChild(div);
   });
 
-  // Related
-  var relContainer = document.getElementById('related-container');
-  relContainer.innerHTML = '';
-  (calc.related || []).forEach(function(relId) {
-    var info = CALC_NAMES[relId];
-    if (!info) return;
-    var a = document.createElement('a');
-    a.href = info.link;
-    a.className = 'related-card';
-    a.innerHTML = '<span class="rel-icon">' + info.icon + '</span>' + info.name;
-    relContainer.appendChild(a);
-  });
+  // Stats table
+  if (calc.stats) {
+    document.getElementById('stats-title').textContent = calc.stats.title || 'Quick Reference';
+    var tbody = '';
+    (calc.stats.rows || []).forEach(function(row) {
+      tbody += '<tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);color:var(--ink-soft);font-size:13px;">' + row[0] + '</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;">' + row[1] + '</td></tr>';
+    });
+    document.getElementById('stats-table').innerHTML = (calc.stats.header ? '<tr><th style="padding:10px 12px;background:var(--card-bg);font-size:12px;text-align:left;">' + calc.stats.header[0] + '</th><th style="padding:10px 12px;background:var(--card-bg);font-size:12px;text-align:left;">' + calc.stats.header[1] + '</th></tr>' : '') + tbody;
+    document.getElementById('stats-note').textContent = calc.stats.note || '';
+  }
+
+  // Recommended section
+  var recSection = document.getElementById('rec-section');
+  var recContainer = document.getElementById('rec-container');
+  recContainer.innerHTML = '';
+  if (calc.related && calc.related.length) {
+    (calc.related || []).forEach(function(relId) {
+      var info = CALC_NAMES[relId];
+      if (!info) return;
+      var a = document.createElement('a');
+      a.href = info.link;
+      a.className = 'recommended-card';
+      a.innerHTML = '<div class="rec-icon">' + info.icon + '</div><div class="rec-info"><strong>' + info.name + '</strong><span>' + (info.desc || '') + '</span></div><span class="rec-arrow">↗</span>';
+      recContainer.appendChild(a);
+    });
+    recSection.style.display = 'block';
+  }
 
   // Article
   document.getElementById('article-title').textContent = 'About the ' + calc.title;
@@ -308,5 +336,57 @@ if (id && CALCULATORS[id]) {
 }
 </script>
 
+
+<script>
+var CALC_LIST=[
+  {name:"BMI Calculator",url:"/calculators/bmi-calculator.html"},
+  {name:"TDEE Calculator",url:"/calculators/tdee-calculator.html"},
+  {name:"Macro Calculator",url:"/calculators/macro-calculator.html"},
+  {name:"Body Fat Calculator",url:"/calculators/body-fat-calculator.html"},
+  {name:"Water Intake Calculator",url:"/calculators/water-calculator.html"},
+  {name:"Age Calculator",url:"/calculators/age-calculator.html"},
+  {name:"Percentage Calculator",url:"/calculators/percentage-calculator.html"},
+  {name:"Ideal Weight Calculator",url:"/calculator.html?id=ideal-weight"},
+  {name:"Lean Body Mass",url:"/calculator.html?id=lean-body-mass"},
+  {name:"Calorie Deficit Calculator",url:"/calculator.html?id=calorie-deficit"},
+  {name:"Calorie Surplus Calculator",url:"/calculator.html?id=calorie-surplus"},
+  {name:"Protein Intake Calculator",url:"/calculator.html?id=protein-intake"},
+  {name:"Fat Intake Calculator",url:"/calculator.html?id=fat-intake"},
+  {name:"Carbohydrate Intake",url:"/calculator.html?id=carb-intake"},
+  {name:"Fibre Intake Calculator",url:"/calculator.html?id=fiber-intake"},
+  {name:"Heart Rate Zones",url:"/calculator.html?id=heart-rate-zones"},
+  {name:"VO2 Max Estimator",url:"/calculator.html?id=vo2max"},
+  {name:"One Rep Max (1RM)",url:"/calculator.html?id=one-rep-max"},
+  {name:"Push-Up Fitness Test",url:"/calculator.html?id=push-up-test"},
+  {name:"Running Pace Calculator",url:"/calculator.html?id=running-pace"},
+  {name:"Steps to Calories",url:"/calculator.html?id=steps-to-calories"},
+  {name:"Sleep Calculator",url:"/calculator.html?id=sleep-calculator"},
+  {name:"Waist-to-Height Ratio",url:"/calculator.html?id=waist-to-height"},
+  {name:"Waist-to-Hip Ratio",url:"/calculator.html?id=waist-to-hip"},
+  {name:"Army Body Fat",url:"/calculator.html?id=army-body-fat"},
+  {name:"Resting Metabolic Rate",url:"/calculator.html?id=resting-metabolic-rate"},
+  {name:"Alcohol Units",url:"/calculator.html?id=alcohol-units"},
+  {name:"BMI for Children",url:"/calculator.html?id=bmi-children"},
+  {name:"Pace to Speed Converter",url:"/calculator.html?id=pace-to-speed"}
+];
+function searchCalcs(q){
+  var box=document.getElementById('hdr-results');
+  q=(q||'').trim().toLowerCase();
+  if(!q){box.innerHTML='';box.style.display='none';return;}
+  var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,7);
+  if(!m.length){box.innerHTML='<div class="hdr-no-result">No results</div>';box.style.display='block';return;}
+  box.innerHTML=m.map(function(c){return '<a href="'+c.url+'" class="hdr-result-item">'+c.name+'</a>';}).join('');
+  box.style.display='block';
+}
+function goRandom(e){
+  e.preventDefault();
+  window.location=CALC_LIST[Math.floor(Math.random()*CALC_LIST.length)].url;
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#hdr-search')&&!e.target.closest('#hdr-results')){
+    var b=document.getElementById('hdr-results');if(b)b.style.display='none';
+  }
+});
+</script>
 </body>
 </html>
