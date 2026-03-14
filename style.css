@@ -58,8 +58,9 @@ h1, h2, h3, h4 {
 .header-flex {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   padding: 14px 0;
+  overflow: visible;
 }
 
 .logo {
@@ -80,11 +81,12 @@ nav {
 nav a {
   color: var(--ink-soft);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
-  padding: 6px 12px;
+  padding: 5px 9px;
   border-radius: 6px;
   transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
 }
 
 nav a:hover {
@@ -96,11 +98,12 @@ nav a:hover {
   background: var(--ink);
   color: var(--white) !important;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 9px 18px;
+  padding: 8px 14px;
   border-radius: 999px;
   flex-shrink: 0;
+  white-space: nowrap;
   transition: opacity 0.15s;
 }
 
@@ -842,32 +845,6 @@ nav a.active {
   padding: 32px 0 8px;
 }
 
-/* ─── SEARCH BAR ─────────────────────────── */
-
-.calc-search-wrap {
-  margin-bottom: 32px;
-}
-
-.calc-search-input {
-  width: 100%;
-  padding: 16px 20px;
-  font-size: 16px;
-  font-family: 'DM Sans', sans-serif;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--white);
-  color: var(--ink);
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.calc-search-input:focus {
-  border-color: var(--ink);
-}
-
-.calc-search-input::placeholder {
-  color: var(--ink-muted);
-}
 
 
 
