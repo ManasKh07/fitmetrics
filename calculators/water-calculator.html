@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Water Intake Calculator | FitMetrics</title>
+<title>Free Water Intake Calculator — Daily Hydration Goal</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Estimate your recommended daily water intake based on body weight.">
+<meta name="description" content="Calculate how much water you should drink daily based on your body weight. Free and instant.">
 <link rel="canonical" href="https://quickbmi.in/calculators/water-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free Water Intake Calculator — Daily Hydration Goal">
+<meta property="og:description" content="Calculate how much water you should drink daily based on your body weight. Free and instant.">
+<meta property="og:url" content="https://quickbmi.in/calculators/water-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Water Intake Calculator","url":"https://quickbmi.in/calculators/water-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Water Intake Calculator — Daily Hydration Needs | FitMetrics">
-<meta property="og:description" content="Calculate your recommended daily water intake based on your body weight.">
-<meta property="og:url" content="https://quickbmi.in/calculators/water-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Water Intake Calculator — Daily Hydration Needs | FitMetrics">
-<meta name="twitter:description" content="Calculate your recommended daily water intake based on your body weight.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,61 +39,93 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Water Intake Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Water Intake Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Wellness Tool</div>
     <h1>Water Intake Calculator</h1>
     <p>Calculate your minimum daily hydration needs based on body weight.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
-      <div class="input-group">
-        <label for="water_w">Body Weight (kg)</label>
-        <input type="number" id="water_w" placeholder="e.g., 70">
+      <div class="input-group"><label>Body Weight</label>
+        <div class="input-row"><input type="number" id="wt_w" placeholder="e.g. 70">
+        <select id="wt_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select></div>
       </div>
-      <button onclick="calculateWater()">Calculate Water Needs</button>
-      <div id="water_result" class="result"></div>
+      <div class="input-group"><label>Activity Level</label>
+        <select id="wt_act">
+          <option value="1.0">Sedentary (little exercise)</option>
+          <option value="1.15" selected>Lightly active (some walking)</option>
+          <option value="1.3">Moderately active (regular exercise)</option>
+          <option value="1.5">Very active (daily intense exercise)</option>
+        </select>
+      </div>
+      <div class="input-group"><label>Climate</label>
+        <select id="wt_climate">
+          <option value="1.0" selected>Temperate</option>
+          <option value="1.15">Hot / humid</option>
+          <option value="0.9">Cold</option>
+        </select>
+      </div>
+      <button onclick="calcWater()">Calculate Water Needs</button>
+      <div id="wt_result" class="result" style="display:none"></div>
+      <div id="wt_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
       <h3>Hydration Reference</h3>
       <table>
-        <tr><th>Weight</th><th>Daily Target</th></tr>
-        <tr><td>50 kg</td><td>1.65 L</td></tr>
-        <tr><td>60 kg</td><td>1.98 L</td></tr>
-        <tr><td>70 kg</td><td>2.31 L</td></tr>
-        <tr><td>80 kg</td><td>2.64 L</td></tr>
+        <tr><th>Weight</th><th>Minimum</th><th>Active</th></tr>
+        <tr><td>50 kg</td><td>1.65 L</td><td>2.1 L</td></tr>
+        <tr><td>60 kg</td><td>1.98 L</td><td>2.6 L</td></tr>
+        <tr><td>70 kg</td><td>2.31 L</td><td>3.0 L</td></tr>
+        <tr><td>80 kg</td><td>2.64 L</td><td>3.4 L</td></tr>
+        <tr><td>90 kg</td><td>2.97 L</td><td>3.9 L</td></tr>
+        <tr><td>100 kg</td><td>3.30 L</td><td>4.3 L</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: 33 ml per kg body weight (baseline)</p>
     </div>
-
   </div>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="tdee-calculator.html" class="recommended-card">
+      <div class="rec-icon">🔥</div>
+      <div class="rec-info"><strong>TDEE Calculator</strong><span>Daily calorie needs</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=fiber-intake" class="recommended-card">
+      <div class="rec-icon">🌾</div>
+      <div class="rec-info"><strong>Fibre Intake</strong><span>Daily fibre target</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=protein-intake" class="recommended-card">
+      <div class="rec-icon">🥩</div>
+      <div class="rec-info"><strong>Protein Intake</strong><span>Daily protein goal</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=sleep-calculator" class="recommended-card">
+      <div class="rec-icon">😴</div>
+      <div class="rec-info"><strong>Sleep Calculator</strong><span>Optimal sleep times</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
   <article class="article">
-    <h2>The Importance of Daily Hydration</h2>
-    <p>Water plays a crucial role in nearly every biological process in the human body. It helps regulate body temperature, transport nutrients, remove waste products and support cellular function.</p>
-    <p>Many health professionals recommend roughly 30–35 milliliters of water per kilogram of body weight daily. This calculator uses a baseline of 33 ml/kg to estimate hydration needs.</p>
-    <p>Hydration works best alongside proper nutrition. Also calculate your <a href="macro-calculator.html">daily macro intake</a> or estimate <a href="tdee-calculator.html">daily calorie requirements</a>. Learn more in our <a href="../blog/hydration-guide.html">Daily Water Intake Guide</a>.</p>
-
-    <div class="faq-section">
-      <h2>FAQs</h2>
-      <details><summary>Does coffee count toward hydration?</summary><p>Yes, beverages like coffee and tea contribute to daily fluid intake, although water should remain the primary source.</p></details>
-      <details><summary>How can I tell if I'm dehydrated?</summary><p>Dark yellow urine, fatigue and headaches are common signs of dehydration.</p></details>
-      <details><summary>Should athletes drink more water?</summary><p>Yes. Physical activity and sweating increase fluid loss and therefore increase hydration requirements.</p></details>
+    <h2>How Much Water Do You Really Need?</h2>
+    <p>Adequate hydration supports every function in the body — from nutrient transport and temperature regulation to cognitive performance and joint lubrication. Most adults need between 2–3.5 litres of fluid daily from all sources. Read our complete guide: <a href="../blog/hydration-guide.html">Daily Water Intake Guide</a>.</p>
+    <div class="faq-section"><h2>FAQs</h2>
+      <details><summary>Does coffee count toward daily water intake?</summary><p>Yes. Despite the mild diuretic effect of caffeine, research shows that regular coffee consumption contributes positively to daily fluid balance.</p></details>
+      <details><summary>How can I tell if I am well hydrated?</summary><p>Pale yellow urine (like lemonade) is the simplest indicator of good hydration. Dark yellow or amber urine indicates you should drink more.</p></details>
+      <details><summary>Should I drink more water when exercising?</summary><p>Yes. Add approximately 400–600 ml for every hour of moderate exercise, more in hot weather or for intense training.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -103,18 +135,25 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function calcWater(){
+  var wu=document.getElementById('wt_wu').value;
+  var w=parseFloat(document.getElementById('wt_w').value);
+  if(!w){alert('Please enter your weight');return;}
+  if(wu==='lb') w=w*0.4536;
+  var act=parseFloat(document.getElementById('wt_act').value);
+  var climate=parseFloat(document.getElementById('wt_climate').value);
+  var litres=(w*0.033*act*climate).toFixed(2);
+  var glasses=Math.round(litres/0.25);
+  var r=document.getElementById('wt_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+litres+' L</span> <span style="font-size:14px;font-weight:600;color:var(--ink-soft)">per day</span>';
+  r.style.background='var(--accent)';r.style.display='block';
+  var ri=document.getElementById('wt_interp');
+  ri.innerHTML='You should drink approximately <strong>'+litres+' litres ('+glasses+' glasses)</strong> per day. <br><br><strong>Simple schedule:</strong> 500ml on waking · 500ml with breakfast · 500ml mid-morning · 500ml with lunch · 500ml mid-afternoon · '+Math.round((litres-2.5)*1000)+'ml with dinner/evening.<br><br>About 20% of daily fluid comes from food (especially fruits and vegetables). If you exercise, add an extra 400–600ml per hour of training.';
+  ri.style.display='block';
+}
+</script>
+</body></html>

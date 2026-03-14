@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Age Calculator | FitMetrics</title>
+<title>Free Age Calculator — Calculate Your Exact Age in Seconds</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Calculate your exact age quickly using this free age calculator.">
+<meta name="description" content="Calculate your exact age in years, months and days from your date of birth. Free and instant.">
 <link rel="canonical" href="https://quickbmi.in/calculators/age-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free Age Calculator — Calculate Your Exact Age in Seconds">
+<meta property="og:description" content="Calculate your exact age in years, months and days from your date of birth. Free and instant.">
+<meta property="og:url" content="https://quickbmi.in/calculators/age-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","url":"https://quickbmi.in/calculators/age-calculator.html","applicationCategory":"CalculatorApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Age Calculator — Calculate Your Exact Age | FitMetrics">
-<meta property="og:description" content="Calculate your exact age in years, months and days from your date of birth.">
-<meta property="og:url" content="https://quickbmi.in/calculators/age-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Age Calculator — Calculate Your Exact Age | FitMetrics">
-<meta name="twitter:description" content="Calculate your exact age in years, months and days from your date of birth.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,62 +39,79 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Age Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Age Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Wellness Tool</div>
     <h1>Age Calculator</h1>
     <p>Calculate your exact age in years, months and days.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
-    <div class="calc-box" style="max-width:500px;">
-      <div class="input-group">
-        <label for="birthdate">Date of Birth</label>
-        <input type="date" id="birthdate">
+    <div class="calc-box">
+      <div class="input-group"><label for="ag_dob">Date of Birth</label>
+        <input type="date" id="ag_dob">
       </div>
-      <button onclick="calculateAge()">Calculate Age</button>
-      <div id="age_result" class="result"></div>
+      <div class="input-group"><label for="ag_to">Calculate age on date</label>
+        <input type="date" id="ag_to">
+      </div>
+      <button onclick="calcAge()">Calculate Age</button>
+      <div id="ag_result" class="result" style="display:none"></div>
+      <div id="ag_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
-      <h3>Age & Health</h3>
-      <p style="font-size:14px;color:var(--ink-soft);margin-bottom:12px;">Age is a key factor in several health calculations.</p>
+      <h3>Age & Health Calculators</h3>
       <table>
         <tr><th>Calculator</th><th>Uses Age?</th></tr>
         <tr><td>BMI</td><td>No</td></tr>
-        <tr><td>TDEE</td><td>Yes</td></tr>
-        <tr><td>Macros</td><td>Yes</td></tr>
+        <tr><td>TDEE</td><td>Yes ✓</td></tr>
+        <tr><td>Macro Calculator</td><td>Yes ✓</td></tr>
+        <tr><td>Heart Rate Zones</td><td>Yes ✓</td></tr>
+        <tr><td>Resting Metabolic Rate</td><td>Yes ✓</td></tr>
         <tr><td>Body Fat</td><td>No</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Age affects metabolism, heart rate max and nutritional needs.</p>
     </div>
-
   </div>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="tdee-calculator.html" class="recommended-card">
+      <div class="rec-icon">🔥</div>
+      <div class="rec-info"><strong>TDEE Calculator</strong><span>Calories for your age</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=heart-rate-zones" class="recommended-card">
+      <div class="rec-icon">❤</div>
+      <div class="rec-info"><strong>Heart Rate Zones</strong><span>Age-based HR zones</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=resting-metabolic-rate" class="recommended-card">
+      <div class="rec-icon">🧪</div>
+      <div class="rec-info"><strong>Resting Metabolic Rate</strong><span>Metabolism by age</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=sleep-calculator" class="recommended-card">
+      <div class="rec-icon">😴</div>
+      <div class="rec-info"><strong>Sleep Calculator</strong><span>Optimal sleep times</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
   <article class="article">
-    <h2>What is Chronological Age?</h2>
-    <p>Chronological age represents the exact amount of time that has passed since a person's birth. It is commonly used in official documents, medical records and demographic statistics.</p>
-    <p>Age calculations can become complex due to leap years and differences in calendar systems. Using a calculator ensures accuracy based on the current date.</p>
-    <p>Combine age with other health indicators such as <a href="bmi-calculator.html">BMI</a> or <a href="tdee-calculator.html">daily calorie expenditure</a> to better understand overall health.</p>
-
-    <div class="faq-section">
-      <h2>FAQs</h2>
-      <details><summary>Does leap year affect age calculation?</summary><p>Yes. Leap years introduce an extra day every four years, which must be considered when calculating exact age.</p></details>
-      <details><summary>What is the difference between chronological and biological age?</summary><p>Chronological age measures time since birth, while biological age estimates how old your body appears based on health and lifestyle factors.</p></details>
-      <details><summary>Why do cultures calculate age differently?</summary><p>Some cultures use alternative age systems where individuals are considered one year old at birth or age increases during the new year.</p></details>
+    <h2>Why Exact Age Matters for Health Calculations</h2>
+    <p>Your chronological age directly affects several health calculations. The Mifflin-St Jeor equation used in our TDEE and macro calculators includes age because metabolism slows by approximately 1–2% per decade after age 20. Heart rate zones are calculated from maximum heart rate (220 − age). Understanding your exact age ensures these calculations are as accurate as possible.</p>
+    <div class="faq-section"><h2>FAQs</h2>
+      <details><summary>Does leap year affect age calculation?</summary><p>Yes. This calculator accounts for leap years and gives you the precise number of years, months and days since your date of birth.</p></details>
+      <details><summary>What is the difference between chronological and biological age?</summary><p>Chronological age is time since birth. Biological age estimates how old your body functions based on health markers, fitness level and lifestyle habits.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -104,18 +121,30 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function calcAge(){
+  var dob=new Date(document.getElementById('ag_dob').value);
+  var toEl=document.getElementById('ag_to').value;
+  var to=toEl?new Date(toEl):new Date();
+  if(isNaN(dob.getTime())){alert('Please enter your date of birth');return;}
+  var y=to.getFullYear()-dob.getFullYear(), m=to.getMonth()-dob.getMonth(), d=to.getDate()-dob.getDate();
+  if(d<0){m--;d+=new Date(to.getFullYear(),to.getMonth(),0).getDate();}
+  if(m<0){y--;m+=12;}
+  var totalDays=Math.floor((to-dob)/86400000);
+  var nextBday=new Date(to.getFullYear(),dob.getMonth(),dob.getDate());
+  if(nextBday<=to) nextBday.setFullYear(to.getFullYear()+1);
+  var daysTo=Math.round((nextBday-to)/86400000);
+  var r=document.getElementById('ag_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+y+' years</span><span style="font-size:14px;color:var(--ink-soft)"> '+m+' months '+d+' days</span>';
+  r.style.background='var(--accent)';r.style.display='block';
+  var ri=document.getElementById('ag_interp');
+  ri.innerHTML='You are <strong>'+y+' years, '+m+' months and '+d+' days</strong> old — <strong>'+totalDays.toLocaleString()+' days</strong> total. Your next birthday is in <strong>'+daysTo+' days</strong>.<br><br>At age '+y+', your TDEE is affected by a metabolic rate approximately <strong>'+(Math.round((y-20)*1.5))+'% lower</strong> than at age 20. Use our <a href="tdee-calculator.html">TDEE calculator</a> for personalised calorie needs.';
+  ri.style.display='block';
+}
+// Set today as default for "calculate age on" field
+document.getElementById('ag_to').valueAsDate = new Date();
+</script>
+</body></html>

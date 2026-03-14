@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMI Calculator | FitMetrics</title>
+<title>Free BMI Calculator — Check Your Body Mass Index Now</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Calculate your Body Mass Index instantly using this free BMI calculator.">
+<meta name="description" content="Calculate your Body Mass Index instantly. Find out if you are in a healthy weight range for your height.">
 <link rel="canonical" href="https://quickbmi.in/calculators/bmi-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free BMI Calculator — Check Your Body Mass Index Now">
+<meta property="og:description" content="Calculate your Body Mass Index instantly. Find out if you are in a healthy weight range for your height.">
+<meta property="og:url" content="https://quickbmi.in/calculators/bmi-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BMI Calculator","url":"https://quickbmi.in/calculators/bmi-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="BMI Calculator — Free & Instant | FitMetrics">
-<meta property="og:description" content="Calculate your Body Mass Index instantly. Find out if your weight is in a healthy range for your height.">
-<meta property="og:url" content="https://quickbmi.in/calculators/bmi-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BMI Calculator — Free & Instant | FitMetrics">
-<meta name="twitter:description" content="Calculate your Body Mass Index instantly. Find out if your weight is in a healthy range for your height.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a healthy BMI?","acceptedAnswer":{"@type":"Answer","text":"A BMI between 18.5 and 24.9 is considered healthy for most adults."}},{"@type":"Question","name":"Is BMI accurate for athletes?","acceptedAnswer":{"@type":"Answer","text":"BMI may overestimate health risk in athletes with high muscle mass. Use body fat percentage alongside BMI."}}]}</script>
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,21 +39,18 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>BMI Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>BMI Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Body Composition Tool</div>
     <h1>BMI Calculator</h1>
     <p>Find out if your weight is in a healthy range for your height.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
 
@@ -61,54 +58,83 @@
       <div class="input-group">
         <label for="weight">Weight</label>
         <div class="input-row">
-          <input id="weight" placeholder="e.g., 70">
-          <select id="weight_unit"><option value="kg">kg</option><option value="lb">lb</option></select>
+          <input type="number" id="weight" placeholder="e.g. 70">
+          <select id="weight_unit" class="unit-select" onchange="toggleWeightUnit()">
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
+          </select>
         </div>
       </div>
       <div class="input-group">
         <label>Height</label>
         <div class="input-row">
-          <input id="height" placeholder="e.g., 178">
-          <input id="height_ft_input" placeholder="ft" style="display:none;">
-          <input id="height_in_input" placeholder="in" style="display:none;">
-          <select id="height_unit" onchange="toggleHeightInputs()">
+          <input type="number" id="height_cm" placeholder="e.g. 175">
+          <input type="number" id="height_ft" placeholder="ft" style="display:none">
+          <input type="number" id="height_in" placeholder="in" style="display:none">
+          <select id="height_unit" class="unit-select" onchange="toggleHeightUnit()">
             <option value="cm">cm</option>
-            <option value="ft">ft + in</option>
+            <option value="ft">ft+in</option>
           </select>
         </div>
       </div>
-      <button onclick="calculateBMI()">Calculate BMI</button>
-      <div id="result" class="result"></div>
+      <button onclick="calcBMI()">Calculate BMI</button>
+      <div id="bmi_result" class="result" style="display:none"></div>
+      <div id="bmi_interp" class="result-interpretation" style="display:none"></div>
     </div>
 
     <div class="side-panel">
       <h3>BMI Categories</h3>
       <table>
-        <tr><th>Category</th><th>Range</th></tr>
-        <tr><td>Underweight</td><td>Below 18.5</td></tr>
-        <tr><td>Healthy Weight</td><td>18.5 – 24.9</td></tr>
-        <tr><td>Overweight</td><td>25.0 – 29.9</td></tr>
-        <tr><td>Obesity</td><td>30.0+</td></tr>
+        <tr><th>Category</th><th>BMI Range</th><th>Health Risk</th></tr>
+        <tr><td>Underweight</td><td>&lt; 18.5</td><td>Moderate</td></tr>
+        <tr><td>Healthy Weight</td><td>18.5 – 24.9</td><td>Lowest</td></tr>
+        <tr><td>Overweight</td><td>25.0 – 29.9</td><td>Increased</td></tr>
+        <tr><td>Obese Class I</td><td>30.0 – 34.9</td><td>High</td></tr>
+        <tr><td>Obese Class II</td><td>35.0 – 39.9</td><td>Very High</td></tr>
+        <tr><td>Obese Class III</td><td>≥ 40.0</td><td>Extremely High</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Source: World Health Organization (WHO)</p>
     </div>
-
   </div>
 
-  <article class="article">
-    <h2>Understanding Body Mass Index</h2>
-    <p>Body Mass Index (BMI) is a widely used measurement that estimates whether a person has a healthy body weight relative to their height. Healthcare professionals use it as a screening tool to identify weight categories that may lead to health risks such as cardiovascular disease, diabetes, or metabolic disorders.</p>
-    <p>If you want a deeper understanding of daily calorie needs, you can also use our <a href="tdee-calculator.html">TDEE calculator</a> or estimate hydration using the <a href="water-calculator.html">water intake calculator</a>.</p>
-    <p>New to BMI? Read our full guide: <a href="../blog/what-is-bmi.html">What is BMI and Why It Matters</a>.</p>
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="tdee-calculator.html" class="recommended-card">
+      <div class="rec-icon">🔥</div>
+      <div class="rec-info"><strong>TDEE Calculator</strong><span>Find your daily calorie needs</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="body-fat-calculator.html" class="recommended-card">
+      <div class="rec-icon">📊</div>
+      <div class="rec-info"><strong>Body Fat Calculator</strong><span>More accurate than BMI</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=ideal-weight" class="recommended-card">
+      <div class="rec-icon">⚖</div>
+      <div class="rec-info"><strong>Ideal Weight</strong><span>Based on your height</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=waist-to-height" class="recommended-card">
+      <div class="rec-icon">📏</div>
+      <div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
 
+  <article class="article">
+    <h2>Understanding Your BMI Result</h2>
+    <p>Body Mass Index (BMI) is a screening tool that estimates whether your body weight is appropriate for your height. It is calculated by dividing your weight in kilograms by the square of your height in metres. While BMI is widely used by healthcare professionals worldwide, it has important limitations — it does not distinguish between fat and muscle, and does not account for where fat is distributed in the body.</p>
+    <p>For a more complete picture of your health, use BMI alongside <a href="body-fat-calculator.html">body fat percentage</a>, <a href="../calculator.html?id=waist-to-height">waist-to-height ratio</a>, and your <a href="tdee-calculator.html">daily calorie needs</a>. Read our full guide: <a href="../blog/what-is-bmi.html">What Is BMI and Why It Matters</a>.</p>
     <div class="faq-section">
       <h2>FAQs</h2>
-      <details><summary>What is considered a healthy BMI?</summary><p>A BMI between 18.5 and 24.9 is considered healthy for most adults.</p></details>
-      <details><summary>Is BMI always accurate?</summary><p>BMI is useful for population-level screening but may not accurately reflect body composition for athletes or individuals with high muscle mass.</p></details>
-      <details><summary>Why do doctors still use BMI?</summary><p>Because it is simple, fast, and useful for identifying general weight categories across large populations.</p></details>
+      <details><summary>What is a healthy BMI?</summary><p>18.5–24.9 is considered healthy for most adults. However, athletes with high muscle mass may have a higher BMI while being perfectly healthy.</p></details>
+      <details><summary>Is BMI accurate for everyone?</summary><p>BMI is a population-level screening tool. It is less accurate for athletes, elderly people, pregnant women, and people of Asian descent (who tend to carry more risk at lower BMI values).</p></details>
+      <details><summary>What should I do if my BMI is high?</summary><p>Consult a healthcare professional. A high BMI indicates increased risk, but your doctor will consider other factors including blood pressure, blood sugar, cholesterol, fitness level and family history.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -118,18 +144,42 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
+<script>
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
+</script>
 <script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+function toggleWeightUnit() {
+  var u = document.getElementById('weight_unit').value;
+  document.getElementById('weight').placeholder = u==='kg' ? 'e.g. 70' : 'e.g. 154';
+}
+function toggleHeightUnit() {
+  var u = document.getElementById('height_unit').value;
+  var cm = document.getElementById('height_cm');
+  var ft = document.getElementById('height_ft');
+  var inp = document.getElementById('height_in');
+  if (u==='cm') { cm.style.display=''; ft.style.display='none'; inp.style.display='none'; }
+  else { cm.style.display='none'; ft.style.display=''; inp.style.display=''; }
+}
+function calcBMI() {
+  var wu = document.getElementById('weight_unit').value;
+  var hu = document.getElementById('height_unit').value;
+  var w = parseFloat(document.getElementById('weight').value);
+  var hM;
+  if (hu==='cm') hM = parseFloat(document.getElementById('height_cm').value)/100;
+  else { var ft=parseFloat(document.getElementById('height_ft').value)||0; var inp=parseFloat(document.getElementById('height_in').value)||0; hM=(ft*12+inp)*0.0254; }
+  if (!w||!hM) { alert('Please fill in all fields'); return; }
+  if (wu==='lb') w=w*0.4536;
+  var bmi=(w/(hM*hM)).toFixed(1);
+  var cats=[['Underweight','bmi < 18.5 — you may benefit from nutritional guidance. Speak to a doctor.',18.5],['Healthy Weight','great result — you are in the healthy weight range for your height.',25],['Overweight','modest lifestyle changes could reduce future health risks.',30],['Obese Class I','consider speaking with a healthcare professional about weight management.',35],['Obese Class II','medical support is recommended. Please consult your doctor.',40],['Obese Class III','please consult your doctor. Medical support is important at this level.',999]];
+  var cat = cats.find(c=>bmi<c[2]);
+  var color = bmi<18.5?'#3B8BD4':bmi<25?'#639922':bmi<30?'#EF9F27':bmi<35?'#D85A30':'#E24B4A';
+  var r = document.getElementById('bmi_result');
+  r.innerHTML = '<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:'+color+'">'+bmi+'</span> <span style="font-size:14px;font-weight:600;color:'+color+'">'+cat[0]+'</span>';
+  r.style.background='var(--card-bg)';r.style.display='block';
+  var ri = document.getElementById('bmi_interp');
+  ri.innerHTML = 'Your BMI of <strong>'+bmi+'</strong> is classified as <strong>'+cat[0]+'</strong> — '+cat[1]+'<br><br>For context: a BMI between 18.5 and 24.9 is the healthy range. Your ideal weight range for your height is approximately <strong>'+(Math.round(hM*hM*18.5*10)/10)+'–'+(Math.round(hM*hM*24.9*10)/10)+' kg</strong>.';
+  ri.style.display='block';
+}
 </script>
-</body>
-</html>
+</body></html>

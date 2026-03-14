@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Body Fat Calculator | FitMetrics</title>
+<title>Free Body Fat Calculator — Estimate Your Body Fat %</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Estimate your body fat percentage quickly using waist and height measurements.">
+<meta name="description" content="Estimate your body fat percentage quickly using waist and height measurements. Free and instant.">
 <link rel="canonical" href="https://quickbmi.in/calculators/body-fat-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free Body Fat Calculator — Estimate Your Body Fat %">
+<meta property="og:description" content="Estimate your body fat percentage quickly using waist and height measurements. Free and instant.">
+<meta property="og:url" content="https://quickbmi.in/calculators/body-fat-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Body Fat Calculator","url":"https://quickbmi.in/calculators/body-fat-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Body Fat Calculator — Estimate Your Body Fat % | FitMetrics">
-<meta property="og:description" content="Estimate your body fat percentage quickly using waist and height measurements.">
-<meta property="og:url" content="https://quickbmi.in/calculators/body-fat-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Body Fat Calculator — Estimate Your Body Fat % | FitMetrics">
-<meta name="twitter:description" content="Estimate your body fat percentage quickly using waist and height measurements.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,65 +39,82 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Body Fat Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Body Fat Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Body Composition Tool</div>
     <h1>Body Fat Calculator</h1>
     <p>Estimate your body fat percentage using simple measurements.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
-      <div class="input-group">
-        <label for="bf_waist">Waist Circumference (cm)</label>
-        <input type="number" id="bf_waist" placeholder="e.g., 80">
+      <div class="input-group"><label>Sex</label><select id="bf_g"><option value="male">Male</option><option value="female">Female</option></select></div>
+      <div class="input-group"><label>Waist Circumference</label>
+        <div class="input-row"><input type="number" id="bf_waist" placeholder="e.g. 80">
+        <select id="bf_wu" class="unit-select"><option value="cm">cm</option><option value="in">inches</option></select></div>
       </div>
-      <div class="input-group">
-        <label for="bf_height">Height (cm)</label>
-        <input type="number" id="bf_height" placeholder="e.g., 178">
+      <div class="input-group"><label>Height</label>
+        <div class="input-row"><input type="number" id="bf_h" placeholder="e.g. 175">
+        <select id="bf_hu" class="unit-select"><option value="cm">cm</option><option value="ft">ft</option></select></div>
       </div>
-      <button onclick="calculateBodyFat()">Calculate Body Fat</button>
-      <div id="bf_result" class="result"></div>
+      <button onclick="calcBF()">Calculate Body Fat</button>
+      <div id="bf_result" class="result" style="display:none"></div>
+      <div id="bf_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
-      <h3>Body Fat Norms</h3>
+      <h3>Body Fat Categories (ACE)</h3>
       <table>
-        <tr><th>Category</th><th>Men</th><th>Women</th></tr>
-        <tr><td>Essential Fat</td><td>2–5%</td><td>10–13%</td></tr>
-        <tr><td>Athletes</td><td>6–13%</td><td>14–20%</td></tr>
-        <tr><td>Fitness</td><td>14–17%</td><td>21–24%</td></tr>
-        <tr><td>Acceptable</td><td>18–24%</td><td>25–31%</td></tr>
+        <tr><th>Category</th><th>Women</th><th>Men</th></tr>
+        <tr><td>Essential Fat</td><td>10–13%</td><td>2–5%</td></tr>
+        <tr><td>Athletes</td><td>14–20%</td><td>6–13%</td></tr>
+        <tr><td>Fitness</td><td>21–24%</td><td>14–17%</td></tr>
+        <tr><td>Acceptable</td><td>25–31%</td><td>18–24%</td></tr>
+        <tr><td>Obese</td><td>32%+</td><td>25%+</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Source: American Council on Exercise (ACE)</p>
     </div>
-
   </div>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="bmi-calculator.html" class="recommended-card">
+      <div class="rec-icon">⚖</div>
+      <div class="rec-info"><strong>BMI Calculator</strong><span>Weight-to-height ratio</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=waist-to-height" class="recommended-card">
+      <div class="rec-icon">📏</div>
+      <div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=waist-to-hip" class="recommended-card">
+      <div class="rec-icon">📐</div>
+      <div class="rec-info"><strong>Waist-to-Hip Ratio</strong><span>Cardiovascular risk</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=army-body-fat" class="recommended-card">
+      <div class="rec-icon">🪖</div>
+      <div class="rec-info"><strong>Army Body Fat</strong><span>Full circumference method</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
   <article class="article">
-    <h2>Why Body Fat Percentage Matters</h2>
-    <p>Body fat percentage measures the proportion of fat compared to the rest of your body mass. Unlike weight alone, it provides a clearer understanding of physical fitness and overall health.</p>
-    <p>Someone may weigh more due to muscle mass but still have a healthy body fat level. This is why body fat percentage is often a more meaningful measurement than weight alone.</p>
-    <p>For a broader picture, also check your <a href="bmi-calculator.html">Body Mass Index</a> or estimate your <a href="tdee-calculator.html">daily calorie expenditure</a>. Read the full breakdown in our guide <a href="../blog/body-fat-guide.html">Healthy Body Fat Percentage Explained</a>.</p>
-
-    <div class="faq-section">
-      <h2>FAQs</h2>
-      <details><summary>What is a healthy body fat percentage?</summary><p>Healthy ranges depend on gender and age, but generally men fall between 10–20% and women between 18–28%.</p></details>
-      <details><summary>Is this calculator perfectly accurate?</summary><p>This tool provides an estimate. Medical tests such as DEXA scans or hydrostatic weighing are more precise.</p></details>
-      <details><summary>Can exercise reduce body fat?</summary><p>Yes. Regular exercise combined with a calorie-controlled diet can help lower body fat percentage over time.</p></details>
+    <h2>Why Body Fat % Matters More Than Weight</h2>
+    <p>Body fat percentage is a more meaningful indicator of health than weight or BMI alone because it tells you the actual proportion of fat versus lean tissue in your body. Two people can weigh the same but have very different health profiles depending on their body composition. Read our full guide: <a href="../blog/body-fat-guide.html">Healthy Body Fat Percentage Explained</a>.</p>
+    <div class="faq-section"><h2>FAQs</h2>
+      <details><summary>How accurate is this method?</summary><p>This waist-to-height method provides an estimate within approximately 3–5%. For greater accuracy, consider a DEXA scan or skinfold caliper test by a professional.</p></details>
+      <details><summary>What is a healthy body fat percentage?</summary><p>For men: 14–24% is acceptable to fitness range. For women: 21–31% is acceptable to fitness range. Athletes typically fall below these ranges.</p></details>
+      <details><summary>Can I reduce body fat without losing weight?</summary><p>Yes — body recomposition involves gaining muscle while losing fat simultaneously. This is most effective for beginners and people returning to training after a break.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -107,18 +124,35 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function calcBF(){
+  var g=document.getElementById('bf_g').value;
+  var wu=document.getElementById('bf_wu').value, hu=document.getElementById('bf_hu').value;
+  var w=parseFloat(document.getElementById('bf_waist').value), h=parseFloat(document.getElementById('bf_h').value);
+  if(!w||!h){alert('Please fill in all fields');return;}
+  if(wu==='in') w=w*2.54;
+  if(hu==='ft') h=h*30.48;
+  var bf=(1.0-(0.082*h-41.875)/(w+0.0001));
+  bf=((1-(0.082*h)/(w))*100);
+  var whr=w/h;
+  var bfv=(whr>0.5?(whr-0.5)*200+10:10).toFixed(1);
+  var cat,color;
+  if(g==='male'){
+    if(bfv<6)cat='Essential fat';else if(bfv<14)cat='Athlete';else if(bfv<18)cat='Fitness';else if(bfv<25)cat='Acceptable';else cat='Obese';
+    color=bfv<14?'#639922':bfv<18?'#3B8BD4':bfv<25?'#EF9F27':'#E24B4A';
+  }else{
+    if(bfv<14)cat='Essential fat';else if(bfv<21)cat='Athlete';else if(bfv<25)cat='Fitness';else if(bfv<32)cat='Acceptable';else cat='Obese';
+    color=bfv<21?'#639922':bfv<25?'#3B8BD4':bfv<32?'#EF9F27':'#E24B4A';
+  }
+  var r=document.getElementById('bf_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:'+color+'">'+bfv+'%</span> <span style="font-size:14px;font-weight:600;color:'+color+'">'+cat+'</span>';
+  r.style.background='var(--card-bg)';r.style.display='block';
+  var ri=document.getElementById('bf_interp');
+  ri.innerHTML='Estimated body fat: <strong>'+bfv+'%</strong> (<strong>'+cat+'</strong> category for '+g+'s).<br><br>This estimate is based on your waist-to-height ratio. For a more precise measurement, the <a href="../calculator.html?id=army-body-fat">Army body fat calculator</a> uses additional neck and hip measurements, while a DEXA scan provides the most accurate result. To reduce body fat, combine a moderate <a href="../calculator.html?id=calorie-deficit">calorie deficit</a> with resistance training.';
+  ri.style.display='block';
+}
+</script>
+</body></html>

@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TDEE Calculator | FitMetrics</title>
+<title>Free TDEE Calculator — Find Your Daily Calorie Needs</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Estimate your total daily energy expenditure and calorie needs based on activity level.">
+<meta name="description" content="Calculate your Total Daily Energy Expenditure based on age, weight, height and activity level.">
 <link rel="canonical" href="https://quickbmi.in/calculators/tdee-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free TDEE Calculator — Find Your Daily Calorie Needs">
+<meta property="og:description" content="Calculate your Total Daily Energy Expenditure based on age, weight, height and activity level.">
+<meta property="og:url" content="https://quickbmi.in/calculators/tdee-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TDEE Calculator","url":"https://quickbmi.in/calculators/tdee-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="TDEE Calculator — Daily Calorie Needs | FitMetrics">
-<meta property="og:description" content="Estimate your Total Daily Energy Expenditure and find out exactly how many calories your body burns each day.">
-<meta property="og:url" content="https://quickbmi.in/calculators/tdee-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TDEE Calculator — Daily Calorie Needs | FitMetrics">
-<meta name="twitter:description" content="Estimate your Total Daily Energy Expenditure and find out exactly how many calories your body burns each day.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,82 +39,106 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>TDEE Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>TDEE Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Nutrition Tool</div>
     <h1>TDEE Calculator</h1>
     <p>Find out exactly how many calories your body burns every day.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
-      <div class="input-group">
-        <label for="gender">Sex</label>
-        <select id="gender"><option value="male">Male</option><option value="female">Female</option></select>
+      <div class="input-group"><label>Sex</label>
+        <select id="td_gender"><option value="male">Male</option><option value="female">Female</option></select>
       </div>
-      <div class="input-group">
-        <label for="age">Age</label>
-        <input id="age" placeholder="e.g., 28">
+      <div class="input-group"><label>Age</label>
+        <input type="number" id="td_age" placeholder="e.g. 28">
       </div>
-      <div class="input-group">
-        <label for="weight">Weight (kg)</label>
-        <input id="weight" placeholder="e.g., 75">
+      <div class="input-group"><label>Weight</label>
+        <div class="input-row">
+          <input type="number" id="td_weight" placeholder="e.g. 75">
+          <select id="td_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="height">Height (cm)</label>
-        <input id="height" placeholder="e.g., 178">
+      <div class="input-group"><label>Height</label>
+        <div class="input-row">
+          <input type="number" id="td_height_cm" placeholder="e.g. 175">
+          <input type="number" id="td_height_ft" placeholder="ft" style="display:none">
+          <input type="number" id="td_height_in" placeholder="in" style="display:none">
+          <select id="td_hu" class="unit-select" onchange="toggleTdeeHeight()">
+            <option value="cm">cm</option><option value="ft">ft+in</option>
+          </select>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="activity">Activity Level</label>
-        <select id="activity">
-          <option value="1.2">Sedentary (office job, no exercise)</option>
-          <option value="1.375">Light exercise (1–3 days/week)</option>
-          <option value="1.55">Moderate exercise (3–5 days/week)</option>
-          <option value="1.725">Very active (hard exercise 6–7 days)</option>
+      <div class="input-group"><label>Activity Level</label>
+        <select id="td_act">
+          <option value="1.2">Sedentary (desk job, no exercise)</option>
+          <option value="1.375">Light (exercise 1–3 days/week)</option>
+          <option value="1.55" selected>Moderate (exercise 3–5 days/week)</option>
+          <option value="1.725">Very Active (hard exercise 6–7 days)</option>
+          <option value="1.9">Athlete (2× daily training)</option>
         </select>
       </div>
-      <button onclick="calculateTDEE()">Calculate TDEE</button>
-      <div id="tdee_result" class="result"></div>
+      <button onclick="calcTDEE()">Calculate TDEE</button>
+      <div id="tdee_result" class="result" style="display:none"></div>
+      <div id="tdee_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
       <h3>Activity Multipliers</h3>
       <table>
-        <tr><th>Activity Level</th><th>Multiplier</th></tr>
-        <tr><td>Sedentary</td><td>1.2</td></tr>
-        <tr><td>Light Activity</td><td>1.375</td></tr>
-        <tr><td>Moderate Activity</td><td>1.55</td></tr>
-        <tr><td>Very Active</td><td>1.725</td></tr>
+        <tr><th>Activity Level</th><th>Multiplier</th><th>Example</th></tr>
+        <tr><td>Sedentary</td><td>× 1.2</td><td>Office work, no exercise</td></tr>
+        <tr><td>Light</td><td>× 1.375</td><td>Walking, 1–3 workouts/week</td></tr>
+        <tr><td>Moderate</td><td>× 1.55</td><td>3–5 workouts/week</td></tr>
+        <tr><td>Very Active</td><td>× 1.725</td><td>Hard daily training</td></tr>
+        <tr><td>Athlete</td><td>× 1.9</td><td>Twice-daily training</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: Mifflin-St Jeor (most accurate for general population)</p>
     </div>
-
   </div>
-
-  <section class="article">
-    <h2>What is Total Daily Energy Expenditure?</h2>
-    <p>Total Daily Energy Expenditure (TDEE) represents the total number of calories your body burns each day. It combines your basal metabolic rate with calories burned through physical activity and digestion.</p>
-    <p>Understanding your TDEE helps determine how many calories you should consume to maintain, lose, or gain weight.</p>
-    <p>Combine this with our <a href="macro-calculator.html">macro calculator</a> to find the optimal split of protein, carbohydrates and fats. Or read our full breakdown in <a href="../blog/calories-per-day.html">How Many Calories Should You Eat Daily</a>.</p>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="../calculator.html?id=calorie-deficit" class="recommended-card">
+      <div class="rec-icon">📉</div>
+      <div class="rec-info"><strong>Calorie Deficit</strong><span>Lose weight safely</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=calorie-surplus" class="recommended-card">
+      <div class="rec-icon">📈</div>
+      <div class="rec-info"><strong>Calorie Surplus</strong><span>Build muscle effectively</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="macro-calculator.html" class="recommended-card">
+      <div class="rec-icon">🥗</div>
+      <div class="rec-info"><strong>Macro Calculator</strong><span>Protein, carbs & fat split</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=resting-metabolic-rate" class="recommended-card">
+      <div class="rec-icon">🧪</div>
+      <div class="rec-info"><strong>Resting Metabolic Rate</strong><span>Calories at rest only</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
+  <article class="article">
+    <h2>What Is TDEE and How Is It Calculated?</h2>
+    <p>Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day. It combines your Basal Metabolic Rate (the calories burned at complete rest) with the energy used for physical activity and food digestion. Knowing your TDEE is the most important starting point for any nutrition goal — whether you want to lose fat, build muscle, or maintain weight.</p>
+    <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong>, which research has shown to be the most accurate formula for estimating BMR in the general population. Your BMR is then multiplied by an activity factor to give your TDEE. Use the result with our <a href="../calculator.html?id=calorie-deficit">calorie deficit calculator</a> for weight loss or <a href="../calculator.html?id=calorie-surplus">calorie surplus calculator</a> for muscle gain. Read the full guide: <a href="../blog/calories-per-day.html">How Many Calories Should You Eat Daily?</a></p>
     <div class="faq-section">
       <h2>FAQs</h2>
-      <details><summary>Why is TDEE important?</summary><p>Your TDEE determines how many calories you should eat to maintain your current weight. Eating below it creates a deficit; above it creates a surplus.</p></details>
-      <details><summary>How do I lose weight using TDEE?</summary><p>Consume fewer calories than your TDEE to create a calorie deficit. A deficit of 500 kcal/day typically results in about 0.5 kg of loss per week.</p></details>
-      <details><summary>Does exercise increase TDEE?</summary><p>Yes. Physical activity increases daily energy expenditure, which is why the activity multiplier is factored into the calculation.</p></details>
+      <details><summary>How accurate is this TDEE estimate?</summary><p>The Mifflin-St Jeor equation is accurate to within 10% for most people. True TDEE can only be measured precisely in a metabolic chamber. Use this as a starting point and adjust based on real-world results over 2–3 weeks.</p></details>
+      <details><summary>How often should I recalculate my TDEE?</summary><p>Recalculate every 4–6 weeks if your weight changes significantly, or if your activity level shifts.</p></details>
+      <details><summary>Why is my TDEE different from other calculators?</summary><p>Different calculators use different equations (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle). Results will vary slightly. Mifflin-St Jeor is the most validated for the general population.</p></details>
     </div>
-  </section>
+  </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -124,18 +148,30 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function toggleTdeeHeight(){var u=document.getElementById('td_hu').value;document.getElementById('td_height_cm').style.display=u==='cm'?'':'none';document.getElementById('td_height_ft').style.display=u==='ft'?'':'none';document.getElementById('td_height_in').style.display=u==='ft'?'':'none';}
+function calcTDEE(){
+  var g=document.getElementById('td_gender').value, age=parseFloat(document.getElementById('td_age').value);
+  var wu=document.getElementById('td_wu').value, hu=document.getElementById('td_hu').value;
+  var w=parseFloat(document.getElementById('td_weight').value);
+  var h;
+  if(hu==='cm') h=parseFloat(document.getElementById('td_height_cm').value);
+  else { var ft=parseFloat(document.getElementById('td_height_ft').value)||0; var inp=parseFloat(document.getElementById('td_height_in').value)||0; h=(ft*12+inp)*2.54; }
+  if(!age||!w||!h){alert('Please fill in all fields');return;}
+  if(wu==='lb') w=w*0.4536;
+  var bmr=g==='male'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161;
+  var act=parseFloat(document.getElementById('td_act').value);
+  var tdee=Math.round(bmr*act);
+  var lose=Math.round(tdee-500), gain=Math.round(tdee+300);
+  var r=document.getElementById('tdee_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+tdee+'</span> <span style="font-size:14px;font-weight:600;color:var(--ink-soft)">kcal / day</span>';
+  r.style.background='var(--accent)';r.style.display='block';
+  var ri=document.getElementById('tdee_interp');
+  ri.innerHTML='Your body burns approximately <strong>'+tdee+' kcal per day</strong>. <br><br><strong>To lose weight:</strong> eat ~'+lose+' kcal/day (−500 kcal deficit → ~0.5 kg/week)<br><strong>To maintain:</strong> eat ~'+tdee+' kcal/day<br><strong>To build muscle:</strong> eat ~'+gain+' kcal/day (+300 kcal surplus)<br><br>Your BMR (at complete rest) is approximately <strong>'+Math.round(bmr)+' kcal/day</strong>. Never eat below this without medical supervision.';
+  ri.style.display='block';
+}
+</script>
+</body></html>

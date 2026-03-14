@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Percentage Calculator | FitMetrics</title>
+<title>Free Percentage Calculator — Quick & Easy Percentage Math</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Quickly calculate percentages with this free online percentage calculator.">
+<meta name="description" content="Calculate percentages instantly. Find what percentage one number is of another in seconds.">
 <link rel="canonical" href="https://quickbmi.in/calculators/percentage-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free Percentage Calculator — Quick & Easy Percentage Math">
+<meta property="og:description" content="Calculate percentages instantly. Find what percentage one number is of another in seconds.">
+<meta property="og:url" content="https://quickbmi.in/calculators/percentage-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://quickbmi.in/calculators/percentage-calculator.html","applicationCategory":"CalculatorApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Percentage Calculator — Quick Percentage Math | FitMetrics">
-<meta property="og:description" content="Instantly calculate the percentage of any value with this free online percentage calculator.">
-<meta property="og:url" content="https://quickbmi.in/calculators/percentage-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Percentage Calculator — Quick Percentage Math | FitMetrics">
-<meta name="twitter:description" content="Instantly calculate the percentage of any value with this free online percentage calculator.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,65 +39,89 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Percentage Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Percentage Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Math Tool</div>
     <h1>Percentage Calculator</h1>
-    <p>Instantly calculate the percentage of any value.</p>
+    <p>Calculate any percentage instantly — multiple modes.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
-      <div class="input-group">
-        <label for="percent_value">Part Value</label>
-        <input type="number" id="percent_value" placeholder="e.g., 20">
+      <div class="input-group"><label>Calculation Type</label>
+        <select id="pc_type" onchange="updatePctLabels()">
+          <option value="of">What is X% of Y?</option>
+          <option value="what">X is what % of Y?</option>
+          <option value="change">% change from X to Y</option>
+          <option value="add">Add X% to Y</option>
+          <option value="remove">Remove X% from Y</option>
+        </select>
       </div>
-      <div class="input-group">
-        <label for="percent_total">Total Value</label>
-        <input type="number" id="percent_total" placeholder="e.g., 100">
+      <div class="input-group"><label id="pc_l1">Percentage (%)</label>
+        <input type="number" id="pc_a" placeholder="e.g. 20">
       </div>
-      <button onclick="calculatePercentage()">Calculate Percentage</button>
-      <div id="percent_result" class="result"></div>
+      <div class="input-group"><label id="pc_l2">Value</label>
+        <input type="number" id="pc_b" placeholder="e.g. 100">
+      </div>
+      <button onclick="calcPct()">Calculate</button>
+      <div id="pc_result" class="result" style="display:none"></div>
+      <div id="pc_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
-      <h3>Common Fraction Conversions</h3>
+      <h3>Common Percentage Reference</h3>
       <table>
-        <tr><th>Fraction</th><th>Percentage</th></tr>
-        <tr><td>1/4</td><td>25%</td></tr>
-        <tr><td>1/3</td><td>33.3%</td></tr>
-        <tr><td>1/2</td><td>50%</td></tr>
-        <tr><td>3/4</td><td>75%</td></tr>
+        <tr><th>Fraction</th><th>Decimal</th><th>Percentage</th></tr>
+        <tr><td>1/10</td><td>0.1</td><td>10%</td></tr>
+        <tr><td>1/5</td><td>0.2</td><td>20%</td></tr>
+        <tr><td>1/4</td><td>0.25</td><td>25%</td></tr>
+        <tr><td>1/3</td><td>0.333</td><td>33.3%</td></tr>
+        <tr><td>1/2</td><td>0.5</td><td>50%</td></tr>
+        <tr><td>2/3</td><td>0.667</td><td>66.7%</td></tr>
+        <tr><td>3/4</td><td>0.75</td><td>75%</td></tr>
       </table>
     </div>
-
   </div>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="bmi-calculator.html" class="recommended-card">
+      <div class="rec-icon">⚖</div>
+      <div class="rec-info"><strong>BMI Calculator</strong><span>Body mass index</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="tdee-calculator.html" class="recommended-card">
+      <div class="rec-icon">🔥</div>
+      <div class="rec-info"><strong>TDEE Calculator</strong><span>Daily calorie burn</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="body-fat-calculator.html" class="recommended-card">
+      <div class="rec-icon">📊</div>
+      <div class="rec-info"><strong>Body Fat Calculator</strong><span>Body fat percentage</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="water-calculator.html" class="recommended-card">
+      <div class="rec-icon">💧</div>
+      <div class="rec-info"><strong>Water Intake</strong><span>Daily hydration</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
   <article class="article">
     <h2>Understanding Percentages</h2>
-    <p>A percentage represents a number or ratio expressed as a fraction of 100. The term originates from the Latin phrase <em>per centum</em>, meaning "by the hundred."</p>
-    <p>Percentages are widely used in finance, statistics, academics and everyday calculations — from exam scores and discounts to tax rates and financial growth.</p>
-    <p>If you are calculating health metrics you might also want to estimate your <a href="bmi-calculator.html">Body Mass Index</a> or determine your <a href="tdee-calculator.html">daily calorie expenditure</a>.</p>
-
-    <div class="faq-section">
-      <h2>FAQs</h2>
-      <details><summary>How do you calculate a percentage manually?</summary><p>Divide the part by the whole and multiply the result by 100.</p></details>
-      <details><summary>Can a percentage be greater than 100?</summary><p>Yes. A value greater than 100% means the part exceeds the original total.</p></details>
-      <details><summary>Where are percentages used?</summary><p>Percentages are used in statistics, finance, health metrics, academic scores and everyday comparisons.</p></details>
+    <p>A percentage expresses a number as a fraction of 100. The word comes from the Latin <em>per centum</em>, meaning "by the hundred." Percentages are used in finance (interest rates, tax), health (body fat, test scores), statistics, and everyday calculations like discounts and tips.</p>
+    <div class="faq-section"><h2>FAQs</h2>
+      <details><summary>How do you calculate a percentage manually?</summary><p>Divide the part by the whole and multiply by 100. For example: 25 ÷ 200 × 100 = 12.5%.</p></details>
+      <details><summary>Can a percentage exceed 100?</summary><p>Yes. A value over 100% means the amount exceeds the original total. For example, if sales grew from 100 to 250, that is a 150% increase.</p></details>
+      <details><summary>What is the difference between percentage and percentage points?</summary><p>Percentage points measure the arithmetic difference between two percentages. If a rate rises from 5% to 8%, it increased by 3 percentage points but by 60% in relative terms.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -107,18 +131,35 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function updatePctLabels(){
+  var t=document.getElementById('pc_type').value;
+  var l1=document.getElementById('pc_l1'), l2=document.getElementById('pc_l2');
+  var a=document.getElementById('pc_a'), b=document.getElementById('pc_b');
+  if(t==='of'){l1.textContent='Percentage (%)';l2.textContent='Of value';a.placeholder='e.g. 20';b.placeholder='e.g. 500';}
+  else if(t==='what'){l1.textContent='Part value';l2.textContent='Total value';a.placeholder='e.g. 25';b.placeholder='e.g. 200';}
+  else if(t==='change'){l1.textContent='Original value';l2.textContent='New value';a.placeholder='e.g. 100';b.placeholder='e.g. 150';}
+  else if(t==='add'){l1.textContent='Percentage to add (%)';l2.textContent='Value';a.placeholder='e.g. 20';b.placeholder='e.g. 500';}
+  else{l1.textContent='Percentage to remove (%)';l2.textContent='Value';a.placeholder='e.g. 10';b.placeholder='e.g. 200';}
+}
+function calcPct(){
+  var t=document.getElementById('pc_type').value;
+  var a=parseFloat(document.getElementById('pc_a').value), b=parseFloat(document.getElementById('pc_b').value);
+  if(isNaN(a)||isNaN(b)){alert('Please fill in both fields');return;}
+  var res, interp;
+  if(t==='of'){res=(a/100*b).toFixed(4)*1;interp=a+'% of '+b+' = <strong>'+res+'</strong>';}
+  else if(t==='what'){res=(a/b*100).toFixed(4)*1;interp=a+' is <strong>'+res+'%</strong> of '+b;}
+  else if(t==='change'){res=((b-a)/Math.abs(a)*100).toFixed(4)*1;interp='From '+a+' to '+b+' = <strong>'+(res>0?'+':'')+res+'%</strong> change';}
+  else if(t==='add'){res=(b+a/100*b).toFixed(4)*1;interp=b+' + '+a+'% = <strong>'+res+'</strong> (added '+(a/100*b).toFixed(2)+')';}
+  else{res=(b-a/100*b).toFixed(4)*1;interp=b+' − '+a+'% = <strong>'+res+'</strong> (removed '+(a/100*b).toFixed(2)+')';}
+  var r=document.getElementById('pc_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+res+'</span>';
+  r.style.background='var(--accent)';r.style.display='block';
+  var ri=document.getElementById('pc_interp');
+  ri.innerHTML=interp;ri.style.display='block';
+}
+</script>
+</body></html>

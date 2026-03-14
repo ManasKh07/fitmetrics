@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Macro Calculator | FitMetrics</title>
+<title>Free Macro Calculator — Daily Protein, Carbs & Fat Goals</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Calculate your daily macronutrient targets including protein, carbohydrates and fat.">
+<meta name="description" content="Get your personalised daily macronutrient targets for weight loss, muscle gain or maintenance.">
 <link rel="canonical" href="https://quickbmi.in/calculators/macro-calculator.html">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Free Macro Calculator — Daily Protein, Carbs & Fat Goals">
+<meta property="og:description" content="Get your personalised daily macronutrient targets for weight loss, muscle gain or maintenance.">
+<meta property="og:url" content="https://quickbmi.in/calculators/macro-calculator.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Macro Calculator","url":"https://quickbmi.in/calculators/macro-calculator.html","applicationCategory":"HealthApplication","operatingSystem":"Any"}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Macro Calculator — Protein, Carbs & Fat Targets | FitMetrics">
-<meta property="og:description" content="Get your daily macronutrient targets based on your weight, activity level and fitness goals.">
-<meta property="og:url" content="https://quickbmi.in/calculators/macro-calculator.html">
-<meta property="og:site_name" content="FitMetrics">
-<meta property="og:image" content="https://quickbmi.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Macro Calculator — Protein, Carbs & Fat Targets | FitMetrics">
-<meta name="twitter:description" content="Get your daily macronutrient targets based on your weight, activity level and fitness goals.">
-<meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
+
 </head>
 <body>
-
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" placeholder="Search calculators..." 
+        onfocus="window.location='../index.html#calc-search'" readonly>
+    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -39,89 +39,94 @@
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
-      <a href="age-calculator.html">Age</a>
-      <a href="percentage-calculator.html">%</a>
     </nav>
-    <a href="bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
   </div>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="../index.html">Home</a> <span class="bc-sep">›</span> <span>Calculators</span> <span class="bc-sep">›</span> <span>Macro Calculator</span></div></nav>
-<div class="page-hero">
+</header><nav class="breadcrumb" aria-label="breadcrumb">
+  <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Macro Calculator</span></div>
+</nav><div class="page-hero">
   <div class="container">
-    <div class="page-hero-label">Health Tool</div>
+    <div class="page-hero-label">Nutrition Tool</div>
     <h1>Macro Calculator</h1>
-    <p>Get your daily protein, carb, and fat targets based on your goals.</p>
+    <p>Get your daily protein, carb and fat targets based on your goals.</p>
   </div>
 </div>
-
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
-      <div class="input-group">
-        <label for="mac_gender">Sex</label>
-        <select id="mac_gender"><option value="male">Male</option><option value="female">Female</option></select>
+      <div class="input-group"><label>Sex</label><select id="mc_g"><option value="male">Male</option><option value="female">Female</option></select></div>
+      <div class="input-group"><label>Age</label><input type="number" id="mc_age" placeholder="e.g. 28"></div>
+      <div class="input-group"><label>Weight</label>
+        <div class="input-row"><input type="number" id="mc_w" placeholder="e.g. 75">
+        <select id="mc_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select></div>
       </div>
-      <div class="input-group">
-        <label for="mac_age">Age</label>
-        <input type="number" id="mac_age" placeholder="e.g., 28">
+      <div class="input-group"><label>Height</label>
+        <div class="input-row">
+          <input type="number" id="mc_hcm" placeholder="e.g. 175">
+          <input type="number" id="mc_hft" placeholder="ft" style="display:none">
+          <input type="number" id="mc_hin" placeholder="in" style="display:none">
+          <select id="mc_hu" class="unit-select" onchange="toggleMacroH()"><option value="cm">cm</option><option value="ft">ft+in</option></select>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="mac_w">Weight (kg)</label>
-        <input type="number" id="mac_w" placeholder="e.g., 75">
+      <div class="input-group"><label>Activity</label>
+        <select id="mc_act"><option value="1.2">Sedentary</option><option value="1.375">Light exercise</option><option value="1.55" selected>Moderate exercise</option><option value="1.725">Very active</option></select>
       </div>
-      <div class="input-group">
-        <label for="mac_h">Height (cm)</label>
-        <input type="number" id="mac_h" placeholder="e.g., 178">
+      <div class="input-group"><label>Goal</label>
+        <select id="mc_goal"><option value="-500">Lose Weight</option><option value="0" selected>Maintain Weight</option><option value="300">Build Muscle</option></select>
       </div>
-      <div class="input-group">
-        <label for="mac_activity">Activity Level</label>
-        <select id="mac_activity">
-          <option value="1.2">Sedentary</option>
-          <option value="1.375">Light Exercise</option>
-          <option value="1.55">Moderate Exercise</option>
-          <option value="1.725">Very Active</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label for="mac_goal">Goal</label>
-        <select id="mac_goal">
-          <option value="-500">Lose Weight</option>
-          <option value="0">Maintain Weight</option>
-          <option value="300">Gain Muscle</option>
-        </select>
-      </div>
-      <button onclick="calculateMacros()">Calculate Macros</button>
-      <div id="mac_result" class="result"></div>
+      <button onclick="calcMacro()">Calculate Macros</button>
+      <div id="mc_result" class="result" style="display:none"></div>
+      <div id="mc_interp" class="result-interpretation" style="display:none"></div>
     </div>
-
     <div class="side-panel">
       <h3>Popular Macro Splits</h3>
       <table>
-        <tr><th>Goal</th><th>P / C / F</th></tr>
-        <tr><td>Balanced</td><td>30 / 40 / 30</td></tr>
-        <tr><td>Low Carb</td><td>40 / 20 / 40</td></tr>
-        <tr><td>Bodybuilding</td><td>40 / 40 / 20</td></tr>
+        <tr><th>Goal</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr>
+        <tr><td>Weight Loss</td><td>35%</td><td>40%</td><td>25%</td></tr>
+        <tr><td>Maintenance</td><td>30%</td><td>40%</td><td>30%</td></tr>
+        <tr><td>Muscle Gain</td><td>30%</td><td>50%</td><td>20%</td></tr>
+        <tr><td>Low Carb</td><td>40%</td><td>20%</td><td>40%</td></tr>
+        <tr><td>Ketogenic</td><td>25%</td><td>5%</td><td>70%</td></tr>
       </table>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Protein: 4 kcal/g · Carbs: 4 kcal/g · Fat: 9 kcal/g</p>
     </div>
-
   </div>
-
+  <div class="recommended-section">
+  <h3>Recommended Calculators</h3>
+  <div class="recommended-grid">
+    <a href="tdee-calculator.html" class="recommended-card">
+      <div class="rec-icon">🔥</div>
+      <div class="rec-info"><strong>TDEE Calculator</strong><span>Your calorie baseline</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=protein-intake" class="recommended-card">
+      <div class="rec-icon">🥩</div>
+      <div class="rec-info"><strong>Protein Intake</strong><span>Protein target by goal</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=calorie-deficit" class="recommended-card">
+      <div class="rec-icon">📉</div>
+      <div class="rec-info"><strong>Calorie Deficit</strong><span>Weight loss calories</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+    <a href="../calculator.html?id=carb-intake" class="recommended-card">
+      <div class="rec-icon">🍚</div>
+      <div class="rec-info"><strong>Carb Intake</strong><span>Daily carb target</span></div>
+      <span class="rec-arrow">↗</span>
+    </a>
+  </div>
+</div>
   <article class="article">
-    <h2>Understanding Macronutrients</h2>
-    <p>Macronutrients — commonly called "macros" — are the three primary nutrients your body needs in large amounts: protein, carbohydrates and fats. Each plays a specific role in energy production and overall health.</p>
-    <p>Protein supports muscle growth and repair, carbohydrates provide energy for daily activity, and fats support hormone production and nutrient absorption.</p>
-    <p>Your macro requirements depend on body weight, activity level and fitness goals. Determine your calorie baseline first with our <a href="tdee-calculator.html">TDEE calculator</a>. Or learn the fundamentals in our guide <a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>.</p>
-
-    <div class="faq-section">
-      <h2>FAQs</h2>
-      <details><summary>How many calories are in each macro?</summary><p>Protein and carbohydrates contain 4 calories per gram, while fats contain 9 calories per gram.</p></details>
-      <details><summary>Do macros matter for weight loss?</summary><p>Yes. While calorie balance determines weight change, macronutrient balance influences energy levels, hunger and muscle retention.</p></details>
-      <details><summary>Should I track macros every day?</summary><p>Tracking macros can help maintain consistency, especially for individuals trying to build muscle or reduce body fat.</p></details>
+    <h2>Understanding Your Macro Results</h2>
+    <p>Macronutrients — protein, carbohydrates and fat — are the three main categories of nutrients that provide energy. Your optimal macro split depends on your goals, activity level and personal preference. This calculator uses your TDEE (calculated from the Mifflin-St Jeor equation) and adjusts for your goal to give you gram targets for each macro.</p>
+    <p>Learn more in our guide: <a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>. Or calculate your specific <a href="../calculator.html?id=protein-intake">protein target</a> in detail.</p>
+    <div class="faq-section"><h2>FAQs</h2>
+      <details><summary>How many calories are in each macro?</summary><p>Protein and carbohydrates provide 4 kcal per gram. Fat provides 9 kcal per gram. Alcohol provides 7 kcal per gram.</p></details>
+      <details><summary>Do macros matter for weight loss?</summary><p>Yes. While total calories determine weight change, macros affect hunger, muscle retention and energy levels. Higher protein during a deficit preserves muscle mass.</p></details>
+      <details><summary>Should I track macros every day?</summary><p>Tracking for 2–4 weeks builds strong intuition about food composition. After that, many people maintain results without strict daily tracking.</p></details>
     </div>
   </article>
 </main>
-
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
@@ -131,18 +136,36 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-
-<script src="../script.js"></script>
 <script>
-(function(){
-  var links = document.querySelectorAll('nav a');
-  var path = window.location.pathname;
-  links.forEach(function(a){
-    if(a.getAttribute('href') && path.endsWith(a.getAttribute('href').replace('../','').replace('./',''))) {
-      a.classList.add('active');
-    }
-  });
-})();
+(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
 </script>
-</body>
-</html>
+<script>
+function toggleMacroH(){var u=document.getElementById('mc_hu').value;document.getElementById('mc_hcm').style.display=u==='cm'?'':'none';document.getElementById('mc_hft').style.display=u==='ft'?'':'none';document.getElementById('mc_hin').style.display=u==='ft'?'':'none';}
+function calcMacro(){
+  var g=document.getElementById('mc_g').value, age=parseFloat(document.getElementById('mc_age').value);
+  var wu=document.getElementById('mc_wu').value, hu=document.getElementById('mc_hu').value;
+  var w=parseFloat(document.getElementById('mc_w').value); var h;
+  if(hu==='cm') h=parseFloat(document.getElementById('mc_hcm').value);
+  else{var ft=parseFloat(document.getElementById('mc_hft').value)||0;var inp=parseFloat(document.getElementById('mc_hin').value)||0;h=(ft*12+inp)*2.54;}
+  if(!age||!w||!h){alert('Please fill in all fields');return;}
+  if(wu==='lb') w=w*0.4536;
+  var bmr=g==='male'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161;
+  var act=parseFloat(document.getElementById('mc_act').value);
+  var goal=parseFloat(document.getElementById('mc_goal').value);
+  var tdee=Math.round(bmr*act)+goal;
+  var splits={'-500':[0.35,0.40,0.25],'0':[0.30,0.40,0.30],'300':[0.30,0.50,0.20]};
+  var gk=String(goal); var sp=splits[gk]||splits['0'];
+  var pG=Math.round(tdee*sp[0]/4), cG=Math.round(tdee*sp[1]/4), fG=Math.round(tdee*sp[2]/9);
+  var r=document.getElementById('mc_result');
+  r.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center">'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+pG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Protein</div></div>'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+cG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Carbs</div></div>'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+fG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Fat</div></div>'
+    +'</div>';
+  r.style.background='var(--accent)';r.style.display='block';
+  var ri=document.getElementById('mc_interp');
+  ri.innerHTML='Target: <strong>'+tdee+' kcal/day</strong> — Protein '+pG+'g ('+Math.round(pG*4)+' kcal) · Carbs '+cG+'g ('+Math.round(cG*4)+' kcal) · Fat '+fG+'g ('+Math.round(fG*9)+' kcal)<br><br>To hit your protein target, aim for <strong>'+Math.round(pG/3)+'–'+Math.round(pG/4)+'g per meal</strong> across 3–4 meals. Good protein sources: chicken (31g/100g), Greek yogurt (10g/100g), eggs (13g/100g), lentils (9g/100g).';
+  ri.style.display='block';
+}
+</script>
+</body></html>
