@@ -147,12 +147,18 @@
   </div>
 </footer>
 
+
+
+
+
+
+
 <script>
 // FitMetrics — calculators-data.js
 // All dynamic calculators. Add new entries here — no new HTML files needed.
 // Each calculator can have: title, desc, icon, category, fields[], calculate(f), interpret(result), faq[], related[]
 
-const CALCULATORS = {
+var CALCULATORS = {
 
 "ideal-weight": {
   title: "Ideal Weight Calculator",
@@ -957,7 +963,7 @@ const CALCULATORS = {
 };
 
 // Related calculator display name map
-const CALC_NAMES = {
+var CALC_NAMES = {
   "bmi-calculator": { desc:"Body mass index check", name:"BMI Calculator",          icon:"⚖", link:"/calculators/bmi-calculator.html" },
   "macro-calculator": { desc:"Protein, carbs & fat split", name:"Macro Calculator",        icon:"🥗", link:"/calculators/macro-calculator.html" },
   "tdee-calculator": { desc:"Daily calorie burn", name:"TDEE Calculator",         icon:"🔥", link:"/calculators/tdee-calculator.html" },
@@ -972,8 +978,6 @@ Object.keys(CALCULATORS).forEach(id => {
   }
 });
 
-</script>
-<script>
 var currentCalc = null;
 
 function getParam(name) {
@@ -1161,11 +1165,7 @@ if (id && CALCULATORS[id]) {
 } else {
   renderNotFound(id);
 }
-</script>
 
-
-
-<script>
 // FitMetrics — search.js
 // Loaded on every page. Works standalone — no redirect needed.
 
@@ -1310,7 +1310,6 @@ document.addEventListener('click', function(e) {
     }
   });
 })();
-
 </script>
 </body>
 </html>
