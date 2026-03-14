@@ -10,7 +10,9 @@
 <meta property="og:site_name" content="FitMetrics">
 <meta property="og:image" content="https://quickbmi.in/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -34,6 +36,15 @@
 .not-found h1 { font-size: 32px; margin-bottom: 12px; }
 .not-found p { color: var(--ink-muted); margin-bottom: 24px; }
 </style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Organization",
+ "name":"FitMetrics",
+ "url":"https://quickbmi.in",
+ "logo":"https://quickbmi.in/favicon-512.png"
+}
+</script>
 </head>
 <body>
 
@@ -160,6 +171,10 @@ function renderCalc(id, calc) {
     label.textContent = field.label;
     div.appendChild(label);
 
+    // Wrapper for input + optional unit selector
+    var row = document.createElement('div');
+    row.className = 'input-row';
+
     var input;
     if (field.type === 'select') {
       input = document.createElement('select');
@@ -170,14 +185,29 @@ function renderCalc(id, calc) {
         o.textContent = opt[1];
         input.appendChild(o);
       });
+      row.appendChild(input);
     } else {
       input = document.createElement('input');
       input.type = field.type || 'text';
       input.id = field.id;
       if (field.placeholder) input.placeholder = field.placeholder;
       input.addEventListener('keydown', function(e){ if(e.key==='Enter') runCalc(); });
+      row.appendChild(input);
+      // Add unit selector if defined
+      if (field.unit) {
+        var sel = document.createElement('select');
+        sel.id = field.unit.id;
+        sel.className = 'unit-select';
+        field.unit.options.forEach(function(opt) {
+          var o = document.createElement('option');
+          o.value = opt[0];
+          o.textContent = opt[1];
+          sel.appendChild(o);
+        });
+        row.appendChild(sel);
+      }
     }
-    div.appendChild(input);
+    div.appendChild(row);
     container.appendChild(div);
   });
 
@@ -229,6 +259,11 @@ function runCalc() {
   currentCalc.fields.forEach(function(field) {
     var el = document.getElementById(field.id);
     formData[field.id] = el ? el.value : '';
+    // Collect unit selector value if present
+    if (field.unit) {
+      var unitEl = document.getElementById(field.unit.id);
+      formData[field.unit.id] = unitEl ? unitEl.value : field.unit.options[0][0];
+    }
   });
 
   var result;
@@ -246,7 +281,21 @@ function runCalc() {
   errorBox.style.display = 'none';
   document.getElementById('result-value').textContent = result.value || '';
   document.getElementById('result-label').textContent = result.label || '';
-  document.getElementById('result-category').textContent = result.category || '';
+  var catEl = document.getElementById('result-category');
+  catEl.textContent = result.category || '';
+  catEl.style.display = result.category ? '' : 'none';
+
+  // Interpretation block
+  var interp = document.getElementById('result-interpretation');
+  if (!interp) {
+    interp = document.createElement('div');
+    interp.id = 'result-interpretation';
+    interp.style.cssText = 'margin-top:14px;font-size:14px;color:var(--ink-soft);line-height:1.65;border-top:1px solid rgba(0,0,0,0.1);padding-top:12px;';
+    resultBox.appendChild(interp);
+  }
+  interp.innerHTML = result.interpretation || '';
+  interp.style.display = result.interpretation ? '' : 'none';
+
   resultBox.style.display = 'block';
 }
 
