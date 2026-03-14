@@ -255,7 +255,7 @@ const CALCULATORS = {
 
   calculate(f) {
     const t=parseFloat(f.vo2_time), age=parseFloat(f.vo2_age);
-    if (!t||!age) return null;
+    if (isNaN(t) || isNaN(age) || t <= 0 || age <= 0) return null;
     const vo2=(3.5+(483/t)).toFixed(1);
     const male_cats=[[55,"Superior"],[45,"Excellent"],[38,"Good"],[30,"Fair"],[0,"Poor"]];
     const female_cats=[[50,"Superior"],[40,"Excellent"],[33,"Good"],[25,"Fair"],[0,"Poor"]];
