@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/favicon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FitMetrics — Free Health Calculators for BMI & More</title>
@@ -28,6 +27,15 @@
 <meta name="twitter:title" content="FitMetrics — Free Health Calculators for BMI & More">
 <meta name="twitter:description" content="Calculate BMI, TDEE, macros, body fat, water intake and more with free science-based tools. No sign-up needed, instant results every time.">
 <meta name="twitter:image" content="https://quickbmi.in/og-image.png">
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Organization",
+ "name":"FitMetrics",
+ "url":"https://quickbmi.in",
+ "logo":"https://quickbmi.in/favicon-512.png"
+}
+</script>
 </head>
 <body>
 
@@ -72,6 +80,10 @@
 </section>
 
 <main class="container">
+
+  <div class="calc-search-wrap">
+    <input type="text" id="calc-search" class="calc-search-input" placeholder="Search calculators — e.g. BMI, protein, sleep..." oninput="filterCalcs(this.value)">
+  </div>
 
   <div class="section-head">
     <span class="tag">Calculators</span>
@@ -330,7 +342,7 @@
     </div>
     <div class="why-stats">
       <div class="stat-box">
-        <div class="stat-num">7</div>
+        <div class="stat-num">36</div>
         <div class="stat-label">Free calculators</div>
       </div>
       <div class="stat-box">
@@ -374,6 +386,29 @@
     }
   });
 })();
+</script>
+<script>
+function filterCalcs(q) {
+  q = q.toLowerCase().trim();
+  var cards = document.querySelectorAll('.calc-card');
+  var labels = document.querySelectorAll('.calc-category-label');
+  if (!q) {
+    cards.forEach(function(c){ c.style.display=''; });
+    labels.forEach(function(l){ l.style.display=''; });
+    return;
+  }
+  cards.forEach(function(c){
+    var text = c.textContent.toLowerCase();
+    c.style.display = text.includes(q) ? '' : 'none';
+  });
+  // Hide category labels if all cards in their section are hidden
+  labels.forEach(function(label){
+    var grid = label.nextElementSibling;
+    if (!grid) return;
+    var visible = Array.from(grid.querySelectorAll('.calc-card')).some(function(c){ return c.style.display !== 'none'; });
+    label.style.display = visible ? '' : 'none';
+  });
+}
 </script>
 </body>
 </html>
