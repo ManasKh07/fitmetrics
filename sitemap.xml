@@ -1,82 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<!-- MAIN PAGES -->
-
-<url>
-<loc>https://quickbmi.in/</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/about.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/contact.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/privacy.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/terms.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/disclaimer.html</loc>
-</url>
-<!-- CALCULATORS -->
-
-<url>
-<loc>https://quickbmi.in/calculators/bmi-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/macro-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/tdee-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/body-fat-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/water-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/age-calculator.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/calculators/percentage-calculator.html</loc>
-</url>
-
-<!-- BLOG -->
-
-<url>
-<loc>https://quickbmi.in/blog/what-is-bmi.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/blog/calories-per-day.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/blog/macro-nutrition-guide.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/blog/hydration-guide.html</loc>
-</url>
-
-<url>
-<loc>https://quickbmi.in/blog/body-fat-guide.html</loc>
-</url>
-
+  <url><loc>https://quickbmi.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://quickbmi.in/all-calculators.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculators/bmi-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculators/tdee-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculators/macro-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculators/body-fat-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculators/water-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculators/age-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculators/percentage-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=ideal-weight</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=lean-body-mass</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=bmi-prime</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=waist-to-height</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=waist-to-hip</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=army-body-fat</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=body-surface-area</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=bmi-children</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=calorie-deficit</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=calorie-surplus</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=protein-intake</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=fat-intake</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=carb-intake</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=fiber-intake</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=resting-metabolic-rate</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=calorie-burn-exercise</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=calorie-intake-children</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=alcohol-units</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=heart-rate-zones</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=vo2max</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=one-rep-max</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=push-up-test</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=running-pace</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=pace-to-speed</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=steps-to-calories</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=sleep-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=pregnancy-weight</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=due-date</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/calculator.html?id=nicotine-calculator</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickbmi.in/blog/what-is-bmi.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/calories-per-day.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/macro-nutrition-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/hydration-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/body-fat-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/weight-loss-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/muscle-gain-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/heart-rate-zones-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/protein-intake-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/blog/sleep-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quickbmi.in/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://quickbmi.in/privacy.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://quickbmi.in/terms.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://quickbmi.in/disclaimer.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://quickbmi.in/contact.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>

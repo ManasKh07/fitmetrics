@@ -1,104 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Contact | FitMetrics</title>
-  <!-- Google tag (gtag.js) -->
+<title>Contact FitMetrics — Get in Touch</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SE671355DP');
-</script>
-
-<meta name="description" content="Contact the FitMetrics team with questions or suggestions.">
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
+<meta name="description" content="Contact the FitMetrics team with questions, feedback, bug reports or calculator suggestions.">
 <link rel="canonical" href="https://quickbmi.in/contact.html">
-
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="Contact FitMetrics — Get in Touch">
+<meta property="og:description" content="Contact the FitMetrics team with questions, feedback, bug reports or calculator suggestions.">
+<meta property="og:url" content="https://quickbmi.in/contact.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="style.css">
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
 </head>
-
 <body>
-
 <header class="header">
-
-<div class="container header-flex">
-
-<a href="index.html" class="logo">⚡ FitMetrics</a>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="calculators/bmi-calculator.html">BMI</a>
-<a href="calculators/macro-calculator.html">Macros</a>
-<a href="calculators/tdee-calculator.html">TDEE</a>
-<a href="calculators/body-fat-calculator.html">Body Fat</a>
-<a href="calculators/water-calculator.html">Water</a>
-<a href="calculators/age-calculator.html">Age</a>
-<a href="calculators/percentage-calculator.html">Percentage</a>
-</nav>
-
-</div>
-
-</header>
-
-
+  <div class="container header-flex">
+    <a href="index.html" class="logo">FitMetrics</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="calculators/bmi-calculator.html">BMI</a>
+      <a href="calculators/macro-calculator.html">Macros</a>
+      <a href="calculators/tdee-calculator.html">TDEE</a>
+      <a href="calculators/body-fat-calculator.html">Body Fat</a>
+      <a href="calculators/water-calculator.html">Water</a>
+      <a href="calculators/age-calculator.html">Age</a>
+      <a href="calculators/percentage-calculator.html">%</a>
+    </nav>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" id="header-search"
+        placeholder="Search calculators..."
+        oninput="filterCalcs(this.value); updateHeaderDropdown(this.value)"
+        autocomplete="off">
+      <div class="hdr-search-results" id="hdr-results-home"></div>
+    </div>
+    <a href="#" class="nav-cta" onclick="goRandomHome(event)">Try Random ↗</a>
+  </div>
+</header><nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="index.html">Home</a><span class="bc-sep">›</span><span>Contact</span></div></nav><div class="page-hero"><div class="container"><div class="page-hero-label">Get in Touch</div><h1>Contact Us</h1><p>Questions, feedback, or suggestions — we read every message.</p></div></div>
 <main class="container">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;padding:40px 0 80px;">
 
-<div style="max-width:500px;margin:40px auto;">
+  <div class="calc-box">
+    <h2 style="margin-top:0;font-size:22px;">Send a Message</h2>
+    <p style="color:var(--ink-soft);font-size:14px;margin-bottom:24px;">We typically respond within 1–2 business days.</p>
+    <form id="contactForm" action="https://formspree.io/f/mdawawle" method="POST">
+      <div class="input-group">
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="e.g. John Doe" required>
+      </div>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="john@example.com" required>
+      </div>
+      <div class="input-group">
+        <label>Subject</label>
+        <select name="subject">
+          <option value="general">General Question</option>
+          <option value="calculator">Calculator Feedback</option>
+          <option value="bug">Report a Bug</option>
+          <option value="suggestion">Suggest a Calculator</option>
+          <option value="business">Business Enquiry</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Your Message</label>
+        <textarea name="message" rows="5" placeholder="How can we help you?" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);resize:vertical;outline:none;" onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--ink')" onblur="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border')"></textarea>
+      </div>
+      <button type="submit" style="margin-top:8px;">Send Message</button>
+    </form>
+    <div id="formMessage" class="result" style="display:none;margin-top:16px;"></div>
+  </div>
 
-<div class="calc-box">
-
-<h2 style="margin-top:0;color:var(--primary);">Contact Us</h2>
-
-<p style="margin-bottom:25px;">If you have questions or suggestions, send us a message.</p>
-
-<form id="contactForm" action="https://formspree.io/f/mdawawle" method="POST">
-
-<div class="input-group">
-<label>Your Name</label>
-<input type="text" name="name" placeholder="e.g., John Doe" required>
+  <div>
+    <div class="side-panel" style="margin-bottom:16px;">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-section" style="margin-top:12px;">
+        <details><summary>Are all calculators free?</summary><p>Yes — every calculator is completely free, forever. No sign-up, no subscription, no hidden fees.</p></details>
+        <details><summary>Is my health data stored?</summary><p>No. All calculations happen entirely in your browser. We never store, transmit or have access to any health data you enter.</p></details>
+        <details><summary>Can I suggest a new calculator?</summary><p>Absolutely. Select "Suggest a Calculator" in the subject dropdown. We review all suggestions and prioritise the most requested tools.</p></details>
+        <details><summary>I found an error. What should I do?</summary><p>Select "Report a Bug" and include the calculator name and the result you expected. We fix confirmed bugs as quickly as possible.</p></details>
+        <details><summary>Can I use your calculators on my website?</summary><p>Please contact us with a "Business Enquiry" for licensing or partnership questions.</p></details>
+      </div>
+    </div>
+    <div style="background:var(--ink);border-radius:var(--radius);padding:24px;">
+      <div style="font-family:Syne,sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Try our calculators</div>
+      <p style="font-size:14px;color:#888;margin-bottom:16px;">36 free health tools — no account needed.</p>
+      <a href="all-calculators.html" style="display:inline-block;background:var(--accent);color:var(--ink);font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px;text-decoration:none;">Browse All Calculators →</a>
+    </div>
+  </div>
 </div>
-
-<div class="input-group">
-<label>Email Address</label>
-<input type="email" name="email" placeholder="john@example.com" required>
-</div>
-
-<div class="input-group">
-<label>Your Message</label>
-<textarea name="message" rows="5" placeholder="How can we help you?" style="width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:8px;"></textarea>
-</div>
-
-<button type="submit">Send Message</button>
-
-</form>
-
-<div id="formMessage" class="result"></div>
-
-</div>
-
-</div>
-
 </main>
-
-
 <footer>
-
-<p>© 2026 FitMetrics</p>
-
-<a href="about.html">About</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-<a href="contact.html">Contact</a>
-
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-links">
+      <a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a>
+    </div>
+    <p class="footer-copy">© 2026 FitMetrics</p>
+  </div>
 </footer>
-
-</body>
-
-</html>
+<script src="/search.js"></script>
+<script>
+document.getElementById("contactForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  var btn=this.querySelector("button[type=submit]");
+  btn.textContent="Sending..."; btn.disabled=true;
+  fetch(this.action,{method:"POST",body:new FormData(this),headers:{"Accept":"application/json"}})
+  .then(function(r){
+    var msg=document.getElementById("formMessage");
+    msg.style.display="block";
+    if(r.ok){msg.textContent="Message sent! We will get back to you within 1-2 business days.";msg.style.background="var(--accent)";}
+    else{msg.textContent="Something went wrong. Please try again.";msg.style.background="#fff0f0";}
+    btn.textContent="Send Message"; btn.disabled=false;
+  });
+});
+</script>
+</body></html>

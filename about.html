@@ -1,122 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>About | FitMetrics</title>
-  <!-- Google tag (gtag.js) -->
+<title>About FitMetrics — Free Science-Based Health Calculators</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SE671355DP');
-</script>
-  
-
-<meta name="description" content="Learn about FitMetrics and our mission to provide free health calculators for everyone.">
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
+<meta name="description" content="Learn about FitMetrics, our mission to make health knowledge free and accessible, and the science behind our calculators.">
 <link rel="canonical" href="https://quickbmi.in/about.html">
-
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+<meta property="og:title" content="About FitMetrics — Free Science-Based Health Calculators">
+<meta property="og:description" content="Learn about FitMetrics, our mission to make health knowledge free and accessible, and the science behind our calculators.">
+<meta property="og:url" content="https://quickbmi.in/about.html">
+<meta property="og:image" content="https://quickbmi.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="style.css">
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
 </head>
-
 <body>
-
 <header class="header">
-
-<div class="container header-flex">
-
-<a href="index.html" class="logo">⚡ FitMetrics</a>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="calculators/bmi-calculator.html">BMI</a>
-<a href="calculators/macro-calculator.html">Macros</a>
-<a href="calculators/tdee-calculator.html">TDEE</a>
-<a href="calculators/body-fat-calculator.html">Body Fat</a>
-<a href="calculators/water-calculator.html">Water</a>
-<a href="calculators/age-calculator.html">Age</a>
-<a href="calculators/percentage-calculator.html">Percentage</a>
-</nav>
-
-</div>
-
-</header>
-
-
+  <div class="container header-flex">
+    <a href="index.html" class="logo">FitMetrics</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="calculators/bmi-calculator.html">BMI</a>
+      <a href="calculators/macro-calculator.html">Macros</a>
+      <a href="calculators/tdee-calculator.html">TDEE</a>
+      <a href="calculators/body-fat-calculator.html">Body Fat</a>
+      <a href="calculators/water-calculator.html">Water</a>
+      <a href="calculators/age-calculator.html">Age</a>
+      <a href="calculators/percentage-calculator.html">%</a>
+    </nav>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" id="header-search"
+        placeholder="Search calculators..."
+        oninput="filterCalcs(this.value); updateHeaderDropdown(this.value)"
+        autocomplete="off">
+      <div class="hdr-search-results" id="hdr-results-home"></div>
+    </div>
+    <a href="#" class="nav-cta" onclick="goRandomHome(event)">Try Random ↗</a>
+  </div>
+</header><nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="index.html">Home</a><span class="bc-sep">›</span><span>About</span></div></nav><div class="page-hero"><div class="container"><div class="page-hero-label">About Us</div><h1>About FitMetrics</h1><p>Building tools that make health science accessible to everyone — free, forever.</p></div></div>
 <main class="container">
-
 <article class="article">
 
-<h1 style="text-align:center;color:var(--primary);">About FitMetrics</h1>
-
 <h2>Our Mission</h2>
+<p>FitMetrics was built on a simple idea: everyone deserves access to accurate, science-based health tools without needing to download an app, create an account, or pay a subscription. Understanding your body — your BMI, daily calorie needs, macronutrient targets, hydration levels, and body composition — should not be locked behind a paywall or buried in complexity.</p>
+<p>We believe that when people have clear, reliable information about their health metrics, they make better decisions. Better decisions lead to better habits. Better habits lead to better lives. That is the chain of value we are trying to create with every calculator and guide we publish.</p>
 
-<p>
-FitMetrics was created to provide simple and reliable health calculators that anyone can use for free. Understanding health metrics such as BMI, calorie expenditure, hydration and macronutrients can help individuals make better lifestyle decisions.
-</p>
+<h2>What We Offer</h2>
+<p>FitMetrics provides over 36 free health and fitness calculators covering body composition, nutrition, fitness performance, and general wellness. Every tool is built on established scientific formulas used by healthcare professionals and researchers worldwide.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;"><div style="background:var(--card-bg);padding:20px;border-radius:var(--radius);border:1px solid var(--border);"><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">36+</div><div style="font-size:13px;color:var(--ink-muted);margin-top:4px">Free calculators</div></div><div style="background:var(--card-bg);padding:20px;border-radius:var(--radius);border:1px solid var(--border);"><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">10+</div><div style="font-size:13px;color:var(--ink-muted);margin-top:4px">Health guides</div></div><div style="background:var(--card-bg);padding:20px;border-radius:var(--radius);border:1px solid var(--border);"><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">0</div><div style="font-size:13px;color:var(--ink-muted);margin-top:4px">Sign-ups required</div></div><div style="background:var(--accent);padding:20px;border-radius:var(--radius);"><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800;color:var(--ink)">100%</div><div style="font-size:13px;color:#4a5a00;margin-top:4px">Free forever</div></div></div>
+<h2>Our Calculators</h2>
+<p><strong>Body Composition</strong> — BMI, body fat percentage, ideal weight, lean body mass, waist-to-height ratio, waist-to-hip ratio, BMI Prime, army body fat, body surface area, and BMI for children.</p>
+<p><strong>Nutrition &amp; Calories</strong> — TDEE, macro calculator, calorie deficit, calorie surplus, protein intake, fat intake, carbohydrate intake, fibre intake, resting metabolic rate, exercise calorie burn, child calorie calculator, and alcohol units.</p>
+<p><strong>Fitness &amp; Performance</strong> — Heart rate zones, VO2 max estimator, one rep max, push-up test, running pace, steps to calories, and pace-to-speed converter.</p>
+<p><strong>Wellness &amp; Life</strong> — Sleep calculator, age calculator, percentage calculator, pregnancy weight gain, due date calculator, and nicotine intake calculator.</p>
 
-<p>
-Many online tools hide useful calculations behind complex apps or subscriptions. Our goal is to provide straightforward tools that are accessible directly through your browser.
-</p>
+<h2>The Science Behind Our Tools</h2>
+<p>Every calculator uses validated formulas from peer-reviewed research. Our BMI and TDEE tools use the <strong>Mifflin-St Jeor equation</strong> — the most accurate formula for estimating metabolic rate in the general population. Body fat uses the <strong>US Army circumference method</strong>. Heart rate zones use the <strong>Karvonen formula</strong>. Ideal weight uses the <strong>Devine formula</strong>.</p>
+<p>Where results involve estimation rather than measurement, we communicate this clearly and recommend consulting a healthcare professional for clinical assessment.</p>
 
-<h2>What We Provide</h2>
+<h2>Our Health Guides</h2>
+<p>Alongside calculators, we publish in-depth educational guides explaining the science behind each metric. Topics include understanding BMI and its limitations, calorie balance, macronutrient roles, hydration science, body fat norms, weight loss fundamentals, muscle building nutrition, heart rate training zones, protein intake science, and sleep biology.</p>
 
-<p>
-Our website offers a growing collection of tools including:
-</p>
+<h2>Medical Disclaimer</h2><div style="background:var(--card-bg);padding:20px 24px;border-radius:var(--radius);border-left:3px solid var(--border-dark);margin-top:8px;"><p style="margin:0;font-size:14px;color:var(--ink-soft);">The calculators and articles on FitMetrics are provided for educational and informational purposes only. They are not intended to replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before making health decisions. Read our full <a href="disclaimer.html">disclaimer</a>.</p></div>
 
-<ul>
-
-<li><strong>BMI Calculator</strong> – estimate body mass index.</li>
-<li><strong>TDEE Calculator</strong> – estimate daily calorie expenditure.</li>
-<li><strong>Macro Calculator</strong> – determine macronutrient targets.</li>
-<li><strong>Body Fat Calculator</strong> – estimate body fat percentage.</li>
-<li><strong>Water Intake Calculator</strong> – estimate hydration needs.</li>
-
-</ul>
-
-<p>
-These calculators are based on commonly accepted formulas used in nutrition science and sports medicine.
-</p>
-
-<h2>Educational Resources</h2>
-
-<p>
-In addition to calculators, we also provide educational guides explaining the science behind nutrition, hydration and body composition. Our aim is to make health knowledge easier to understand.
-</p>
-
-<div style="background:#f9fafb;padding:20px;border-radius:8px;margin-top:30px;border-left:4px solid var(--secondary);">
-
-<h3>Medical Disclaimer</h3>
-
-<p style="font-size:14px">
-The information and calculators on this website are provided for educational purposes only and should not replace professional medical advice.
-</p>
-
-</div>
+<h2>Contact Us</h2>
+<p>We welcome feedback, bug reports, and calculator suggestions. Use our <a href="contact.html">contact form</a> — we read every message.</p>
 
 </article>
-
 </main>
-
-
 <footer>
-
-<p>© 2026 FitMetrics</p>
-
-<a href="about.html">About</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-<a href="contact.html">Contact</a>
-
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-links">
+      <a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a>
+    </div>
+    <p class="footer-copy">© 2026 FitMetrics</p>
+  </div>
 </footer>
-
+<script src="/search.js"></script>
 </body>
-
 </html>
