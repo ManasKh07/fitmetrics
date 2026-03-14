@@ -822,3 +822,23 @@ nav a.active {
   white-space: nowrap;
   flex-shrink: 0;
 }
+
+/* ─── CALC CATEGORY LABELS ───────────────── */
+
+.calc-category-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin: 40px 0 14px;
+}
+
+.calc-category-label:first-of-type { margin-top: 0; }
+
+.see-all-row {
+  text-align: center;
+  padding: 32px 0 8px;
+}

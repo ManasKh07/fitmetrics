@@ -5,8 +5,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FitMetrics | Free Health Calculators</title>
-<meta name="description" content="Free online health calculators including BMI, macros, TDEE, body fat, water intake and more.">
+<title>FitMetrics — Free Health Calculators for BMI & More</title>
+<meta name="description" content="Calculate BMI, TDEE, macros, body fat, water intake and more with free science-based tools. No sign-up needed, instant results every time.">
 <link rel="canonical" href="https://quickbmi.in/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,14 +17,14 @@
 {"@context":"https://schema.org","@type":"WebSite","name":"FitMetrics","url":"https://quickbmi.in"}
 </script>
 <meta property="og:type" content="website">
-<meta property="og:title" content="FitMetrics — Free Health Calculators">
-<meta property="og:description" content="Free online health calculators for BMI, TDEE, macros, body fat, water intake and more. No sign-up needed.">
+<meta property="og:title" content="FitMetrics — Free Health Calculators for BMI & More">
+<meta property="og:description" content="Calculate BMI, TDEE, macros, body fat, water intake and more with free science-based tools. No sign-up needed, instant results every time.">
 <meta property="og:url" content="https://quickbmi.in/">
 <meta property="og:site_name" content="FitMetrics">
 <meta property="og:image" content="https://quickbmi.in/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FitMetrics — Free Health Calculators">
-<meta name="twitter:description" content="Free online health calculators for BMI, TDEE, macros, body fat and more.">
+<meta name="twitter:title" content="FitMetrics — Free Health Calculators for BMI & More">
+<meta name="twitter:description" content="Calculate BMI, TDEE, macros, body fat, water intake and more with free science-based tools. No sign-up needed, instant results every time.">
 <meta name="twitter:image" content="https://quickbmi.in/og-image.png">
 </head>
 <body>
@@ -76,71 +76,193 @@
     <h2>Pick a tool</h2>
   </div>
 
+  <!-- BODY COMPOSITION -->
+  <div class="calc-category-label">Body Composition</div>
   <div class="calc-grid">
-
     <a href="calculators/bmi-calculator.html" class="calc-card featured">
       <div class="calc-icon">⚖</div>
-      <div class="calc-info">
-        <h3>BMI Calculator</h3>
-        <p>Body mass index from weight & height</p>
-      </div>
+      <div class="calc-info"><h3>BMI Calculator</h3><p>Body mass index from weight & height</p></div>
       <span class="calc-arrow">↗</span>
     </a>
-
-    <a href="calculators/macro-calculator.html" class="calc-card">
-      <div class="calc-icon">🥗</div>
-      <div class="calc-info">
-        <h3>Macro Calculator</h3>
-        <p>Protein, carbs & fat targets</p>
-      </div>
-      <span class="calc-arrow">↗</span>
-    </a>
-
-    <a href="calculators/tdee-calculator.html" class="calc-card">
-      <div class="calc-icon">🔥</div>
-      <div class="calc-info">
-        <h3>TDEE Calculator</h3>
-        <p>Total daily calorie burn</p>
-      </div>
-      <span class="calc-arrow">↗</span>
-    </a>
-
     <a href="calculators/body-fat-calculator.html" class="calc-card">
       <div class="calc-icon">📊</div>
-      <div class="calc-info">
-        <h3>Body Fat Calculator</h3>
-        <p>Estimate fat percentage</p>
-      </div>
+      <div class="calc-info"><h3>Body Fat Calculator</h3><p>Estimate fat percentage</p></div>
       <span class="calc-arrow">↗</span>
     </a>
+    <a href="calculator.html?id=ideal-weight" class="calc-card">
+      <div class="calc-icon">⚖</div>
+      <div class="calc-info"><h3>Ideal Weight</h3><p>Ideal body weight for your height</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=lean-body-mass" class="calc-card">
+      <div class="calc-icon">💪</div>
+      <div class="calc-info"><h3>Lean Body Mass</h3><p>Weight excluding all body fat</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=waist-to-height" class="calc-card">
+      <div class="calc-icon">📏</div>
+      <div class="calc-info"><h3>Waist-to-Height Ratio</h3><p>Abdominal fat risk indicator</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=waist-to-hip" class="calc-card">
+      <div class="calc-icon">📐</div>
+      <div class="calc-info"><h3>Waist-to-Hip Ratio</h3><p>Cardiovascular risk assessment</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=bmi-prime" class="calc-card">
+      <div class="calc-icon">📊</div>
+      <div class="calc-info"><h3>BMI Prime</h3><p>Ratio to upper healthy weight limit</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=army-body-fat" class="calc-card">
+      <div class="calc-icon">🪖</div>
+      <div class="calc-info"><h3>Army Body Fat</h3><p>US Army circumference method</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+  </div>
 
+  <!-- NUTRITION -->
+  <div class="calc-category-label">Nutrition & Calories</div>
+  <div class="calc-grid">
+    <a href="calculators/tdee-calculator.html" class="calc-card featured">
+      <div class="calc-icon">🔥</div>
+      <div class="calc-info"><h3>TDEE Calculator</h3><p>Total daily calorie burn</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculators/macro-calculator.html" class="calc-card">
+      <div class="calc-icon">🥗</div>
+      <div class="calc-info"><h3>Macro Calculator</h3><p>Protein, carbs & fat targets</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
     <a href="calculators/water-calculator.html" class="calc-card">
       <div class="calc-icon">💧</div>
-      <div class="calc-info">
-        <h3>Water Intake</h3>
-        <p>Daily hydration estimate</p>
-      </div>
+      <div class="calc-info"><h3>Water Intake</h3><p>Daily hydration estimate</p></div>
       <span class="calc-arrow">↗</span>
     </a>
+    <a href="calculator.html?id=calorie-deficit" class="calc-card">
+      <div class="calc-icon">📉</div>
+      <div class="calc-info"><h3>Calorie Deficit</h3><p>Calories to eat for weight loss</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=calorie-surplus" class="calc-card">
+      <div class="calc-icon">📈</div>
+      <div class="calc-info"><h3>Calorie Surplus</h3><p>Calories for muscle gain</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=protein-intake" class="calc-card">
+      <div class="calc-icon">🥩</div>
+      <div class="calc-info"><h3>Protein Intake</h3><p>Daily protein target by goal</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=fat-intake" class="calc-card">
+      <div class="calc-icon">🥑</div>
+      <div class="calc-info"><h3>Fat Intake</h3><p>Daily fat grams from calories</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=carb-intake" class="calc-card">
+      <div class="calc-icon">🍚</div>
+      <div class="calc-info"><h3>Carbohydrate Intake</h3><p>Daily carb target by diet style</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=resting-metabolic-rate" class="calc-card">
+      <div class="calc-icon">🧪</div>
+      <div class="calc-info"><h3>Resting Metabolic Rate</h3><p>Calories burned at rest</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=calorie-burn-exercise" class="calc-card">
+      <div class="calc-icon">🔥</div>
+      <div class="calc-info"><h3>Exercise Calorie Burn</h3><p>Calories burned per workout</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=fiber-intake" class="calc-card">
+      <div class="calc-icon">🌾</div>
+      <div class="calc-info"><h3>Fibre Intake</h3><p>Daily fibre by age and sex</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=alcohol-units" class="calc-card">
+      <div class="calc-icon">🍺</div>
+      <div class="calc-info"><h3>Alcohol Units</h3><p>Units and calories in drinks</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+  </div>
 
+  <!-- FITNESS -->
+  <div class="calc-category-label">Fitness & Performance</div>
+  <div class="calc-grid">
+    <a href="calculator.html?id=heart-rate-zones" class="calc-card featured">
+      <div class="calc-icon">❤</div>
+      <div class="calc-info"><h3>Heart Rate Zones</h3><p>5 training zones from max HR</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=one-rep-max" class="calc-card">
+      <div class="calc-icon">🏋</div>
+      <div class="calc-info"><h3>One Rep Max (1RM)</h3><p>Max strength from any lift</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=vo2max" class="calc-card">
+      <div class="calc-icon">🫁</div>
+      <div class="calc-info"><h3>VO2 Max Estimator</h3><p>Cardiovascular fitness score</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=running-pace" class="calc-card">
+      <div class="calc-icon">🏃</div>
+      <div class="calc-info"><h3>Running Pace</h3><p>Pace from distance and time</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=steps-to-calories" class="calc-card">
+      <div class="calc-icon">👟</div>
+      <div class="calc-info"><h3>Steps to Calories</h3><p>Calories burned from steps</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=push-up-test" class="calc-card">
+      <div class="calc-icon">💪</div>
+      <div class="calc-info"><h3>Push-Up Fitness Test</h3><p>Rate your push-up performance</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=pace-to-speed" class="calc-card">
+      <div class="calc-icon">⚡</div>
+      <div class="calc-info"><h3>Pace to Speed</h3><p>Convert pace to km/h or mph</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- WELLNESS -->
+  <div class="calc-category-label">Wellness & Life</div>
+  <div class="calc-grid">
     <a href="calculators/age-calculator.html" class="calc-card">
       <div class="calc-icon">🎂</div>
-      <div class="calc-info">
-        <h3>Age Calculator</h3>
-        <p>Exact age in years, months & days</p>
-      </div>
+      <div class="calc-info"><h3>Age Calculator</h3><p>Exact age in years, months & days</p></div>
       <span class="calc-arrow">↗</span>
     </a>
-
     <a href="calculators/percentage-calculator.html" class="calc-card">
       <div class="calc-icon">%</div>
-      <div class="calc-info">
-        <h3>Percentage Calculator</h3>
-        <p>Quick percentage math</p>
-      </div>
+      <div class="calc-info"><h3>Percentage Calculator</h3><p>Quick percentage math</p></div>
       <span class="calc-arrow">↗</span>
     </a>
+    <a href="calculator.html?id=sleep-calculator" class="calc-card">
+      <div class="calc-icon">😴</div>
+      <div class="calc-info"><h3>Sleep Calculator</h3><p>Best wake times by sleep cycles</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=pregnancy-weight" class="calc-card">
+      <div class="calc-icon">🤱</div>
+      <div class="calc-info"><h3>Pregnancy Weight Gain</h3><p>Recommended gain by BMI</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=due-date" class="calc-card">
+      <div class="calc-icon">🗓</div>
+      <div class="calc-info"><h3>Due Date Calculator</h3><p>Estimated delivery date</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+    <a href="calculator.html?id=body-surface-area" class="calc-card">
+      <div class="calc-icon">🧬</div>
+      <div class="calc-info"><h3>Body Surface Area</h3><p>Used in medical dosing</p></div>
+      <span class="calc-arrow">↗</span>
+    </a>
+  </div>
 
+  <div class="see-all-row">
+    <a href="all-calculators.html" class="btn-primary">See All 36 Calculators →</a>
   </div>
 
   <div class="trust-strip">
@@ -150,7 +272,7 @@
     <div class="trust-divider"></div>
     <div class="trust-item"><strong>Science-based</strong><span>Proven formulas</span></div>
     <div class="trust-divider"></div>
-    <div class="trust-item"><strong>7 tools</strong><span>& growing</span></div>
+    <div class="trust-item"><strong>36 tools</strong><span>& growing</span></div>
   </div>
 
   <div class="section-head">
