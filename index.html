@@ -82,7 +82,7 @@
 <main class="container">
 
   <div class="calc-search-wrap">
-    <input type="text" id="calc-search" class="calc-search-input" placeholder="Search calculators — e.g. BMI, protein, sleep..." oninput="filterCalcs(this.value)">
+    <input type="text" id="calc-search" class="calc-search-input" placeholder="Search calculators — e.g. BMI, protein, sleep..." oninput="filterCalcs(this.value); syncSearch(this.value)">
   </div>
 
   <div class="section-head">
@@ -389,25 +389,40 @@
 </script>
 <script>
 function filterCalcs(q) {
-  q = q.toLowerCase().trim();
+  q = (q||'').toLowerCase().trim();
   var cards = document.querySelectorAll('.calc-card');
   var labels = document.querySelectorAll('.calc-category-label');
+  var seeAll = document.querySelector('.see-all-row');
   if (!q) {
     cards.forEach(function(c){ c.style.display=''; });
     labels.forEach(function(l){ l.style.display=''; });
+    if(seeAll) seeAll.style.display='';
     return;
   }
+  var any = false;
   cards.forEach(function(c){
     var text = c.textContent.toLowerCase();
-    c.style.display = text.includes(q) ? '' : 'none';
+    var show = text.includes(q);
+    c.style.display = show ? '' : 'none';
+    if(show) any = true;
   });
-  // Hide category labels if all cards in their section are hidden
   labels.forEach(function(label){
     var grid = label.nextElementSibling;
     if (!grid) return;
     var visible = Array.from(grid.querySelectorAll('.calc-card')).some(function(c){ return c.style.display !== 'none'; });
     label.style.display = visible ? '' : 'none';
   });
+  if(seeAll) seeAll.style.display = 'none';
+}
+function syncSearch(q) {
+  var s = document.getElementById('calc-search');
+  if(s && s.value !== q) s.value = q;
+  var h = document.getElementById('header-search');
+  if(h && h.value !== q) h.value = q;
+}
+function scrollToCalcs() {
+  var el = document.getElementById('calc-search');
+  if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
 }
 </script>
 </body>
