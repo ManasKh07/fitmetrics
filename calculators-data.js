@@ -79,8 +79,7 @@ const CALCULATORS = {
     if (f.cd_hu==="ft") h=h*30.48;
     const bmr = f.cd_gender==="male" ? 10*w+6.25*h-5*age+5 : 10*w+6.25*h-5*age-161;
     const tdee = bmr*act;
-    const target = tdee-(loss*1000/7);
-    const weeks = (w*(loss>0?1:0)/loss).toFixed(0);
+    const target = tdee-((loss*7700)/7);
     return { value: Math.round(target) + " kcal/day",
       label:"Daily calorie target for " + loss + " kg/week loss",
       category:"Your TDEE: " + Math.round(tdee) + " kcal/day",
@@ -233,7 +232,7 @@ const CALCULATORS = {
     return { value: "Max HR: " + mhr + " bpm",
       label: zStr,
       category:"Karvonen formula  |  Resting HR: " + rhr + " bpm",
-      interpretation:"<strong>Zone 1 ("+zones[0][0]+"–"+zones[0][1]+" bpm):</strong> Recovery — very easy, fat burning. Use for active recovery days.<br><strong>Zone 2 ("+zones[1][0]+"–"+zones[1][1]+" bpm):</strong> Aerobic base — builds mitochondria and fat-burning efficiency. Most of your training should be here.<br><strong>Zone 3 ("+zones[2][0]+"–"+zones[2][1]+" bpm):</strong> Aerobic — moderate effort. Improves cardiovascular fitness.<br><strong>Zone 4 ("+zones[3][0]+"–"+zones[3][1]+" bpm):</strong> Threshold — hard effort, raises lactate threshold and speed.<br><strong>Zone 5 ("+zones[4][0]+"+ bpm):</strong> Maximum — all-out sprints. Develops peak power and VO2 max." };
+      interpretation:"<strong>Zone 1 ("+zones[0][0]+"–"+zones[0][1]+" bpm):</strong> Recovery — very easy, fat burning. Use for active recovery days.<br><strong>Zone 2 ("+zones[1][0]+"–"+zones[1][1]+" bpm):</strong> Aerobic base — builds mitochondria and fat-burning efficiency. Most of your training should be here.<br><strong>Zone 3 ("+zones[2][0]+"–"+zones[2][1]+" bpm):</strong> Aerobic — moderate effort. Improves cardiovascular fitness.<br><strong>Zone 4 ("+zones[3][0]+"–"+zones[3][1]+" bpm):</strong> Threshold — hard effort, raises lactate threshold and speed.<br><strong>Zone 5 ("+zones[4][0]+"–"+zones[4][1]+" bpm):</strong> Maximum — all-out sprints. Develops peak power and VO2 max." };
   },
   faq:[["What is Zone 2 training?","Zone 2 improves fat burning efficiency, mitochondrial density and aerobic endurance. Elite endurance athletes spend 70–80% of training here."],["How do I measure resting heart rate?","Measure your pulse first thing in the morning before getting out of bed for the most accurate reading."]],
   related:["tdee-calculator","calorie-deficit","vo2max"]
@@ -280,6 +279,7 @@ const CALCULATORS = {
     let w=parseFloat(f.orm_weight);
     const r=parseFloat(f.orm_reps);
     if (!w||!r) return null;
+    if (r >= 37) return { value:"—", label:"Please enter fewer than 37 reps for an accurate estimate.", category:"", interpretation:"" };
     if (f.orm_wu==="lb") w=w*0.4536;
     const epley=w*(1+r/30);
     const brzycki=w*(36/(37-r));
@@ -533,13 +533,13 @@ const CALCULATORS = {
   title: "Exercise Calorie Burn Calculator",
   desc: "Estimate how many calories you burn during different types of exercise.",
   icon: "🔥", category: "Fitness",
+  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },
   fields: [
     { id:"cbe_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
       unit:{ id:"cbe_wu", options:[["kg","kg"],["lb","lb"]] } },
     { id:"cbe_exercise", label:"Exercise type", type:"select", options:[
       ["8","Running (8 km/h — jogging)"],["11","Running (11 km/h — fast)"],["4","Walking (brisk)"],
-
-  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
+      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
       ["5","Weight training"],["9","HIIT"],["3","Yoga / stretching"],["6","Jump rope"]
     ]},
     { id:"cbe_mins", label:"Duration (minutes)", type:"number", placeholder:"e.g. 45" }
