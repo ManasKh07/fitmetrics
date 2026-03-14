@@ -183,16 +183,18 @@ function renderCalc(id, calc) {
   var canonicalUrl = 'https://quickbmi.in/calculator.html?id=' + id;
   document.getElementById('canonical-url').setAttribute('href', canonicalUrl);
 
-  // Schema (#8)
+  // Schema (#8/#9)
   document.getElementById('page-schema').textContent = JSON.stringify({
     "@context":"https://schema.org",
-    "@type":"WebApplication",
+    "@type":["WebApplication","MedicalWebPage"],
     "name": calc.title + " | FitMetrics",
     "url": canonicalUrl,
     "applicationCategory":"HealthApplication",
+    "medicalAudience":{"@type":"MedicalAudience","audienceType":"General public"},
     "operatingSystem":"All",
+    "isAccessibleForFree": true,
     "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "publisher":{"@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in"}
+    "publisher":{"@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}
   }, null, 1);
 
   // Hero
@@ -220,6 +222,7 @@ function renderCalc(id, calc) {
     if (field.type === 'select') {
       input = document.createElement('select');
       input.id = field.id;
+      input.name = field.id;
       field.options.forEach(function(opt) {
         var o = document.createElement('option');
         o.value = opt[0];
@@ -231,6 +234,7 @@ function renderCalc(id, calc) {
       input = document.createElement('input');
       input.type = field.type || 'text';
       input.id = field.id;
+      input.name = field.id;
       if (field.placeholder) input.placeholder = field.placeholder;
       input.addEventListener('keydown', function(e){ if(e.key==='Enter') runCalc(); });
       row.appendChild(input);
@@ -238,6 +242,7 @@ function renderCalc(id, calc) {
       if (field.unit) {
         var sel = document.createElement('select');
         sel.id = field.unit.id;
+        sel.name = field.unit.id;
         sel.className = 'unit-select';
         field.unit.options.forEach(function(opt) {
           var o = document.createElement('option');
@@ -245,7 +250,27 @@ function renderCalc(id, calc) {
           o.textContent = opt[1];
           sel.appendChild(o);
         });
+        sel.value = field.unit.options[0][0];
         row.appendChild(sel);
+
+        // If this is a height field with ft option, add a hidden inches sub-input (#4)
+        var hasFt = field.unit.options.some(function(o){ return o[0]==='ft'; });
+        if (hasFt) {
+          var inchInput = document.createElement('input');
+          inchInput.type = 'number';
+          inchInput.id = field.id + '_in';
+          inchInput.name = field.id + '_in';
+          inchInput.placeholder = 'in';
+          inchInput.min = 0; inchInput.max = 11;
+          inchInput.style.cssText = 'display:none;width:64px;flex-shrink:0;';
+          inchInput.addEventListener('keydown', function(e){ if(e.key==='Enter') runCalc(); });
+          row.appendChild(inchInput);
+          // Show/hide inches input based on unit selection
+          sel.addEventListener('change', function() {
+            inchInput.style.display = sel.value === 'ft' ? '' : 'none';
+            input.placeholder = sel.value === 'ft' ? 'ft (e.g. 5)' : field.placeholder || '';
+          });
+        }
       }
     }
     div.appendChild(row);
@@ -253,7 +278,9 @@ function renderCalc(id, calc) {
   });
 
   // Stats table
+  var sidePanel = document.getElementById('side-panel');
   if (calc.stats) {
+    sidePanel.style.display = '';
     document.getElementById('stats-title').textContent = calc.stats.title || 'Quick Reference';
     var tbody = '';
     (calc.stats.rows || []).forEach(function(row) {
@@ -261,6 +288,8 @@ function renderCalc(id, calc) {
     });
     document.getElementById('stats-table').innerHTML = (calc.stats.header ? '<tr><th style="padding:10px 12px;background:var(--card-bg);font-size:12px;text-align:left;">' + calc.stats.header[0] + '</th><th style="padding:10px 12px;background:var(--card-bg);font-size:12px;text-align:left;">' + calc.stats.header[1] + '</th></tr>' : '') + tbody;
     document.getElementById('stats-note').textContent = calc.stats.note || '';
+  } else {
+    sidePanel.style.display = 'none';
   }
 
   // Recommended section
@@ -328,7 +357,7 @@ function runCalc() {
   var resultBox = document.getElementById('result-box');
   var errorBox = document.getElementById('error-box');
 
-  if (!result) {
+  if (result === null || result === undefined) {
     resultBox.style.display = 'none';
     errorBox.style.display = 'block';
     return;

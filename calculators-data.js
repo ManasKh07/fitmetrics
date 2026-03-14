@@ -13,9 +13,10 @@ const CALCULATORS = {
     { id:"iw_height", label:"Height", type:"number", placeholder:"e.g. 175",
       unit:{ id:"iw_height_unit", options:[["cm","cm"],["ft","ft"]] } }
   ],
+  stats: { title:"Ideal Weight by Height", header:["Height","Ideal Weight (M / F)"], rows:[["160 cm","54 / 49 kg"],["165 cm","57 / 53 kg"],["170 cm","61 / 56 kg"],["175 cm","65 / 60 kg"],["180 cm","69 / 63 kg"],["185 cm","73 / 67 kg"]], note:"Devine formula. ±5 kg for frame size." },
   calculate(f) {
     let h = parseFloat(f.iw_height);
-    if (!h) return null;
+    if (isNaN(h) || h <= 0) return null;
     if (f.iw_height_unit === "ft") h = h * 30.48;
     const inches = h / 2.54;
     let base = f.iw_gender === "male" ? 50 + 2.3*(inches-60) : 45.5 + 2.3*(inches-60);
@@ -41,9 +42,9 @@ const CALCULATORS = {
       unit:{ id:"lbm_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
 
-  stats: { title:"Ideal Weight by Height", header:["Height","Ideal Weight (M / F)"], rows:[["160 cm","54 / 49 kg"],["165 cm","57 / 53 kg"],["170 cm","61 / 56 kg"],["175 cm","65 / 60 kg"],["180 cm","69 / 63 kg"],["185 cm","73 / 67 kg"]], note:"Devine formula. ±5 kg for frame size." },  calculate(f) {
+  calculate(f) {
     let w = parseFloat(f.lbm_weight), h = parseFloat(f.lbm_height);
-    if (!w || !h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.lbm_wu==="lb") w = w*0.4536;
     if (f.lbm_hu==="ft") h = h*30.48;
     const lbm = f.lbm_gender==="male" ? 0.407*w+0.267*h-19.2 : 0.252*w+0.473*h-48.3;
@@ -71,10 +72,11 @@ const CALCULATORS = {
     { id:"cd_activity", label:"Activity Level", type:"select", options:[["1.2","Sedentary"],["1.375","Light exercise"],["1.55","Moderate exercise"],["1.725","Very active"]] },
     { id:"cd_loss", label:"Weight loss per week", type:"select", options:[["0.25","0.25 kg / 0.5 lb (gentle)"],["0.5","0.5 kg / 1 lb (moderate)"],["0.75","0.75 kg / 1.5 lb (fast)"],["1","1 kg / 2 lb (aggressive)"]] }
   ],
+  stats: { title:"Deficit vs Weekly Loss", header:["Daily Deficit","~Weekly Loss"], rows:[["250 kcal","~0.25 kg"],["500 kcal","~0.5 kg"],["750 kcal","~0.75 kg"],["1,000 kcal","~1 kg"]], note:"1 kg fat ≈ 7,700 kcal. Min 1,200 kcal/day (F), 1,500 (M)." },
   calculate(f) {
     let w=parseFloat(f.cd_weight), h=parseFloat(f.cd_height);
     const age=parseFloat(f.cd_age), act=parseFloat(f.cd_activity), loss=parseFloat(f.cd_loss);
-    if (!age||!w||!h) return null;
+    if (isNaN(age) || isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.cd_wu==="lb") w=w*0.4536;
     if (f.cd_hu==="ft") h=h*30.48;
     const bmr = f.cd_gender==="male" ? 10*w+6.25*h-5*age+5 : 10*w+6.25*h-5*age-161;
@@ -104,10 +106,10 @@ const CALCULATORS = {
     { id:"cs_goal", label:"Surplus size", type:"select", options:[["200","Lean bulk (+200 kcal)"],["350","Moderate bulk (+350 kcal)"],["500","Aggressive bulk (+500 kcal)"]] }
   ],
 
-  stats: { title:"Deficit vs Weekly Loss", header:["Daily Deficit","~Weekly Loss"], rows:[["250 kcal","~0.25 kg"],["500 kcal","~0.5 kg"],["750 kcal","~0.75 kg"],["1,000 kcal","~1 kg"]], note:"1 kg fat ≈ 7,700 kcal. Min 1,200 kcal/day (F), 1,500 (M)." },  calculate(f) {
+  calculate(f) {
     let w=parseFloat(f.cs_weight), h=parseFloat(f.cs_height);
     const age=parseFloat(f.cs_age), act=parseFloat(f.cs_activity), surplus=parseFloat(f.cs_goal);
-    if (!age||!w||!h) return null;
+    if (isNaN(age) || isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.cs_wu==="lb") w=w*0.4536;
     if (f.cs_hu==="ft") h=h*30.48;
     const bmr = f.cs_gender==="male" ? 10*w+6.25*h-5*age+5 : 10*w+6.25*h-5*age-161;
@@ -131,9 +133,10 @@ const CALCULATORS = {
       unit:{ id:"pi_wu", options:[["kg","kg"],["lb","lb"]] } },
     { id:"pi_goal", label:"Goal", type:"select", options:[["1.6","Maintain muscle"],["2.0","Build muscle"],["2.4","Athlete / heavy training"],["1.2","Lose weight (preserve muscle)"]] }
   ],
+  stats: { title:"Protein in Common Foods", header:["Food (100g)","Protein"], rows:[["Chicken breast","31g"],["Tuna (canned)","26g"],["Eggs (whole)","13g"],["Greek yogurt","10g"],["Tofu (firm)","17g"],["Lentils (cooked)","9g"]], note:"Protein provides 4 kcal per gram." },
   calculate(f) {
     let w=parseFloat(f.pi_weight);
-    if (!w) return null;
+    if (isNaN(w) || w <= 0) return null;
     if (f.pi_wu==="lb") w=w*0.4536;
     const g=parseFloat(f.pi_goal);
     const grams = Math.round(w*g);
@@ -157,9 +160,9 @@ const CALCULATORS = {
     { id:"fi_pct", label:"Fat percentage of diet", type:"select", options:[["20","20% (low fat)"],["30","30% (standard)"],["35","35% (moderate high)"],["40","40% (high fat / keto)"]] }
   ],
 
-  stats: { title:"Protein in Common Foods", header:["Food (100g)","Protein"], rows:[["Chicken breast","31g"],["Tuna (canned)","26g"],["Eggs (whole)","13g"],["Greek yogurt","10g"],["Tofu (firm)","17g"],["Lentils (cooked)","9g"]], note:"Protein provides 4 kcal per gram." },  calculate(f) {
+  calculate(f) {
     const cal=parseFloat(f.fi_calories), pct=parseFloat(f.fi_pct);
-    if (!cal) return null;
+    if (isNaN(cal) || cal <= 0) return null;
     const grams=Math.round((cal*pct/100)/9);
     return { value: grams + "g / day",
       label:"Daily fat intake at " + pct + "% of " + cal + " kcal",
@@ -178,9 +181,10 @@ const CALCULATORS = {
     { id:"ci_calories", label:"Daily Calorie Target (kcal)", type:"number", placeholder:"e.g. 2000" },
     { id:"ci_pct", label:"Carb percentage", type:"select", options:[["10","10% (keto)"],["20","20% (low carb)"],["40","40% (moderate)"],["50","50% (standard)"],["60","60% (high carb / endurance)"]] }
   ],
+  stats: { title:"Carbs in Common Foods", header:["Food (100g)","Carbs"], rows:[["Oats (dry)","66g"],["Brown rice (cooked)","23g"],["Sweet potato","20g"],["Banana","23g"],["Lentils (cooked)","20g"],["Wholegrain bread","41g"]], note:"Carbs provide 4 kcal per gram." },
   calculate(f) {
     const cal=parseFloat(f.ci_calories), pct=parseFloat(f.ci_pct);
-    if (!cal) return null;
+    if (isNaN(cal) || cal <= 0) return null;
     const grams=Math.round((cal*pct/100)/4);
     return { value: grams + "g / day",
       label:"Daily carbohydrate intake at " + pct + "% of " + cal + " kcal",
@@ -200,9 +204,9 @@ const CALCULATORS = {
     { id:"fib_age", label:"Age", type:"number", placeholder:"e.g. 30" }
   ],
 
-  stats: { title:"Carbs in Common Foods", header:["Food (100g)","Carbs"], rows:[["Oats (dry)","66g"],["Brown rice (cooked)","23g"],["Sweet potato","20g"],["Banana","23g"],["Lentils (cooked)","20g"],["Wholegrain bread","41g"]], note:"Carbs provide 4 kcal per gram." },  calculate(f) {
+  calculate(f) {
     const age=parseFloat(f.fib_age);
-    if (!age) return null;
+    if (isNaN(age) || age <= 0) return null;
     let target = f.fib_gender==="male" ? (age<=50?38:30) : (age<=50?25:21);
     const current_avg = f.fib_gender==="male" ? 18 : 15;
     return { value: target + "g / day",
@@ -222,9 +226,10 @@ const CALCULATORS = {
     { id:"hrz_age", label:"Age", type:"number", placeholder:"e.g. 30" },
     { id:"hrz_rhr", label:"Resting Heart Rate (bpm)", type:"number", placeholder:"e.g. 60" }
   ],
+  stats: { title:"Zone Training Benefits", header:["Zone","Primary Benefit"], rows:[["Z1 (50–60%)","Active recovery"],["Z2 (60–70%)","Fat burning & aerobic base"],["Z3 (70–80%)","Aerobic fitness"],["Z4 (80–90%)","Lactate threshold"],["Z5 (90–100%)","Peak speed & VO2 max"]], note:"MHR = 220 − age (estimated)." },
   calculate(f) {
     const age=parseFloat(f.hrz_age), rhr=parseFloat(f.hrz_rhr);
-    if (!age||!rhr) return null;
+    if (isNaN(age) || isNaN(rhr) || age <= 0 || rhr <= 0) return null;
     const mhr=220-age, hrr=mhr-rhr;
     const z=(lo,hi)=>[Math.round(rhr+hrr*lo),Math.round(rhr+hrr*hi)];
     const zones=[z(0.5,0.6),z(0.6,0.7),z(0.7,0.8),z(0.8,0.9),z(0.9,1.0)];
@@ -248,7 +253,7 @@ const CALCULATORS = {
     { id:"vo2_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] }
   ],
 
-  stats: { title:"Zone Training Benefits", header:["Zone","Primary Benefit"], rows:[["Z1 (50–60%)","Active recovery"],["Z2 (60–70%)","Fat burning & aerobic base"],["Z3 (70–80%)","Aerobic fitness"],["Z4 (80–90%)","Lactate threshold"],["Z5 (90–100%)","Peak speed & VO2 max"]], note:"MHR = 220 − age (estimated)." },  calculate(f) {
+  calculate(f) {
     const t=parseFloat(f.vo2_time), age=parseFloat(f.vo2_age);
     if (!t||!age) return null;
     const vo2=(3.5+(483/t)).toFixed(1);
@@ -275,6 +280,7 @@ const CALCULATORS = {
       unit:{ id:"orm_wu", options:[["kg","kg"],["lb","lb"]] } },
     { id:"orm_reps", label:"Reps performed", type:"number", placeholder:"e.g. 8" }
   ],
+  stats: { title:"Training % of 1RM", header:["Goal","% of 1RM","Reps"], rows:[["Max strength","90–100%","1–3"],["Strength","80–90%","3–6"],["Hypertrophy","65–80%","6–12"],["Endurance","50–65%","12–20+"]], note:"Recalculate every 4–6 weeks as strength improves." },
   calculate(f) {
     let w=parseFloat(f.orm_weight);
     const r=parseFloat(f.orm_reps);
@@ -304,9 +310,9 @@ const CALCULATORS = {
     { id:"put_reps", label:"Push-ups completed", type:"number", placeholder:"e.g. 25" }
   ],
 
-  stats: { title:"Training % of 1RM", header:["Goal","% of 1RM","Reps"], rows:[["Max strength","90–100%","1–3"],["Strength","80–90%","3–6"],["Hypertrophy","65–80%","6–12"],["Endurance","50–65%","12–20+"]], note:"Recalculate every 4–6 weeks as strength improves." },  calculate(f) {
+  calculate(f) {
     const age=parseFloat(f.put_age), reps=parseFloat(f.put_reps);
-    if (!age||!reps) return null;
+    if (isNaN(age) || isNaN(reps) || age <= 0 || reps <= 0) return null;
     const std={ male:[[17,21],[21,27],[15,21],[13,17],[11,15]], female:[[12,16],[13,18],[11,14],[9,12],[7,10]] };
     const idx=age<30?0:age<40?1:age<50?2:age<60?3:4;
     const [avg,good]=std[f.put_gender][idx];
@@ -332,6 +338,7 @@ const CALCULATORS = {
     { id:"rp_mins", label:"Minutes", type:"number", placeholder:"e.g. 55" },
     { id:"rp_secs", label:"Seconds", type:"number", placeholder:"0" }
   ],
+  stats: { title:"Common Race Finish Times", header:["Race","Good Amateur Pace"], rows:[["5K","5:00–6:30 /km"],["10K","5:15–6:45 /km"],["Half Marathon","5:30–7:00 /km"],["Marathon","5:45–7:30 /km"]], note:"Improve ~3–5% per year with consistent training." },
   calculate(f) {
     let d=parseFloat(f.rp_dist);
     const h=parseFloat(f.rp_hours)||0, m=parseFloat(f.rp_mins)||0, s=parseFloat(f.rp_secs)||0;
@@ -362,10 +369,10 @@ const CALCULATORS = {
       unit:{ id:"stc_wu", options:[["kg","kg"],["lb","lb"]] } }
   ],
 
-  stats: { title:"Common Race Finish Times", header:["Race","Good Amateur Pace"], rows:[["5K","5:00–6:30 /km"],["10K","5:15–6:45 /km"],["Half Marathon","5:30–7:00 /km"],["Marathon","5:45–7:30 /km"]], note:"Improve ~3–5% per year with consistent training." },  calculate(f) {
+  calculate(f) {
     let w=parseFloat(f.stc_weight);
     const steps=parseFloat(f.stc_steps);
-    if (!steps||!w) return null;
+    if (isNaN(steps) || isNaN(w) || steps <= 0 || w <= 0) return null;
     if (f.stc_wu==="lb") w=w*0.4536;
     const total=Math.round(steps*0.0004*w);
     const km=(steps/1350).toFixed(1);
@@ -387,6 +394,7 @@ const CALCULATORS = {
     { id:"sl_hour", label:"Bedtime — Hour (0–23)", type:"number", placeholder:"e.g. 22" },
     { id:"sl_min", label:"Bedtime — Minute", type:"number", placeholder:"e.g. 30" }
   ],
+  stats: { title:"Sleep Needs by Age (NSF)", header:["Age Group","Recommended"], rows:[["Teenagers (14–17)","8–10 hours"],["Young adults (18–25)","7–9 hours"],["Adults (26–64)","7–9 hours"],["Older adults (65+)","7–8 hours"]], note:"Each 90-min cycle = light + deep + REM sleep." },
   calculate(f) {
     const h=parseFloat(f.sl_hour), m=parseFloat(f.sl_min)||0;
     if (isNaN(h)) return null;
@@ -417,9 +425,9 @@ const CALCULATORS = {
       unit:{ id:"bp_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
 
-  stats: { title:"Sleep Needs by Age (NSF)", header:["Age Group","Recommended"], rows:[["Teenagers (14–17)","8–10 hours"],["Young adults (18–25)","7–9 hours"],["Adults (26–64)","7–9 hours"],["Older adults (65+)","7–8 hours"]], note:"Each 90-min cycle = light + deep + REM sleep." },  calculate(f) {
+  calculate(f) {
     let w=parseFloat(f.bp_weight), h=parseFloat(f.bp_height);
-    if (!w||!h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.bp_wu==="lb") w=w*0.4536;
     if (f.bp_hu==="ft") h=h*30.48;
     const bmi=w/Math.pow(h/100,2);
@@ -444,9 +452,10 @@ const CALCULATORS = {
     { id:"wth_height", label:"Height", type:"number", placeholder:"e.g. 175",
       unit:{ id:"wth_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
+  stats: { title:"Waist-to-Height Reference", header:["Ratio","Category"], rows:[["< 0.4","Underweight"],["0.4 – 0.5","Healthy"],["0.5 – 0.6","Overweight"],["≥ 0.6","Obese"]], note:"Keep your waist less than half your height." },
   calculate(f) {
     let w=parseFloat(f.wth_waist), h=parseFloat(f.wth_height);
-    if (!w||!h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.wth_wu==="in") w=w*2.54;
     if (f.wth_hu==="ft") h=h*30.48;
     const ratio=(w/h).toFixed(2);
@@ -473,9 +482,9 @@ const CALCULATORS = {
       unit:{ id:"wh_hu", options:[["cm","cm"],["in","inches"]] } }
   ],
 
-  stats: { title:"Waist-to-Height Reference", header:["Ratio","Category"], rows:[["< 0.4","Underweight"],["0.4 – 0.5","Healthy"],["0.5 – 0.6","Overweight"],["≥ 0.6","Obese"]], note:"Keep your waist less than half your height." },  calculate(f) {
+  calculate(f) {
     let w=parseFloat(f.wh_waist), h=parseFloat(f.wh_hip);
-    if (!w||!h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.wh_wu==="in") w=w*2.54;
     if (f.wh_hu==="in") h=h*2.54;
     const ratio=(w/h).toFixed(2);
@@ -496,6 +505,7 @@ const CALCULATORS = {
   title: "Army Body Fat Calculator",
   desc: "Calculate body fat percentage using the US Army circumference method.",
   icon: "🪖", category: "Body",
+  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },
   fields: [
     { id:"abf_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
     { id:"abf_height", label:"Height", type:"number", placeholder:"e.g. 178",
@@ -509,7 +519,7 @@ const CALCULATORS = {
   ],
   calculate(f) {
     let h=parseFloat(f.abf_height), neck=parseFloat(f.abf_neck), waist=parseFloat(f.abf_waist), hip=parseFloat(f.abf_hip)||0;
-    if (!h||!neck||!waist) return null;
+    if (isNaN(h) || isNaN(neck) || isNaN(waist) || h <= 0 || neck <= 0 || waist <= 0) return null;
     if (f.abf_hu==="in") h=h*2.54;
     if (f.abf_nu==="in") neck=neck*2.54;
     if (f.abf_wu==="in") waist=waist*2.54;
@@ -533,7 +543,6 @@ const CALCULATORS = {
   title: "Exercise Calorie Burn Calculator",
   desc: "Estimate how many calories you burn during different types of exercise.",
   icon: "🔥", category: "Fitness",
-  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },
   fields: [
     { id:"cbe_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
       unit:{ id:"cbe_wu", options:[["kg","kg"],["lb","lb"]] } },
@@ -547,7 +556,7 @@ const CALCULATORS = {
   calculate(f) {
     let w=parseFloat(f.cbe_weight);
     const met=parseFloat(f.cbe_exercise), mins=parseFloat(f.cbe_mins);
-    if (!w||!mins) return null;
+    if (isNaN(w) || isNaN(mins) || w <= 0 || mins <= 0) return null;
     if (f.cbe_wu==="lb") w=w*0.4536;
     const kcal=Math.round((met*3.5*w/200)*mins);
     const weekly=kcal*3, perKg=(kcal/w).toFixed(1);
@@ -571,9 +580,10 @@ const CALCULATORS = {
       unit:{ id:"pg_hu", options:[["cm","cm"],["ft","ft"]] } },
     { id:"pg_twins", label:"Pregnancy type", type:"select", options:[["single","Single baby"],["twins","Twins"]] }
   ],
+  stats: { title:"Weight Gain by Pre-Preg BMI", header:["BMI Category","Recommended Gain"], rows:[["Underweight (<18.5)","12.5–18 kg"],["Healthy (18.5–24.9)","11.5–16 kg"],["Overweight (25–29.9)","7–11.5 kg"],["Obese (≥30)","5–9 kg"]], note:"Source: Institute of Medicine (IOM)." },
   calculate(f) {
     let w=parseFloat(f.pg_weight), h=parseFloat(f.pg_height);
-    if (!w||!h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.pg_wu==="lb") w=w*0.4536;
     if (f.pg_hu==="ft") h=h*30.48;
     const bmi=w/Math.pow(h/100,2);
@@ -600,7 +610,7 @@ const CALCULATORS = {
     { id:"dd_cycle", label:"Average cycle length (days)", type:"number", placeholder:"e.g. 28" }
   ],
 
-  stats: { title:"Weight Gain by Pre-Preg BMI", header:["BMI Category","Recommended Gain"], rows:[["Underweight (<18.5)","12.5–18 kg"],["Healthy (18.5–24.9)","11.5–16 kg"],["Overweight (25–29.9)","7–11.5 kg"],["Obese (≥30)","5–9 kg"]], note:"Source: Institute of Medicine (IOM)." },  calculate(f) {
+  calculate(f) {
     const lmp=new Date(f.dd_lmp), cycle=parseFloat(f.dd_cycle)||28;
     if (isNaN(lmp.getTime())) return null;
     const due=new Date(lmp);
@@ -626,9 +636,10 @@ const CALCULATORS = {
     { id:"bsa_height", label:"Height", type:"number", placeholder:"e.g. 175",
       unit:{ id:"bsa_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
+  stats: { title:"Average BSA Reference", header:["Group","Average BSA"], rows:[["Adult male","1.9 m²"],["Adult female","1.6 m²"],["Child (10 yrs)","1.14 m²"],["Child (5 yrs)","0.76 m²"],["Neonate","0.25 m²"]], note:"Mosteller formula: √(height × weight ÷ 3600)." },
   calculate(f) {
     let w=parseFloat(f.bsa_weight), h=parseFloat(f.bsa_height);
-    if (!w||!h) return null;
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.bsa_wu==="lb") w=w*0.4536;
     if (f.bsa_hu==="ft") h=h*30.48;
     const bsa=Math.sqrt((h*w)/3600).toFixed(2);
@@ -651,7 +662,7 @@ const CALCULATORS = {
     { id:"nic_count", label:"Number per day", type:"number", placeholder:"e.g. 10" }
   ],
 
-  stats: { title:"Average BSA Reference", header:["Group","Average BSA"], rows:[["Adult male","1.9 m²"],["Adult female","1.6 m²"],["Child (10 yrs)","1.14 m²"],["Child (5 yrs)","0.76 m²"],["Neonate","0.25 m²"]], note:"Mosteller formula: √(height × weight ÷ 3600)." },  calculate(f) {
+  calculate(f) {
     const mg=parseFloat(f.nic_type), count=parseFloat(f.nic_count);
     if (!count) return null;
     const absorbed=(mg*0.1*count).toFixed(1);
@@ -675,9 +686,10 @@ const CALCULATORS = {
     { id:"cc_age", label:"Age (years)", type:"number", placeholder:"e.g. 10" },
     { id:"cc_activity", label:"Activity level", type:"select", options:[["1.0","Sedentary"],["1.3","Moderately active"],["1.6","Active"]] }
   ],
+  stats: { title:"Child Calorie Needs (Moderate Activity)", header:["Age","Boys","Girls"], rows:[["2–3","1,000–1,400","1,000–1,200"],["4–8","1,200–1,600","1,200–1,400"],["9–13","1,600–2,000","1,400–1,800"],["14–18","2,000–2,600","1,800–2,000"]], note:"Source: USDA Dietary Guidelines." },
   calculate(f) {
     const age=parseFloat(f.cc_age), act=parseFloat(f.cc_activity);
-    if (!age) return null;
+    if (isNaN(age) || age <= 0) return null;
     let bmr;
     if (f.cc_gender==="male") bmr=88.362+13.397*30+4.799*140-5.677*age;
     else bmr=447.593+9.247*28+3.098*135-4.330*age;
@@ -700,9 +712,9 @@ const CALCULATORS = {
     { id:"au_abv", label:"ABV / Strength (%)", type:"number", placeholder:"e.g. 5" }
   ],
 
-  stats: { title:"Child Calorie Needs (Moderate Activity)", header:["Age","Boys","Girls"], rows:[["2–3","1,000–1,400","1,000–1,200"],["4–8","1,200–1,600","1,200–1,400"],["9–13","1,600–2,000","1,400–1,800"],["14–18","2,000–2,600","1,800–2,000"]], note:"Source: USDA Dietary Guidelines." },  calculate(f) {
+  calculate(f) {
     const vol=parseFloat(f.au_volume), abv=parseFloat(f.au_abv);
-    if (!vol||!abv) return null;
+    if (isNaN(vol) || isNaN(abv) || vol <= 0 || abv <= 0) return null;
     const units=(vol*abv)/1000;
     const cal=Math.round(units*56+vol*0.03);
     const weekly=(units*7).toFixed(1);
@@ -728,10 +740,11 @@ const CALCULATORS = {
     { id:"bmic_height", label:"Height", type:"number", placeholder:"e.g. 150",
       unit:{ id:"bmic_hu", options:[["cm","cm"],["ft","ft"]] } }
   ],
+  stats: { title:"BMI-for-Age Percentile (CDC)", header:["Percentile","Category"], rows:[["Below 5th","Underweight"],["5th – 84th","Healthy weight"],["85th – 94th","Overweight"],["95th and above","Obese"]], note:"Children require age- and sex-specific charts — adult cutoffs do not apply." },
   calculate(f) {
     let w=parseFloat(f.bmic_weight), h=parseFloat(f.bmic_height);
     const age=parseFloat(f.bmic_age);
-    if (!age||!w||!h) return null;
+    if (isNaN(age) || isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return null;
     if (f.bmic_wu==="lb") w=w*0.4536;
     if (f.bmic_hu==="ft") h=h*30.48;
     const bmi=(w/Math.pow(h/100,2)).toFixed(1);
@@ -755,9 +768,9 @@ const CALCULATORS = {
     { id:"pts_unit", label:"Pace unit", type:"select", options:[["km","per km"],["mi","per mile"]] }
   ],
 
-  stats: { title:"BMI-for-Age Percentile (CDC)", header:["Percentile","Category"], rows:[["Below 5th","Underweight"],["5th – 84th","Healthy weight"],["85th – 94th","Overweight"],["95th and above","Obese"]], note:"Children require age- and sex-specific charts — adult cutoffs do not apply." },  calculate(f) {
+  calculate(f) {
     const m=parseFloat(f.pts_pace_min)||0, s=parseFloat(f.pts_pace_sec)||0;
-    if (!m&&!s) return null;
+    if ((isNaN(m) && isNaN(s)) || (m <= 0 && s <= 0)) return null;
     const totalMin=m+s/60;
     let kmh;
     if (f.pts_unit==="km") kmh=60/totalMin;
@@ -774,7 +787,7 @@ const CALCULATORS = {
 },
 
 "resting-metabolic-rate": {
-  stats: { title:"Average RMR by Age & Sex", header:["Age","Men","Women"], rows:[["20–29","1,800–2,000","1,450–1,600"],["30–39","1,750–1,950","1,400–1,550"],["40–49","1,700–1,900","1,350–1,500"],["50–59","1,650–1,850","1,300–1,450"],["60+","1,550–1,750","1,250–1,400"]], note:"RMR decreases ~1–2% per decade after age 30." },
+
   title: "Resting Metabolic Rate (RMR) Calculator",
   desc: "Calculate your resting metabolic rate — the calories your body burns at complete rest.",
   icon: "🧪", category: "Nutrition",
@@ -786,10 +799,11 @@ const CALCULATORS = {
       unit:{ id:"rmr_hu", options:[["cm","cm"],["ft","ft"]] } },
     { id:"rmr_age", label:"Age", type:"number", placeholder:"e.g. 30" }
   ],
+  stats: { title:"Average RMR by Age & Sex", header:["Age","Men","Women"], rows:[["20–29","1,800–2,000","1,450–1,600"],["30–39","1,750–1,950","1,400–1,550"],["40–49","1,700–1,900","1,350–1,500"],["50–59","1,650–1,850","1,300–1,450"],["60+","1,550–1,750","1,250–1,400"]], note:"RMR decreases ~1–2% per decade after age 30." },
   calculate(f) {
     let w=parseFloat(f.rmr_weight), h=parseFloat(f.rmr_height);
     const age=parseFloat(f.rmr_age);
-    if (!w||!h||!age) return null;
+    if (isNaN(w) || isNaN(h) || isNaN(age) || w <= 0 || h <= 0 || age <= 0) return null;
     if (f.rmr_wu==="lb") w=w*0.4536;
     if (f.rmr_hu==="ft") h=h*30.48;
     const rmr=f.rmr_gender==="male"?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161;
