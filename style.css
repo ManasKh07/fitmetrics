@@ -873,7 +873,8 @@ nav a.active {
 
 .header-search-wrap {
   flex: 1;
-  max-width: 260px;
+  max-width: 280px;
+  position: relative;
 }
 
 .header-search-input {
@@ -1012,7 +1013,11 @@ nav a.active {
 }
 
 @media (max-width: 700px) {
-  .header-search-wrap { display: none; }
+  .header-search-wrap {
+  flex: 1;
+  max-width: 280px;
+  position: relative;
+}
   .recommended-grid { grid-template-columns: 1fr; }
 }
 
@@ -1052,4 +1057,8 @@ nav a.active {
 }
 
 /* Make search wrap position:relative so dropdown positions correctly */
-.header-search-wrap { position: relative; }
+.header-search-wrap {
+  flex: 1;
+  max-width: 280px;
+  position: relative;
+}

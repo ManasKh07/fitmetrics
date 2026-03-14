@@ -43,6 +43,7 @@
   <div class="container header-flex">
     <a href="index.html" class="logo">FitMetrics</a>
     <nav>
+      <a href="index.html" class="active">Home</a>
       <a href="calculators/bmi-calculator.html">BMI</a>
       <a href="calculators/macro-calculator.html">Macros</a>
       <a href="calculators/tdee-calculator.html">TDEE</a>
@@ -51,7 +52,14 @@
       <a href="calculators/age-calculator.html">Age</a>
       <a href="calculators/percentage-calculator.html">%</a>
     </nav>
-    <a href="calculators/bmi-calculator.html" class="nav-cta">Try a Calculator</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" id="header-search"
+        placeholder="Search calculators..."
+        oninput="filterCalcs(this.value); updateHeaderDropdown(this.value)"
+        autocomplete="off">
+      <div class="hdr-search-results" id="hdr-results-home"></div>
+    </div>
+    <a href="#" class="nav-cta" onclick="goRandomHome(event)">Try Random ↗</a>
   </div>
 </header>
 
@@ -82,7 +90,7 @@
 <main class="container">
 
   <div class="calc-search-wrap">
-    <input type="text" id="calc-search" class="calc-search-input" placeholder="Search calculators — e.g. BMI, protein, sleep..." oninput="filterCalcs(this.value); syncSearch(this.value)">
+    <input type="text" id="calc-search" class="calc-search-input" placeholder="Search calculators — e.g. BMI, protein, sleep..." oninput="filterCalcs(this.value); updateHeaderDropdown(this.value)">
   </div>
 
   <div class="section-head">
@@ -387,105 +395,8 @@
   });
 })();
 </script>
-<script>
-function filterCalcs(q) {
-  q = (q||'').toLowerCase().trim();
-  var cards = document.querySelectorAll('.calc-card');
-  var labels = document.querySelectorAll('.calc-category-label');
-  var seeAll = document.querySelector('.see-all-row');
-  if (!q) {
-    cards.forEach(function(c){ c.style.display=''; });
-    labels.forEach(function(l){ l.style.display=''; });
-    if(seeAll) seeAll.style.display='';
-    return;
-  }
-  var any = false;
-  cards.forEach(function(c){
-    var text = c.textContent.toLowerCase();
-    var show = text.includes(q);
-    c.style.display = show ? '' : 'none';
-    if(show) any = true;
-  });
-  labels.forEach(function(label){
-    var grid = label.nextElementSibling;
-    if (!grid) return;
-    var visible = Array.from(grid.querySelectorAll('.calc-card')).some(function(c){ return c.style.display !== 'none'; });
-    label.style.display = visible ? '' : 'none';
-  });
-  if(seeAll) seeAll.style.display = 'none';
-}
-function syncSearch(q) {
-  var s = document.getElementById('calc-search');
-  if(s && s.value !== q) s.value = q;
-  var h = document.getElementById('header-search');
-  if(h && h.value !== q) h.value = q;
-}
-function scrollToCalcs() {
-  var el = document.getElementById('calc-search');
-  if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
-}
-</script>
-<script>
-var CALC_LIST_HOME=[
-  {name:"BMI Calculator",url:"calculators/bmi-calculator.html"},
-  {name:"TDEE Calculator",url:"calculators/tdee-calculator.html"},
-  {name:"Macro Calculator",url:"calculators/macro-calculator.html"},
-  {name:"Body Fat Calculator",url:"calculators/body-fat-calculator.html"},
-  {name:"Water Intake Calculator",url:"calculators/water-calculator.html"},
-  {name:"Age Calculator",url:"calculators/age-calculator.html"},
-  {name:"Percentage Calculator",url:"calculators/percentage-calculator.html"},
-  {name:"Ideal Weight Calculator",url:"calculator.html?id=ideal-weight"},
-  {name:"Calorie Deficit Calculator",url:"calculator.html?id=calorie-deficit"},
-  {name:"Calorie Surplus Calculator",url:"calculator.html?id=calorie-surplus"},
-  {name:"Protein Intake Calculator",url:"calculator.html?id=protein-intake"},
-  {name:"Heart Rate Zones",url:"calculator.html?id=heart-rate-zones"},
-  {name:"VO2 Max Estimator",url:"calculator.html?id=vo2max"},
-  {name:"One Rep Max (1RM)",url:"calculator.html?id=one-rep-max"},
-  {name:"Running Pace Calculator",url:"calculator.html?id=running-pace"},
-  {name:"Sleep Calculator",url:"calculator.html?id=sleep-calculator"},
-  {name:"Waist-to-Height Ratio",url:"calculator.html?id=waist-to-height"},
-  {name:"Waist-to-Hip Ratio",url:"calculator.html?id=waist-to-hip"},
-  {name:"Army Body Fat",url:"calculator.html?id=army-body-fat"},
-  {name:"Steps to Calories",url:"calculator.html?id=steps-to-calories"},
-  {name:"Lean Body Mass",url:"calculator.html?id=lean-body-mass"},
-  {name:"Carbohydrate Intake",url:"calculator.html?id=carb-intake"},
-  {name:"Fibre Intake",url:"calculator.html?id=fiber-intake"},
-  {name:"Resting Metabolic Rate",url:"calculator.html?id=resting-metabolic-rate"},
-  {name:"Alcohol Units Calculator",url:"calculator.html?id=alcohol-units"},
-  {name:"BMI for Children",url:"calculator.html?id=bmi-children"},
-  {name:"Pregnancy Weight Gain",url:"calculator.html?id=pregnancy-weight"},
-  {name:"Due Date Calculator",url:"calculator.html?id=due-date"},
-  {name:"Push-Up Fitness Test",url:"calculator.html?id=push-up-test"},
-  {name:"Exercise Calorie Burn",url:"calculator.html?id=calorie-burn-exercise"},
-  {name:"Pace to Speed Converter",url:"calculator.html?id=pace-to-speed"},
-  {name:"Fat Intake Calculator",url:"calculator.html?id=fat-intake"},
-  {name:"BMI Prime",url:"calculator.html?id=bmi-prime"},
-  {name:"Body Surface Area",url:"calculator.html?id=body-surface-area"},
-  {name:"Child Calorie Calculator",url:"calculator.html?id=calorie-intake-children"},
-  {name:"Nicotine Intake Calculator",url:"calculator.html?id=nicotine-calculator"}
-];
-function syncSearch(q){
-  var s=document.getElementById('calc-search');
-  if(s&&s.value!==q)s.value=q;
-  // Also show dropdown from header
-  var box=document.getElementById('hdr-results-home');
-  q=(q||'').toLowerCase().trim();
-  if(!q){if(box)box.style.display='none';return;}
-  var m=CALC_LIST_HOME.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,6);
-  if(!box)return;
-  if(!m.length){box.innerHTML='<div class="hdr-no-result">No results — scroll down to see filtered cards</div>';box.style.display='block';return;}
-  box.innerHTML=m.map(function(c){return '<a href="'+c.url+'" class="hdr-result-item">'+c.name+'</a>';}).join('');
-  box.style.display='block';
-}
-function goRandomHome(e){
-  e.preventDefault();
-  window.location=CALC_LIST_HOME[Math.floor(Math.random()*CALC_LIST_HOME.length)].url;
-}
-document.addEventListener('click',function(e){
-  if(!e.target.closest('#header-search')&&!e.target.closest('#hdr-results-home')){
-    var b=document.getElementById('hdr-results-home');if(b)b.style.display='none';
-  }
-});
-</script>
+
+
+<script src="/search.js"></script>
 </body>
 </html>
