@@ -28,10 +28,6 @@
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
-    <div class="header-search-wrap">
-      <input type="text" class="header-search-input" placeholder="Search calculators..." 
-        onfocus="window.location='../index.html#calc-search'" readonly>
-    </div>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
@@ -40,7 +36,14 @@
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
     </nav>
-    <a href="../all-calculators.html" class="nav-cta">All Calculators</a>
+    <div class="header-search-wrap">
+      <input type="text" class="header-search-input" id="hdr-search"
+        placeholder="Search calculators..."
+        oninput="searchCalcs(this.value)"
+        autocomplete="off">
+      <div class="hdr-search-results" id="hdr-results"></div>
+    </div>
+    <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
   </div>
 </header><nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>TDEE Calculator</span></div>
@@ -148,9 +151,7 @@
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
-<script>
-(function(){var links=document.querySelectorAll('nav a');var path=window.location.pathname;links.forEach(function(a){if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))a.classList.add('active');});})();
-</script>
+
 <script>
 function toggleTdeeHeight(){var u=document.getElementById('td_hu').value;document.getElementById('td_height_cm').style.display=u==='cm'?'':'none';document.getElementById('td_height_ft').style.display=u==='ft'?'':'none';document.getElementById('td_height_in').style.display=u==='ft'?'':'none';}
 function calcTDEE(){
@@ -173,5 +174,69 @@ function calcTDEE(){
   ri.innerHTML='Your body burns approximately <strong>'+tdee+' kcal per day</strong>. <br><br><strong>To lose weight:</strong> eat ~'+lose+' kcal/day (−500 kcal deficit → ~0.5 kg/week)<br><strong>To maintain:</strong> eat ~'+tdee+' kcal/day<br><strong>To build muscle:</strong> eat ~'+gain+' kcal/day (+300 kcal surplus)<br><br>Your BMR (at complete rest) is approximately <strong>'+Math.round(bmr)+' kcal/day</strong>. Never eat below this without medical supervision.';
   ri.style.display='block';
 }
+</script>
+<script>
+var CALC_LIST=[
+  {name:"BMI Calculator",url:"/calculators/bmi-calculator.html"},
+  {name:"TDEE Calculator",url:"/calculators/tdee-calculator.html"},
+  {name:"Macro Calculator",url:"/calculators/macro-calculator.html"},
+  {name:"Body Fat Calculator",url:"/calculators/body-fat-calculator.html"},
+  {name:"Water Intake Calculator",url:"/calculators/water-calculator.html"},
+  {name:"Age Calculator",url:"/calculators/age-calculator.html"},
+  {name:"Percentage Calculator",url:"/calculators/percentage-calculator.html"},
+  {name:"Ideal Weight Calculator",url:"/calculator.html?id=ideal-weight"},
+  {name:"Lean Body Mass",url:"/calculator.html?id=lean-body-mass"},
+  {name:"Calorie Deficit Calculator",url:"/calculator.html?id=calorie-deficit"},
+  {name:"Calorie Surplus Calculator",url:"/calculator.html?id=calorie-surplus"},
+  {name:"Protein Intake Calculator",url:"/calculator.html?id=protein-intake"},
+  {name:"Fat Intake Calculator",url:"/calculator.html?id=fat-intake"},
+  {name:"Carbohydrate Intake",url:"/calculator.html?id=carb-intake"},
+  {name:"Fibre Intake Calculator",url:"/calculator.html?id=fiber-intake"},
+  {name:"Heart Rate Zones",url:"/calculator.html?id=heart-rate-zones"},
+  {name:"VO2 Max Estimator",url:"/calculator.html?id=vo2max"},
+  {name:"One Rep Max (1RM)",url:"/calculator.html?id=one-rep-max"},
+  {name:"Push-Up Fitness Test",url:"/calculator.html?id=push-up-test"},
+  {name:"Running Pace Calculator",url:"/calculator.html?id=running-pace"},
+  {name:"Steps to Calories",url:"/calculator.html?id=steps-to-calories"},
+  {name:"Sleep Calculator",url:"/calculator.html?id=sleep-calculator"},
+  {name:"BMI Prime",url:"/calculator.html?id=bmi-prime"},
+  {name:"Waist-to-Height Ratio",url:"/calculator.html?id=waist-to-height"},
+  {name:"Waist-to-Hip Ratio",url:"/calculator.html?id=waist-to-hip"},
+  {name:"Army Body Fat",url:"/calculator.html?id=army-body-fat"},
+  {name:"Exercise Calorie Burn",url:"/calculator.html?id=calorie-burn-exercise"},
+  {name:"Pregnancy Weight Gain",url:"/calculator.html?id=pregnancy-weight"},
+  {name:"Due Date Calculator",url:"/calculator.html?id=due-date"},
+  {name:"Body Surface Area",url:"/calculator.html?id=body-surface-area"},
+  {name:"Resting Metabolic Rate",url:"/calculator.html?id=resting-metabolic-rate"},
+  {name:"Alcohol Units Calculator",url:"/calculator.html?id=alcohol-units"},
+  {name:"BMI for Children",url:"/calculator.html?id=bmi-children"},
+  {name:"Pace to Speed Converter",url:"/calculator.html?id=pace-to-speed"}
+];
+function searchCalcs(q){
+  var box=document.getElementById('hdr-results');
+  q=(q||'').trim().toLowerCase();
+  if(!q){box.innerHTML='';box.style.display='none';return;}
+  var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,7);
+  if(!m.length){box.innerHTML='<div class="hdr-no-result">No results</div>';box.style.display='block';return;}
+  box.innerHTML=m.map(function(c){return '<a href="'+c.url+'" class="hdr-result-item">'+c.name+'</a>';}).join('');
+  box.style.display='block';
+}
+function goRandom(e){
+  e.preventDefault();
+  window.location=CALC_LIST[Math.floor(Math.random()*CALC_LIST.length)].url;
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#hdr-search')&&!e.target.closest('#hdr-results')){
+    var b=document.getElementById('hdr-results');if(b)b.style.display='none';
+  }
+});
+(function(){
+  var links=document.querySelectorAll('nav a');
+  var path=window.location.pathname;
+  links.forEach(function(a){
+    if(a.getAttribute('href')&&path.endsWith(a.getAttribute('href').replace('../','').replace('./','')))
+      a.classList.add('active');
+  });
+})();
 </script>
 </body></html>
