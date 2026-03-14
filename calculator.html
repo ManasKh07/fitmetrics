@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">Calculator | FitMetrics</title>
 <meta id="page-desc" name="description" content="Free health calculator by FitMetrics.">
@@ -694,8 +695,7 @@ var CALCULATORS = {
       unit:{ id:"cbe_wu", options:[["kg","kg"],["lb","lb"]] } },
     { id:"cbe_exercise", label:"Exercise type", type:"select", options:[
       ["8","Running (8 km/h — jogging)"],["11","Running (11 km/h — fast)"],["4","Walking (brisk)"],
-
-  stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
+      ["7","Cycling (moderate)"],["10","Cycling (vigorous)"],["6","Swimming"],
       ["5","Weight training"],["9","HIIT"],["3","Yoga / stretching"],["6","Jump rope"]
     ]},
     { id:"cbe_mins", label:"Duration (minutes)", type:"number", placeholder:"e.g. 45" }
@@ -1158,13 +1158,15 @@ function runCalc() {
   resultBox.style.display = 'block';
 }
 
-// Init
-var id = getParam('id');
-if (id && CALCULATORS[id]) {
-  renderCalc(id, CALCULATORS[id]);
-} else {
-  renderNotFound(id);
-}
+// Init — wrapped in DOMContentLoaded to ensure DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  var id = getParam('id');
+  if (id && CALCULATORS[id]) {
+    renderCalc(id, CALCULATORS[id]);
+  } else {
+    renderNotFound(id);
+  }
+});
 
 // FitMetrics — search.js
 // Loaded on every page. Works standalone — no redirect needed.
