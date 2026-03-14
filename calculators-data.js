@@ -773,8 +773,8 @@ const CALCULATORS = {
   related:["running-pace","heart-rate-zones","calorie-burn-exercise"]
 },
 
-"r
-  stats: { title:"Average RMR by Age & Sex", header:["Age","Men","Women"], rows:[["20–29","1,800–2,000","1,450–1,600"],["30–39","1,750–1,950","1,400–1,550"],["40–49","1,700–1,900","1,350–1,500"],["50–59","1,650–1,850","1,300–1,450"],["60+","1,550–1,750","1,250–1,400"]], note:"RMR decreases ~1–2% per decade after age 30." },esting-metabolic-rate": {
+"rresting-metabolic-rate": {
+  stats: { title:"Average RMR by Age & Sex", header:["Age","Men","Women"], rows:[["20–29","1,800–2,000","1,450–1,600"],["30–39","1,750–1,950","1,400–1,550"],["40–49","1,700–1,900","1,350–1,500"],["50–59","1,650–1,850","1,300–1,450"],["60+","1,550–1,750","1,250–1,400"]], note:"RMR decreases ~1–2% per decade after age 30." },
   title: "Resting Metabolic Rate (RMR) Calculator",
   desc: "Calculate your resting metabolic rate — the calories your body burns at complete rest.",
   icon: "🧪", category: "Nutrition",
