@@ -61,7 +61,7 @@ function calculateWater(){
 let w=parseFloat(document.getElementById("water_w").value);
 
 if(isNaN(w)){
-showResult("water_result","Enter valid weight");
+showResult("water_result","Hmm — enter your weight first.");
 return;
 }
 
@@ -80,7 +80,7 @@ let value=parseFloat(document.getElementById("percent_value").value);
 let total=parseFloat(document.getElementById("percent_total").value);
 
 if(total===0){
-showResult("percent_result","Total cannot be zero");
+showResult("percent_result","Can't divide by zero — check your total.");
 return;
 }
 
@@ -222,12 +222,3 @@ function toggleHeightInputs() {
         inInput.style.display = "block"; 
     }
 }
-
-
-
-
-
-
-
-
-
