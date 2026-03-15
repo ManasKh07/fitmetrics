@@ -45,13 +45,13 @@
     </div>
     <a href="#" class="nav-cta" onclick="goRandomHome(event)">Try Random ↗</a>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="index.html">Home</a><span class="bc-sep">›</span><span>Contact</span></div></nav><div class="page-hero"><div class="container"><div class="page-hero-label">Get in Touch</div><h1>Contact Us</h1><p>Questions, feedback, or suggestions — we read every message.</p></div></div>
+</header><nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="index.html">Home</a><span class="bc-sep">›</span><span>Contact</span></div></nav><div class="page-hero"><div class="container"><div class="page-hero-label">One person runs this</div><h1>Get in Touch</h1><p>Found a bug, got a suggestion, or just want to say something? I read every message personally.</p></div></div>
 <main class="container">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;padding:40px 0 80px;">
 
   <div class="calc-box">
     <h2 style="margin-top:0;font-size:22px;">Send a Message</h2>
-    <p style="color:var(--ink-soft);font-size:14px;margin-bottom:24px;">We typically respond within 1–2 business days.</p>
+    <p style="color:var(--ink-soft);font-size:14px;margin-bottom:24px;">I typically reply within a day or two. No support team, no ticket system — just a reply from me.</p>
     <form id="contactForm" action="https://formspree.io/f/mdawawle" method="POST">
       <div class="input-group">
         <label>Your Name</label>
@@ -73,7 +73,7 @@
       </div>
       <div class="input-group">
         <label>Your Message</label>
-        <textarea name="message" rows="5" placeholder="How can we help you?" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);resize:vertical;outline:none;" onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--ink')" onblur="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border')"></textarea>
+        <textarea name="message" rows="5" placeholder="What's on your mind?" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);resize:vertical;outline:none;" onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--ink')" onblur="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border')"></textarea>
       </div>
       <button type="submit" style="margin-top:8px;">Send Message</button>
     </form>
@@ -84,16 +84,16 @@
     <div class="side-panel" style="margin-bottom:16px;">
       <h3>Frequently Asked Questions</h3>
       <div class="faq-section" style="margin-top:12px;">
-        <details><summary>Are all calculators free?</summary><p>Yes — every calculator is completely free, forever. No sign-up, no subscription, no hidden fees.</p></details>
-        <details><summary>Is my health data stored?</summary><p>No. All calculations happen entirely in your browser. We never store, transmit or have access to any health data you enter.</p></details>
-        <details><summary>Can I suggest a new calculator?</summary><p>Absolutely. Select "Suggest a Calculator" in the subject dropdown. We review all suggestions and prioritise the most requested tools.</p></details>
-        <details><summary>I found an error. What should I do?</summary><p>Select "Report a Bug" and include the calculator name and the result you expected. We fix confirmed bugs as quickly as possible.</p></details>
-        <details><summary>Can I use your calculators on my website?</summary><p>Please contact us with a "Business Enquiry" for licensing or partnership questions.</p></details>
+        <details><summary>Are all calculators free?</summary><p>Yes — every single one. No sign-up, no subscription, no "premium" tier. Free now, free forever.</p></details>
+        <details><summary>Is my health data stored anywhere?</summary><p>No. Every calculation happens entirely in your browser. The numbers you type never leave your device — I have no server storing any of it.</p></details>
+        <details><summary>Can I suggest a new calculator?</summary><p>Please do. Select "Suggest a Calculator" in the dropdown. I've added several tools based on requests and I look at all of them.</p></details>
+        <details><summary>I found an error in a result. What should I do?</summary><p>Select "Report a Bug" and tell me which calculator, what you entered, and what you expected. I take accuracy seriously and fix confirmed bugs quickly.</p></details>
+        <details><summary>Can I use your calculators on my own website?</summary><p>Get in touch via "Business Enquiry" and we can talk about it.</p></details>
       </div>
     </div>
     <div style="background:var(--ink);border-radius:var(--radius);padding:24px;">
-      <div style="font-family:Syne,sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Try our calculators</div>
-      <p style="font-size:14px;color:#888;margin-bottom:16px;">36 free health tools — no account needed.</p>
+      <div style="font-family:Syne,sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">While you're here</div>
+      <p style="font-size:14px;color:#888;margin-bottom:16px;">36 free health calculators. No account needed. Just numbers.</p>
       <a href="all-calculators.html" style="display:inline-block;background:var(--accent);color:var(--ink);font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px;text-decoration:none;">Browse All Calculators →</a>
     </div>
   </div>
@@ -101,7 +101,7 @@
 </main>
 <footer>
   <div class="container footer-inner">
-    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
     <div class="footer-links">
       <a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a>
     </div>
@@ -118,8 +118,8 @@ document.getElementById("contactForm").addEventListener("submit",function(e){
   .then(function(r){
     var msg=document.getElementById("formMessage");
     msg.style.display="block";
-    if(r.ok){msg.textContent="Message sent! We will get back to you within 1-2 business days.";msg.style.background="var(--accent)";}
-    else{msg.textContent="Something went wrong. Please try again.";msg.style.background="#fff0f0";}
+    if(r.ok){msg.textContent="Got it — I'll get back to you within a day or two.";msg.style.background="var(--accent)";}
+    else{msg.textContent="Something went wrong. Try again, or email me directly.";msg.style.background="#fff0f0";}
     btn.textContent="Send Message"; btn.disabled=false;
   });
 });
