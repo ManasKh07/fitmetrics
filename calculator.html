@@ -106,7 +106,7 @@
         <div class="result-label" id="result-label"></div>
         <div class="result-category" id="result-category"></div>
       </div>
-      <div class="error-box" id="error-box">Please fill in all fields before calculating.</div>
+      <div class="error-box" id="error-box">Hmm — looks like something's missing. Fill in all fields and try again.</div>
     </div>
 
     <div class="side-panel" id="side-panel">
@@ -123,8 +123,8 @@
     <div class="faq-section" id="faq-container"></div>
     <div class="blog-cta" id="blog-cta" style="display:none;">
       <div class="blog-cta-text">
-        <strong>Want more health tools?</strong>
-        <span>Check all our free calculators — BMI, TDEE, macros and more.</span>
+        <strong>Need another number?</strong>
+        <span>There are 36 free calculators here — BMI, TDEE, macros, body fat and more. No login, no ads.</span>
       </div>
       <a href="/index.html" class="btn-primary">See All Calculators →</a>
     </div>
@@ -139,7 +139,7 @@
 
 <footer>
   <div class="container footer-inner">
-    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Free health calculators for everyone.</p></div>
+    <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
     <div class="footer-links">
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy</a>
@@ -310,7 +310,7 @@ function renderCalc(id, calc) {
   }
 
   // Article
-  document.getElementById('article-title').textContent = 'About the ' + calc.title;
+  document.getElementById('article-title').textContent = 'How the ' + calc.title + ' works';
   document.getElementById('article-intro').textContent = calc.desc;
 
   // FAQ

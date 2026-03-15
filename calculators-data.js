@@ -6,7 +6,7 @@ const CALCULATORS = {
 
 "ideal-weight": {
   title: "Ideal Weight Calculator",
-  desc: "Find your ideal body weight based on height and gender using the Devine formula.",
+  desc: "A height-based estimate of healthy body weight using the Devine formula. Useful as a rough reference — not a target to obsess over.",
   icon: "⚖", category: "Body",
   fields: [
     { id:"iw_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -26,13 +26,13 @@ const CALCULATORS = {
       category: base < 55 ? "Light frame" : base < 75 ? "Medium frame" : "Tall frame",
       interpretation: "Your ideal weight range is approximately " + (base-5).toFixed(0) + "–" + (base+5).toFixed(0) + " kg. This is an estimate based on height alone. A healthy weight considers muscle mass, bone structure, and overall fitness — not just a single number. Use this alongside your <a href='/calculators/bmi-calculator.html'>BMI</a> and <a href='/calculators/body-fat-calculator.html'>body fat %</a> for a fuller picture." };
   },
-  faq:[["Is ideal weight the same as healthy weight?","Ideal weight is a height-based estimate. Healthy weight also accounts for muscle mass, bone density and body composition."],["Which formula is used?","The Devine formula, widely used in clinical settings since 1974."]],
+  faq:[["Is ideal weight the same as healthy weight?","Not exactly. Ideal weight is just a height-based estimate. A truly healthy weight also factors in muscle mass, bone density, and body composition — two people can have identical 'ideal weights' and look completely different."],["Which formula is used?","The Devine formula, published in 1974 and still used in clinical settings today. It was originally developed for drug dosing, not aesthetics."]],
   related:["bmi-calculator","body-fat-calculator","tdee-calculator"]
 },
 
 "lean-body-mass": {
   title: "Lean Body Mass Calculator",
-  desc: "Calculate your lean body mass — everything in your body except fat.",
+  desc: "Calculate your lean body mass — muscles, bones, organs, water. Everything that isn't fat. This number drives your metabolism more than your total weight does.",
   icon: "💪", category: "Body",
   fields: [
     { id:"lbm_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -54,13 +54,13 @@ const CALCULATORS = {
       category:"Fat mass: " + fatMass.toFixed(1) + " kg  |  Body fat: " + bfPct + "%",
       interpretation:"Your lean mass of " + lbm.toFixed(1) + " kg includes muscles, bones, organs and water. Lean mass determines your basal metabolic rate — people with more lean mass burn more calories at rest. Resistance training increases lean mass, raising metabolism and improving body composition even without weight loss." };
   },
-  faq:[["What is lean body mass?","Lean body mass includes muscles, bones, organs and water — everything except body fat."],["Why does it matter?","It determines your basal metabolic rate. More lean mass = more calories burned at rest."]],
+  faq:[["What is lean body mass?","Everything except fat — muscles, bones, organs, and water. It's the part of your body that burns calories, moves weight, and keeps you alive."],["Why does it matter?","Your lean mass sets your baseline metabolism. More lean mass means more calories burned at rest, which is why building muscle makes fat loss easier over time."]],
   related:["body-fat-calculator","bmi-calculator","tdee-calculator"]
 },
 
 "calorie-deficit": {
   title: "Calorie Deficit Calculator",
-  desc: "Calculate exactly how many calories to eat daily to lose weight at your target pace.",
+  desc: "Find out exactly how many calories to eat daily to lose weight at a pace that won't make you miserable.",
   icon: "📉", category: "Nutrition",
   fields: [
     { id:"cd_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -87,13 +87,13 @@ const CALCULATORS = {
       category:"Your TDEE: " + Math.round(tdee) + " kcal/day",
       interpretation:"Eating " + Math.round(target) + " kcal per day creates a deficit of approximately " + Math.round(tdee-target) + " kcal/day. At this rate you will lose roughly " + loss + " kg per week. A deficit of 300–500 kcal/day is sustainable long-term. Ensure you eat at least 1,200 kcal (women) or 1,500 kcal (men) per day to avoid nutritional deficiencies." };
   },
-  faq:[["How big a deficit is safe?","A deficit of 300–500 kcal/day is safe and sustainable. Larger deficits increase muscle loss risk."],["Will I lose muscle on a deficit?","Eating adequate protein (1.6–2.4g/kg) and doing resistance training preserves muscle during a calorie deficit."]],
+  faq:[["How big a deficit is safe?","A 300–500 kcal/day deficit is the sweet spot — fast enough to see progress, slow enough to not feel terrible. Bigger deficits tend to increase muscle loss and are hard to sustain."],["Will I lose muscle on a deficit?","You'll lose some if you're not careful. Eating enough protein (1.6–2.4g per kg of bodyweight) and doing resistance training are the two things that protect muscle while cutting."]],
   related:["tdee-calculator","macro-calculator","protein-intake"]
 },
 
 "calorie-surplus": {
   title: "Calorie Surplus Calculator",
-  desc: "Find out how many calories to eat daily to gain muscle without excess fat.",
+  desc: "Find out how many calories to eat daily to build muscle without piling on unnecessary fat.",
   icon: "📈", category: "Nutrition",
   fields: [
     { id:"cs_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -120,13 +120,13 @@ const CALCULATORS = {
       category:"Surplus: +" + surplus + " kcal above your TDEE of " + Math.round(tdee),
       interpretation:"A surplus of " + surplus + " kcal/day above your maintenance provides the energy needed for muscle protein synthesis. A lean bulk (+200 kcal) minimises fat gain. A moderate bulk (+350 kcal) balances speed of gain with body composition. Most of the surplus weight should come from increased protein and carbohydrate intake around training sessions." };
   },
-  faq:[["How much muscle can I gain per month?","Beginners can gain 1–2 kg/month. Intermediate lifters typically gain 0.5–1 kg/month under optimal conditions."],["What is a lean bulk?","A lean bulk uses a small surplus (200–300 kcal) to minimise fat gain while building muscle gradually."]],
+  faq:[["How much muscle can I gain per month?","Beginners with good training and nutrition can realistically gain 1–2 kg/month. Intermediate lifters are closer to 0.5–1 kg. Anyone promising more is probably selling something."],["What is a lean bulk?","A lean bulk uses a small surplus (200–300 kcal) to build muscle slowly while minimising fat gain. It requires more patience but less time cutting afterward."]],
   related:["tdee-calculator","protein-intake","macro-calculator"]
 },
 
 "protein-intake": {
   title: "Protein Intake Calculator",
-  desc: "Calculate your optimal daily protein intake based on body weight and fitness goal.",
+  desc: "Work out how much protein you actually need per day. Most people — even regular gym-goers — are eating less than they think.",
   icon: "🥩", category: "Nutrition",
   fields: [
     { id:"pi_weight", label:"Weight", type:"number", placeholder:"e.g. 75",
@@ -147,13 +147,13 @@ const CALCULATORS = {
       category:kcal + " kcal from protein  |  ~" + meals + " protein-rich meals",
       interpretation:"Aim to spread your " + grams + "g of protein across " + meals + " meals of 25–35g each. This distributes amino acid availability throughout the day, maximising muscle protein synthesis. Best sources include chicken, fish, eggs, Greek yogurt, cottage cheese, tofu, and legumes. Each gram of protein provides 4 kcal." };
   },
-  faq:[["Can I eat too much protein?","For healthy adults, up to 3.5g/kg is generally considered safe. Above 2.2g/kg provides no additional muscle-building benefit."],["What are the best protein sources?","Chicken, fish, eggs, Greek yogurt, cottage cheese, tofu, lentils and chickpeas are all excellent choices."]],
+  faq:[["Can I eat too much protein?","For healthy adults it's hard to cause real harm. Above 2.2g/kg you get diminishing returns for muscle building, but there's no evidence of harm up to 3.5g/kg if kidneys are healthy."],["What are the best protein sources?","Chicken, fish, eggs, Greek yogurt, cottage cheese, tofu, lentils, and chickpeas. Whey protein is fine if whole food sources aren't enough — it's not magic though."]],
   related:["macro-calculator","tdee-calculator","calorie-deficit"]
 },
 
 "fat-intake": {
   title: "Fat Intake Calculator",
-  desc: "Find out how many grams of fat you should eat daily based on your calorie needs.",
+  desc: "Work out your daily fat target in grams. Fat got a bad reputation in the 90s — it doesn't deserve it.",
   icon: "🥑", category: "Nutrition",
   fields: [
     { id:"fi_calories", label:"Daily Calorie Target (kcal)", type:"number", placeholder:"e.g. 2000" },
@@ -169,7 +169,7 @@ const CALCULATORS = {
       category:Math.round(grams*9) + " kcal from fat  |  " + grams + "g ÷ 3 meals = " + Math.round(grams/3) + "g per meal",
       interpretation:"At " + pct + "% of your calories from fat, you should consume " + grams + "g per day. Prioritise unsaturated fats (olive oil, avocados, nuts, fatty fish) over saturated fats, and avoid trans fats entirely. Fat provides 9 kcal per gram — the highest of any macronutrient — so portion sizes should be measured carefully." };
   },
-  faq:[["Is fat bad for you?","Dietary fat is essential for hormone production, brain function and vitamin absorption. The type matters more than the amount."],["What are healthy fats?","Unsaturated fats from avocados, nuts, olive oil and fatty fish support cardiovascular health."]],
+  faq:[["Is fat bad for you?","No — and the research from the last 20 years has largely cleared it. Fat is essential for hormones, brain function, and absorbing fat-soluble vitamins. The type matters more than the total amount."],["What are healthy fats?","Unsaturated fats from avocados, nuts, olive oil, and fatty fish are the ones to prioritise. Saturated fat is fine in moderation. Trans fats (partially hydrogenated oils) are the ones to actually avoid."]],
   related:["macro-calculator","calorie-deficit","protein-intake"]
 },
 
@@ -191,7 +191,7 @@ const CALCULATORS = {
       category:Math.round(grams*4) + " kcal from carbs  |  ~" + Math.round(grams/3) + "g per meal",
       interpretation:"At " + pct + "% carbohydrates, you should consume " + grams + "g per day. Choose complex carbohydrates — oats, brown rice, sweet potatoes, whole grains, legumes — over refined sources. Carbohydrates provide 4 kcal per gram and are the body's preferred fuel for high-intensity exercise and brain function." };
   },
-  faq:[["Do carbs cause weight gain?","Excess calories cause weight gain, not carbs specifically. Carbohydrates are the body's primary energy source."],["What is a low carb diet?","Low carb typically means under 100g/day. Ketogenic diets restrict to under 50g/day to induce ketosis."]],
+  faq:[["Do carbs cause weight gain?","Eating more calories than you burn causes weight gain — carbs are just one way to get there. They're actually the body's preferred fuel for exercise and the brain runs almost exclusively on glucose."],["What is a low carb diet?","Generally under 100g/day. Keto is more extreme — under 50g/day — to push the body into ketosis. Both can work for weight loss, they're just not magic."]],
   related:["macro-calculator","calorie-deficit","fat-intake"]
 },
 
@@ -214,13 +214,13 @@ const CALCULATORS = {
       category:"Most adults get only " + current_avg + "g — you need " + (target-current_avg) + "g more",
       interpretation:"To reach " + target + "g of fibre daily, aim for: 1 serving of oats (4g) + 2 servings of vegetables (8g) + 1 apple (4g) + 1 serving of beans or lentils (8g) + wholegrain bread (3–4g per slice). Fibre feeds beneficial gut bacteria, stabilises blood sugar, lowers LDL cholesterol, and reduces colorectal cancer risk." };
   },
-  faq:[["Why is fibre important?","Fibre supports digestion, stabilises blood sugar, lowers cholesterol and promotes a healthy gut microbiome."],["What foods are high in fibre?","Legumes, oats, vegetables, fruits and whole grains are excellent fibre sources."]],
+  faq:[["Why is fibre important?","Beyond digestion, fibre feeds the beneficial bacteria in your gut, slows glucose absorption (fewer blood sugar spikes), lowers LDL cholesterol, and is associated with lower colorectal cancer risk. Most people get roughly half what they need."],["What foods are high in fibre?","Legumes are the king — lentils and chickpeas pack 7–9g per 100g cooked. After that: oats, vegetables, fruit, and whole grains. Switching from white to wholegrain bread alone adds a few grams per day."]],
   related:["macro-calculator","calorie-deficit","water-calculator"]
 },
 
 "heart-rate-zones": {
   title: "Heart Rate Zone Calculator",
-  desc: "Find your 5 training heart rate zones based on your maximum heart rate.",
+  desc: "Find your 5 heart rate training zones. Most people train too hard too often — knowing your zones fixes that.",
   icon: "❤", category: "Fitness",
   fields: [
     { id:"hrz_age", label:"Age", type:"number", placeholder:"e.g. 30" },
@@ -239,13 +239,13 @@ const CALCULATORS = {
       category:"Karvonen formula  |  Resting HR: " + rhr + " bpm",
       interpretation:"<strong>Zone 1 ("+zones[0][0]+"–"+zones[0][1]+" bpm):</strong> Recovery — very easy, fat burning. Use for active recovery days.<br><strong>Zone 2 ("+zones[1][0]+"–"+zones[1][1]+" bpm):</strong> Aerobic base — builds mitochondria and fat-burning efficiency. Most of your training should be here.<br><strong>Zone 3 ("+zones[2][0]+"–"+zones[2][1]+" bpm):</strong> Aerobic — moderate effort. Improves cardiovascular fitness.<br><strong>Zone 4 ("+zones[3][0]+"–"+zones[3][1]+" bpm):</strong> Threshold — hard effort, raises lactate threshold and speed.<br><strong>Zone 5 ("+zones[4][0]+"–"+zones[4][1]+" bpm):</strong> Maximum — all-out sprints. Develops peak power and VO2 max." };
   },
-  faq:[["What is Zone 2 training?","Zone 2 improves fat burning efficiency, mitochondrial density and aerobic endurance. Elite endurance athletes spend 70–80% of training here."],["How do I measure resting heart rate?","Measure your pulse first thing in the morning before getting out of bed for the most accurate reading."]],
+  faq:[["What is Zone 2 training?","Zone 2 is easy enough that you can hold a conversation. It builds mitochondria, improves fat burning, and develops aerobic base. Elite endurance athletes spend 70–80% of their training here — most amateurs do the opposite."],["How do I measure resting heart rate?","First thing in the morning before you get up. Lie still, count beats for 60 seconds. Do this a few days in a row and take the average."]],
   related:["tdee-calculator","calorie-deficit","vo2max"]
 },
 
 "vo2max": {
   title: "VO2 Max Estimator",
-  desc: "Estimate your VO2 max — a key measure of cardiovascular fitness — from a simple run test.",
+  desc: "Estimate your VO2 max from a simple run test. It's the closest thing fitness has to an overall score.",
   icon: "🫁", category: "Fitness",
   fields: [
     { id:"vo2_time", label:"1.5 mile run time (minutes)", type:"number", placeholder:"e.g. 12" },
@@ -267,13 +267,13 @@ const CALCULATORS = {
       category:"Average for adults aged " + age + ": " + avg + " ml/kg/min",
       interpretation:"VO2 max is the maximum rate at which your body can consume oxygen during intense exercise — the gold standard measure of cardiovascular fitness. A score of " + vo2 + " ml/kg/min is rated <strong>" + cat + "</strong>. VO2 max can be improved by 10–15% through consistent aerobic training, particularly Zone 2 endurance work and high-intensity interval training." };
   },
-  faq:[["What is a good VO2 max?","For men, above 45 ml/kg/min is excellent. For women, above 40 ml/kg/min is excellent."],["Can VO2 max be improved?","Yes. Regular aerobic exercise — especially Zone 2 training and interval training — significantly improves VO2 max."]],
+  faq:[["What is a good VO2 max?","For men, above 45 ml/kg/min is excellent. For women, above 40 ml/kg/min. Elite marathon runners are typically 70+. For context, the average untrained adult is around 35–40."],["Can VO2 max be improved?","Yes, significantly — up to 10–15% with consistent training. Zone 2 endurance work builds the aerobic base; high-intensity intervals push the ceiling higher."]],
   related:["heart-rate-zones","tdee-calculator","calorie-deficit"]
 },
 
 "one-rep-max": {
   title: "One Rep Max (1RM) Calculator",
-  desc: "Calculate your one rep max for any lift using the Epley and Brzycki formulas.",
+  desc: "Estimate your one rep max without the injury risk of actually attempting it. Uses both Epley and Brzycki formulas and averages them.",
   icon: "🏋", category: "Fitness",
   fields: [
     { id:"orm_weight", label:"Weight lifted", type:"number", placeholder:"e.g. 100",
@@ -296,13 +296,13 @@ const CALCULATORS = {
       category:"90%: " + p(90) + "kg  |  80%: " + p(80) + "kg  |  70%: " + p(70) + "kg  |  60%: " + p(60) + "kg",
       interpretation:"Your estimated 1RM is " + avg.toFixed(1) + " kg. Training zones based on this: <strong>Strength (85–95%):</strong> " + p(85) + "–" + p(95) + "kg for 1–5 reps. <strong>Hypertrophy (65–85%):</strong> " + p(65) + "–" + p(85) + "kg for 6–12 reps. <strong>Endurance (50–65%):</strong> " + p(50) + "–" + p(65) + "kg for 15+ reps. Recalculate every 4–6 weeks as you get stronger." };
   },
-  faq:[["Why not just attempt a 1RM?","Testing 1RM directly carries injury risk. Calculating from submaximal lifts is safer and accurate enough for programming."],["What percentage should I train at?","Hypertrophy: 65–85%. Strength: 85–95%. Power: 50–70%."]],
+  faq:[["Why not just attempt a 1RM?","Attempting a true 1RM without a spotter, proper warm-up, and experience is how people get hurt. Estimating from a submaximal set (3–5 reps) is accurate enough for programming and much safer."],["What percentage should I train at?","Hypertrophy (muscle size): 65–85%. Strength: 85–95%. Power: 50–70% but moving fast. Most beginners should stay in the hypertrophy range and build a base first."]],
   related:["tdee-calculator","protein-intake","calorie-surplus"]
 },
 
 "push-up-test": {
   title: "Push-Up Fitness Test Calculator",
-  desc: "Find out your push-up fitness level based on age, sex and reps completed.",
+  desc: "See how your push-up count stacks up against age and sex norms. Humbling for some, reassuring for others.",
   icon: "💪", category: "Fitness",
   fields: [
     { id:"put_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -323,13 +323,13 @@ const CALCULATORS = {
       category:next,
       interpretation:"For your age group (" + (age<30?"under 30":age<40?"30s":age<50?"40s":age<60?"50s":"60+") + "), the average is " + avg + " reps and 'Good' begins at " + good + " reps. Push-ups test upper body endurance and relative strength. To improve, train 3–4 times per week using progressive overload — add 1–2 reps per session until you reach your target." };
   },
-  faq:[["How often should I do push-ups?","3–4 times per week with rest days allows adequate recovery for strength and endurance gains."],["Do push-ups build muscle?","Yes. They train chest, shoulders and triceps. Weighted or archer variations increase the challenge significantly."]],
+  faq:[["How often should I do push-ups?","3–4 times per week with rest days. Muscles grow during recovery, not during the workout itself — daily push-ups without rest days stall progress."],["Do push-ups actually build muscle?","Yes, especially chest, shoulders, and triceps. Once standard push-ups get easy, try archer push-ups, decline, or add a weighted vest to keep progressing."]],
   related:["one-rep-max","tdee-calculator","protein-intake"]
 },
 
 "running-pace": {
   title: "Running Pace Calculator",
-  desc: "Calculate your running pace per kilometre or mile from your distance and finish time.",
+  desc: "Calculate your running pace per km or mile from any distance and time. Also shows projected finish times for 5K, 10K, half, and full marathon.",
   icon: "🏃", category: "Fitness",
   fields: [
     { id:"rp_dist", label:"Distance", type:"number", placeholder:"e.g. 10",
@@ -355,13 +355,13 @@ const CALCULATORS = {
       category:"5K: " + fiveK + " min  |  10K: " + tenK + " min  |  Half: " + hm + " min  |  Full: " + fm + " min",
       interpretation:"At your current pace of " + pm + ":" + ps + " /km you would complete a 5K in " + fiveK + " minutes and a 10K in " + tenK + " minutes. A good recreational 5K is under 30 minutes (6:00/km). To improve pace, incorporate weekly interval training (short fast efforts at Zone 4–5) alongside your steady-state runs." };
   },
-  faq:[["What is a good 5K pace?","Under 30 minutes (6:00/km) is a common goal. Competitive runners aim for under 20 minutes."],["How do I improve my running pace?","Interval training, tempo runs and consistent weekly mileage all improve running speed over time."]],
+  faq:[["What is a good 5K pace?","Under 30 minutes (6:00/km) is a solid goal for recreational runners. Under 25 minutes means you're getting serious. Under 20 minutes puts you in competitive amateur territory."],["How do I improve my running pace?","Interval training once or twice a week plus consistent easy mileage is the most effective combination. Most runners improve fastest when they slow down their easy runs and actually push their hard ones."]],
   related:["heart-rate-zones","vo2max","calorie-burn-exercise"]
 },
 
 "steps-to-calories": {
   title: "Steps to Calories Calculator",
-  desc: "Convert your daily step count into estimated calories burned based on your weight.",
+  desc: "Convert your step count to estimated calories burned. Also puts the '10,000 steps' myth in perspective.",
   icon: "👟", category: "Fitness",
   fields: [
     { id:"stc_steps", label:"Daily Steps", type:"number", placeholder:"e.g. 8000" },
@@ -382,13 +382,13 @@ const CALCULATORS = {
       category:"Weekly: ~" + weekly.toLocaleString() + " kcal  |  Monthly: ~" + monthly.toLocaleString() + " kcal",
       interpretation:"Walking " + steps.toLocaleString() + " steps burns approximately " + total + " kcal for a " + w.toFixed(0) + " kg person. The widely cited 10,000 steps/day target was originally a marketing figure, but research supports 7,000–10,000 daily steps for meaningful cardiovascular health benefits. Each 2,000 additional daily steps reduces cardiovascular mortality risk by approximately 8% in adults." };
   },
-  faq:[["How accurate is this?","This is an estimate. Actual burn varies with stride length, terrain and individual metabolism."],["How many steps burn 500 calories?","For a 70 kg person, approximately 10,000–12,000 steps burns around 500 calories."]],
+  faq:[["How accurate is this?","It's an estimate — actual burn varies with your stride length, pace, terrain, and individual metabolism. Think of it as a ballpark, not a precise readout."],["Where did 10,000 steps come from?","A Japanese pedometer marketing campaign from 1965. That said, research does support that 7,000–10,000 daily steps correlates with meaningful cardiovascular health benefits — the number just wasn't based on science originally."]],
   related:["tdee-calculator","calorie-deficit","water-calculator"]
 },
 
 "sleep-calculator": {
   title: "Sleep Calculator",
-  desc: "Find the best times to wake up based on 90-minute sleep cycles to feel fully rested.",
+  desc: "Find the best times to wake up based on 90-minute sleep cycles. Waking mid-cycle is why you feel groggy even after 8 hours.",
   icon: "😴", category: "Wellness",
   fields: [
     { id:"sl_hour", label:"Bedtime — Hour (0–23)", type:"number", placeholder:"e.g. 22" },
@@ -410,13 +410,13 @@ const CALCULATORS = {
       category:"Includes ~14 minutes to fall asleep  |  Best: 6 cycles (9h) or 5 cycles (7.5h)",
       interpretation:"Each sleep cycle lasts approximately 90 minutes and includes light sleep, deep sleep, and REM sleep. Waking between cycles — rather than in the middle of one — means you emerge from lighter sleep and feel more refreshed. <strong>6 cycles (9h)</strong> is ideal for recovery and muscle growth. <strong>5 cycles (7.5h)</strong> is optimal for most adults. Avoid 4 cycles (6h) regularly — it significantly reduces REM sleep." };
   },
-  faq:[["What is a sleep cycle?","A sleep cycle is approximately 90 minutes and includes light sleep, deep sleep and REM sleep."],["How many cycles do I need?","Most adults need 5–6 complete cycles (7.5–9 hours) per night for optimal rest and recovery."]],
+  faq:[["What is a sleep cycle?","About 90 minutes of light sleep → deep sleep → REM sleep. REM is where memory consolidation and emotional processing happen. Cutting sleep short consistently means less REM."],["How many cycles do I need?","Most adults need 5–6 complete cycles (7.5–9 hours). 4 cycles (6 hours) is survivable short-term but chronic short sleep accumulates a real cognitive and health debt."]],
   related:["tdee-calculator","water-calculator","heart-rate-zones"]
 },
 
 "bmi-prime": {
   title: "BMI Prime Calculator",
-  desc: "Calculate your BMI Prime — a ratio showing how far you are from the upper healthy weight limit.",
+  desc: "BMI Prime tells you how far above or below the healthy weight ceiling you are. A score of 1.0 means you're exactly at the upper limit of healthy.",
   icon: "📊", category: "Body",
   fields: [
     { id:"bp_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
@@ -438,13 +438,13 @@ const CALCULATORS = {
       category:cat,
       interpretation:"A BMI Prime of 1.0 means your BMI is exactly 25 — the upper boundary of healthy weight. Your score of " + prime + " means your BMI is " + ((prime-1)*100).toFixed(0) + "% " + (prime>1?"above":"below") + " this threshold. BMI Prime makes it easier to compare weight status across different populations that use different BMI cutoffs." };
   },
-  faq:[["What does BMI Prime of 1.0 mean?","Your BMI is exactly 25 — the upper boundary of healthy weight."],["Is BMI Prime better than BMI?","BMI Prime makes cross-population comparison easier but has the same underlying limitations as BMI."]],
+  faq:[["What does BMI Prime of 1.0 mean?","Your BMI is exactly 25 — the top of the healthy range. Below 1.0 means you're within healthy weight. Above means you're over it by that proportion."],["Is BMI Prime better than BMI?","It's the same calculation expressed differently. The advantage is it makes the math intuitive — 1.2 means 20% over the healthy ceiling, regardless of which population you're comparing."]],
   related:["bmi-calculator","body-fat-calculator","ideal-weight"]
 },
 
 "waist-to-height": {
   title: "Waist-to-Height Ratio Calculator",
-  desc: "Calculate your waist-to-height ratio — a simple and accurate indicator of abdominal fat risk.",
+  desc: "Calculate your waist-to-height ratio. The rule is simple: keep your waist under half your height. Research suggests it predicts heart disease risk better than BMI.",
   icon: "📏", category: "Body",
   fields: [
     { id:"wth_waist", label:"Waist circumference", type:"number", placeholder:"e.g. 80",
@@ -466,13 +466,13 @@ const CALCULATORS = {
       category:cat + (diff>0?" — " + diff + "cm waist reduction to reach healthy range":" — within healthy range"),
       interpretation:"The simple rule: keep your waist circumference less than half your height. Your ratio of " + ratio + " is " + cat.toLowerCase() + ". Waist-to-height ratio is a stronger predictor of cardiovascular risk than BMI because it specifically captures abdominal fat — which is more metabolically dangerous than fat in other areas." };
   },
-  faq:[["Why is waist-to-height ratio useful?","It identifies central obesity, which is a stronger predictor of heart disease and diabetes than BMI alone."],["What is the healthy range?","A ratio below 0.5 is healthy. The simple rule: 'keep your waist less than half your height'."]],
+  faq:[["Why is waist-to-height ratio useful?","Because it specifically flags abdominal fat, which is more metabolically dangerous than fat elsewhere. BMI can't tell where fat is stored — this can."],["What is the healthy range?","Under 0.5. The simple version: your waist should be less than half your height. That's it."]],
   related:["bmi-calculator","body-fat-calculator","waist-to-hip"]
 },
 
 "waist-to-hip": {
   title: "Waist-to-Hip Ratio Calculator",
-  desc: "Calculate your waist-to-hip ratio and assess your risk of cardiovascular disease.",
+  desc: "Calculate your waist-to-hip ratio and see where you fall on cardiovascular risk. Apple shape vs pear shape actually matters metabolically.",
   icon: "📐", category: "Body",
   fields: [
     { id:"wh_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -497,13 +497,13 @@ const CALCULATORS = {
       category:"WHO threshold for " + f.wh_gender + "s: " + (f.wh_gender==="male"?"0.90":"0.85") + " for low risk",
       interpretation:"Your waist-to-hip ratio of " + ratio + " indicates <strong>" + cat + "</strong>. The WHO recommends below 0.90 for men and 0.85 for women for low cardiovascular risk. A higher ratio indicates more abdominal fat relative to hip fat — the 'apple shape' which carries significantly higher metabolic risk than the 'pear shape' associated with hip and thigh fat distribution." };
   },
-  faq:[["What does a high WHR mean?","Excess abdominal fat linked to higher risk of heart disease, stroke and type 2 diabetes."],["What is the ideal WHR?","WHO recommends below 0.9 for men and 0.85 for women for low cardiovascular risk."]],
+  faq:[["What does a high WHR mean?","More fat concentrated around the abdomen relative to the hips. Abdominal fat is metabolically active in ways that increase risk of heart disease, type 2 diabetes, and stroke."],["What is the ideal WHR?","WHO recommends below 0.90 for men and 0.85 for women for low cardiovascular risk. Below those numbers you're in the clear."]],
   related:["waist-to-height","body-fat-calculator","bmi-calculator"]
 },
 
 "army-body-fat": {
   title: "Army Body Fat Calculator",
-  desc: "Calculate body fat percentage using the US Army circumference method.",
+  desc: "Calculate body fat using the US Army circumference method — just a tape measure, no calipers or underwater weighing required.",
   icon: "🪖", category: "Body",
   stats: { title:"US Army BF% Standards", header:["Age","Max (M)","Max (F)"], rows:[["17–20","20%","28%"],["21–27","22%","30%"],["28–39","24%","32%"],["40+","26%","34%"]], note:"Exceeding limits requires enrolment in Army Weight Control Program." },
   fields: [
@@ -535,13 +535,13 @@ const CALCULATORS = {
       category:cat + "  |  US Army standard: " + army_std,
       interpretation:"Your estimated body fat of " + bf + "% falls in the <strong>" + cat + "</strong> category. The US Army method is accurate to within 3–4% when measurements are taken carefully. For more precision, consider a DEXA scan. To reduce body fat, a calorie deficit combined with resistance training (to preserve muscle) is most effective." };
   },
-  faq:[["How accurate is the Army method?","Accurate to within 3–4% when measurements are taken correctly."],["What are the Army body fat standards?","The US Army allows up to 20% for men aged 17–20 and up to 26% for women in the same age group."]],
+  faq:[["How accurate is the Army method?","Within 3–4% when measurements are taken carefully and consistently. Take measurements in the morning before eating, and measure in the same spot each time."],["What are the Army body fat standards?","It varies by age. Men: 20% (17–20 yrs) up to 26% (40+). Women: 28–34% across the same age range. Exceeding limits triggers the Army Weight Control Program."]],
   related:["body-fat-calculator","bmi-calculator","waist-to-hip"]
 },
 
 "calorie-burn-exercise": {
   title: "Exercise Calorie Burn Calculator",
-  desc: "Estimate how many calories you burn during different types of exercise.",
+  desc: "Estimate how many calories you burn during exercise. Fair warning: fitness trackers usually overestimate this by 20–30%.",
   icon: "🔥", category: "Fitness",
   fields: [
     { id:"cbe_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
@@ -565,13 +565,13 @@ const CALCULATORS = {
       category:"Per kg: " + perKg + " kcal/kg  |  3x/week: " + weekly + " kcal/week",
       interpretation:"This " + mins + "-minute session burns approximately " + kcal + " kcal — equivalent to " + Math.round(kcal/100*28) + "g of body fat if sustained consistently. Doing this 3 times per week creates an extra " + weekly + " kcal burn. Note: calorie burn is often overestimated by fitness trackers. Combine exercise with diet management for best results." };
   },
-  faq:[["What is MET?","MET (Metabolic Equivalent of Task) measures energy use relative to resting. Running has a higher MET than walking."],["Does muscle mass affect calorie burn?","Yes. More muscle mass means more calories burned at rest and during exercise."]],
+  faq:[["What is MET?","Metabolic Equivalent of Task — a measure of how hard an activity is relative to sitting still. Running has a MET of ~8–11. Walking is ~3–4. It's the basis for most calorie burn estimates."],["Does muscle mass affect calorie burn?","Yes, noticeably. More muscle means a higher resting metabolism AND more calories burned during exercise for the same effort. It's one of the better long-term reasons to lift weights."]],
   related:["tdee-calculator","steps-to-calories","calorie-deficit"]
 },
 
 "pregnancy-weight": {
   title: "Pregnancy Weight Gain Calculator",
-  desc: "Calculate recommended total weight gain during pregnancy based on your pre-pregnancy BMI.",
+  desc: "How much weight should you gain during pregnancy? It depends on your starting BMI. This uses Institute of Medicine guidelines.",
   icon: "🤱", category: "Wellness",
   fields: [
     { id:"pg_weight", label:"Pre-pregnancy weight", type:"number", placeholder:"e.g. 65",
@@ -597,13 +597,13 @@ const CALCULATORS = {
       category:"Pre-pregnancy BMI: " + bmi.toFixed(1) + " (" + cat + ")",
       interpretation:"Based on your pre-pregnancy BMI of " + bmi.toFixed(1) + " (" + cat + "), the recommended total weight gain is " + range + ". This is based on Institute of Medicine guidelines. Weight gain should be gradual — approximately 1–2 kg in the first trimester and 0.3–0.5 kg per week thereafter. Always follow your midwife or doctor's personalised advice." };
   },
-  faq:[["Why does pre-pregnancy weight matter?","Women at a healthy BMI have lower risk of complications. Weight gain guidelines adjust accordingly."],["Is it safe to diet during pregnancy?","Calorie restriction during pregnancy is not recommended. Focus on nutrient-dense foods."]],
+  faq:[["Why does pre-pregnancy weight matter?","Your starting BMI affects how much weight gain is healthy. Gaining too little or too much both carry risks — for different reasons. These guidelines exist to reduce those risks, not for aesthetic reasons."],["Is it safe to diet during pregnancy?","No. This isn't the time for calorie restriction. Focus on nutrient-dense food, adequate protein, and following your midwife's guidance."]],
   related:["bmi-calculator","water-calculator","calorie-deficit"]
 },
 
 "due-date": {
   title: "Pregnancy Due Date Calculator",
-  desc: "Calculate your estimated due date based on your last menstrual period.",
+  desc: "Calculate your estimated due date from your last period. Worth knowing: only about 5% of babies actually arrive on their due date.",
   icon: "🗓", category: "Wellness",
   fields: [
     { id:"dd_lmp", label:"First day of last menstrual period", type:"date" },
@@ -622,13 +622,13 @@ const CALCULATORS = {
       category:daysLeft>0?(daysLeft+" days to go — currently approx. week "+weeks+" of pregnancy"):"Due date passed",
       interpretation:"Your estimated due date is " + due.toLocaleDateString("en-GB",{month:"long",day:"numeric",year:"numeric"}) + ". Only about 5% of babies are born on their exact due date — most arrive within 2 weeks either side. This calculation uses Naegele's rule (280 days from LMP) adjusted for your " + cycle + "-day cycle. Your healthcare provider may adjust this based on early ultrasound measurements." };
   },
-  faq:[["How accurate is the due date?","Only 5% of babies are born on their exact due date. Most arrive within 2 weeks either side."],["What is Naegele's rule?","Naegele's rule adds 280 days to the first day of the last menstrual period to estimate due date."]],
+  faq:[["How accurate is the due date?","Only 5% of babies arrive on the exact date. Most come within 2 weeks either side. Think of it as a target window, not a deadline."],["What is Naegele's rule?","The standard method: add 280 days to the first day of your last period, then adjust for cycle length if it's not 28 days. Your healthcare provider may adjust further based on early ultrasound."]],
   related:["pregnancy-weight","water-calculator","bmi-calculator"]
 },
 
 "body-surface-area": {
   title: "Body Surface Area Calculator",
-  desc: "Calculate your total body surface area (BSA) — used in medical dosing calculations.",
+  desc: "Calculate your body surface area using the Mosteller formula. Mostly used in medical contexts — chemotherapy dosing, burn assessment, cardiac output.",
   icon: "🧬", category: "Body",
   fields: [
     { id:"bsa_weight", label:"Weight", type:"number", placeholder:"e.g. 70",
@@ -649,13 +649,13 @@ const CALCULATORS = {
       category:"Average adult male: 1.9 m²  |  Average adult female: 1.6 m²",
       interpretation:"Your body surface area of " + bsa + " m² is calculated using the Mosteller formula. BSA is used in medicine to calculate chemotherapy drug doses, burn injury severity assessments, and cardiac output measurements, because it correlates better with metabolism than body weight alone. It is also used to calculate body surface area percentage affected in skin conditions." };
   },
-  faq:[["Why is BSA used in medicine?","BSA correlates better with metabolism than body weight alone, making it more accurate for drug dosing."],["What is average BSA?","Adult men: approximately 1.9 m². Adult women: approximately 1.6 m²."]],
+  faq:[["Why is BSA used in medicine instead of weight?","Because body weight alone is a poor predictor of how drugs distribute through the body. BSA correlates better with metabolism and organ function, which is why it's preferred for chemotherapy dosing."],["What is average BSA?","Around 1.9 m² for adult men and 1.6 m² for adult women. Newborns are about 0.25 m²."]],
   related:["bmi-calculator","ideal-weight","lean-body-mass"]
 },
 
 "nicotine-calculator": {
   title: "Nicotine Intake Calculator",
-  desc: "Estimate your daily nicotine intake from cigarettes or tobacco products.",
+  desc: "Estimate how much nicotine you actually absorb daily from cigarettes or tobacco. The number is lower than most people expect.",
   icon: "🚭", category: "Wellness",
   fields: [
     { id:"nic_type", label:"Product type", type:"select", options:[["12","Cigarette (standard)"],["20","Cigarette (strong)"],["4","Light cigarette"],["8","Cigar"],["0.5","Nicotine patch (mg/h)"]] },
@@ -673,13 +673,13 @@ const CALCULATORS = {
       category:"Weekly absorbed: ~" + weekly + " mg",
       interpretation:"Only about 10% of the nicotine in a cigarette is actually absorbed into the bloodstream. Your " + count + " cigarettes/day provide " + total + "mg of nicotine, of which approximately " + absorbed + "mg is absorbed. Nicotine dependence typically develops at intakes above 5–10mg/day absorbed. If you are considering quitting, nicotine replacement therapy (NRT) can help manage withdrawal symptoms." };
   },
-  faq:[["How much nicotine is absorbed from a cigarette?","Only about 1–2 mg of the roughly 12 mg in a cigarette is absorbed into the bloodstream."],["At what level is nicotine toxic?","Toxic doses start at around 30–60 mg for adults, though individual sensitivity varies."]],
+  faq:[["How much nicotine is actually absorbed from a cigarette?","Only about 1–2 mg of the ~12 mg in a cigarette enters the bloodstream. The rest burns off or is exhaled. The absorbed amount is still enough to create dependence quickly."],["At what level does dependence develop?","Typically above 5–10 mg absorbed per day. Even occasional smoking can establish dependence patterns faster than most people expect."]],
   related:["tdee-calculator","water-calculator","bmi-calculator"]
 },
 
 "calorie-intake-children": {
   title: "Child Calorie Calculator",
-  desc: "Estimate the recommended daily calorie intake for children aged 2–17.",
+  desc: "Rough estimate of daily calorie needs for children aged 2–17. Treat it as a ballpark — children's needs vary a lot and they're usually good at self-regulating hunger.",
   icon: "👦", category: "Nutrition",
   fields: [
     { id:"cc_gender", label:"Sex", type:"select", options:[["male","Boy"],["female","Girl"]] },
@@ -699,13 +699,13 @@ const CALCULATORS = {
       category:"Based on average height/weight for age group",
       interpretation:"This is an estimate based on average growth charts. Individual children vary significantly based on height, weight, growth stage and activity level. Children should not count calories strictly — focus on balanced meals, regular active play, and listening to natural hunger and fullness cues. Consult a paediatrician if you have concerns about your child's growth or weight." };
   },
-  faq:[["Should children count calories?","Children should not count calories strictly. Focus on balanced meals and activity."],["What affects a child's calorie needs?","Age, sex, height, weight, growth stage and physical activity level all affect requirements."]],
+  faq:[["Should children count calories?","Generally no — it can do more harm than good. Healthy eating habits, regular activity, and listening to hunger cues matter far more than hitting a number. If there are genuine concerns about weight or growth, a paediatrician is the right person to talk to."],["What affects a child's calorie needs?","Age, sex, height, weight, growth stage, and activity level — all of which change constantly. That's why these are estimates, not prescriptions."]],
   related:["water-calculator","fiber-intake","protein-intake"]
 },
 
 "alcohol-units": {
   title: "Alcohol Units Calculator",
-  desc: "Calculate how many alcohol units are in your drink and compare to weekly guidelines.",
+  desc: "Calculate alcohol units and calories in any drink. Useful for tracking against weekly guidelines — and for seeing how many hidden calories are in a Friday night.",
   icon: "🍺", category: "Wellness",
   fields: [
     { id:"au_volume", label:"Volume (ml)", type:"number", placeholder:"e.g. 500" },
@@ -724,13 +724,13 @@ const CALCULATORS = {
       category:cat + "  |  If consumed daily: " + weekly + " units/week (limit: 14)",
       interpretation:"This drink contains " + units.toFixed(1) + " alcohol units and approximately " + cal + " calories. The UK NHS recommends no more than 14 units per week for both men and women, spread across 3 or more days. If consumed daily, this drink would contribute " + weekly + " units per week. Alcohol provides 7 kcal per gram with no nutritional value — liquid calories are a common hidden source in diet tracking." };
   },
-  faq:[["What are UK weekly alcohol guidelines?","NHS recommends no more than 14 units per week for both men and women."],["How many calories are in alcohol?","Alcohol contains 7 kcal per gram — more than protein or carbs but less than fat."]],
+  faq:[["What are the weekly alcohol guidelines?","NHS recommends no more than 14 units per week for both men and women, spread over at least 3 days. That's roughly 6 pints of average-strength beer or 10 small glasses of wine."],["How many calories are in alcohol?","7 kcal per gram — more than protein or carbs, less than fat. A pint of lager is roughly 180–220 kcal. A large glass of wine is around 200 kcal. It adds up fast and doesn't fill you up."]],
   related:["calorie-deficit","tdee-calculator","water-calculator"]
 },
 
 "bmi-children": {
   title: "BMI Calculator for Children",
-  desc: "Calculate BMI for children and teens aged 2–19 and see the weight category.",
+  desc: "BMI for children aged 2–19. Important: adult BMI cutoffs don't apply here — children need age- and sex-specific percentile charts.",
   icon: "🧒", category: "Body",
   fields: [
     { id:"bmic_age", label:"Age (years)", type:"number", placeholder:"e.g. 12" },
@@ -754,13 +754,13 @@ const CALCULATORS = {
       category:cat + " (general estimate — consult a paediatrician for full assessment)",
       interpretation:"Important: adult BMI categories do not apply to children. Children's BMI must be interpreted using age- and sex-specific percentile charts. A BMI that is healthy for a 12-year-old is different from a healthy BMI for a 6-year-old. This result (" + bmi + ") is a general guide only. Please consult your child's paediatrician or use official growth chart tools for an accurate assessment." };
   },
-  faq:[["Is BMI reliable for children?","BMI for children must be interpreted by age and sex percentile, not adult cutoffs. Always consult a paediatrician."],["What is a healthy BMI for a 12-year-old?","This varies by sex and age. Doctors use growth charts to assess healthy weight in children."]],
+  faq:[["Is BMI reliable for children?","Only when interpreted using age- and sex-specific percentile charts — not adult cutoffs. A BMI of 17 might be healthy for a 6-year-old and underweight for a 16-year-old. Always involve a paediatrician for a full assessment."],["What is a healthy BMI for a 12-year-old?","It depends on their sex and growth stage. Doctors use CDC or WHO growth charts to place children on a percentile curve — that context is what matters, not the raw number."]],
   related:["bmi-calculator","calorie-intake-children","ideal-weight"]
 },
 
 "pace-to-speed": {
   title: "Pace to Speed Converter",
-  desc: "Convert running pace (min/km or min/mile) to speed in km/h or mph.",
+  desc: "Convert running pace (min/km or min/mile) to speed in km/h or mph. Also shows projected 5K and 10K finish times.",
   icon: "⚡", category: "Fitness",
   fields: [
     { id:"pts_pace_min", label:"Pace — Minutes", type:"number", placeholder:"e.g. 5" },
@@ -782,14 +782,14 @@ const CALCULATORS = {
       category:"5K finish: " + fiveK + " min  |  10K finish: " + tenK + " min",
       interpretation:"At " + kmh.toFixed(1) + " km/h you would complete a 5K in " + fiveK + " minutes. Common reference points: 6:00/km (10 km/h) = easy jogging, 5:00/km (12 km/h) = good recreational pace, 4:00/km (15 km/h) = strong club runner, 3:00/km (20 km/h) = elite level." };
   },
-  faq:[["What pace is 10 km/h?","10 km/h equals 6:00 per km — a comfortable jogging speed for most people."],["What is a marathon qualifying pace?","Boston Marathon for men 18–34 requires approximately 4:17/km (6:54/mile)."]],
+  faq:[["What pace is 10 km/h?","6:00 per km — a comfortable jogging pace for most people. It's also roughly a 30-minute 5K, which is a common beginner goal."],["What is a marathon qualifying pace?","The Boston Marathon for men aged 18–34 requires around 4:17/km (6:54/mile). Most runners spend years working toward that."]],
   related:["running-pace","heart-rate-zones","calorie-burn-exercise"]
 },
 
 "resting-metabolic-rate": {
 
   title: "Resting Metabolic Rate (RMR) Calculator",
-  desc: "Calculate your resting metabolic rate — the calories your body burns at complete rest.",
+  desc: "Calculate the calories your body burns just to stay alive — breathing, heartbeat, temperature regulation. This is the floor your daily intake shouldn't go below.",
   icon: "🧪", category: "Nutrition",
   fields: [
     { id:"rmr_gender", label:"Sex", type:"select", options:[["male","Male"],["female","Female"]] },
@@ -814,7 +814,7 @@ const CALCULATORS = {
       category:perHour + " kcal/hour  |  " + perMin + " kcal/minute  |  Just to stay alive",
       interpretation:"Your body burns " + Math.round(rmr) + " kcal per day purely to maintain vital functions — breathing, heartbeat, brain activity, temperature regulation and cell maintenance. This is your floor: eating below this long-term is not recommended. To find your full daily needs including activity, use our <a href='/calculators/tdee-calculator.html'>TDEE calculator</a>. Building muscle increases RMR because muscle tissue burns more calories at rest than fat tissue." };
   },
-  faq:[["What is the difference between RMR and BMR?","Very similar. BMR is measured in a fully fasted resting state. RMR is slightly higher as it includes minor resting activity."],["Can I increase my metabolic rate?","Yes. Building muscle mass, adequate protein intake and regular exercise all raise metabolic rate."]],
+  faq:[["What is the difference between RMR and BMR?","Very similar. BMR is measured in a fully fasted, resting lab state. RMR is slightly higher because it includes minor everyday activity. In practice, most people use the terms interchangeably."],["Can I actually increase my metabolic rate?","Yes — building muscle is the most reliable way. Muscle tissue burns more calories at rest than fat tissue does. Adequate protein intake and regular resistance training are the main levers."]],
   related:["tdee-calculator","calorie-deficit","lean-body-mass"]
 }
 
