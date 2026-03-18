@@ -52,7 +52,7 @@
   </div>
 </header>
 
-<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" style="display:none">
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;background:#fff;z-index:9999;flex-direction:column;overflow-y:auto;">
   <div class="mobile-menu-header">
     <span class="logo">FitMetrics</span>
     <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
@@ -200,8 +200,8 @@ function calcBMI(){
   ri.innerHTML='Your BMI of <strong>'+bmi+'</strong> is classified as <strong>'+cat[0]+'</strong> — '+cat[1]+'<br><br>Healthy range for your height: approximately <strong>'+(Math.round(hM*hM*18.5*10)/10)+'–'+(Math.round(hM*hM*24.9*10)/10)+' kg</strong>.';
   ri.style.display='block';
 }
-function openMobileMenu(){var m=document.getElementById('mobile-menu');m.style.display='';m.classList.add('open');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('mob-search').focus();},100);}
-function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function openMobileMenu(){  var m=document.getElementById('mobile-menu');  m.style.display='flex';  m.style.position='fixed';  m.style.inset='0';  m.style.background='#ffffff';  m.style.zIndex='9999';  m.style.flexDirection='column';  m.style.overflowY='auto';  m.classList.add('open');  document.getElementById('hamburger').classList.add('open');  document.getElementById('hamburger').setAttribute('aria-expanded','true');  document.body.style.overflow='hidden';  setTimeout(function(){var s=document.getElementById('mob-search');if(s)s.focus();},100);}
+function closeMobileMenu(){  var m=document.getElementById('mobile-menu');  m.style.display='none';  m.classList.remove('open');  document.getElementById('hamburger').classList.remove('open');  document.getElementById('hamburger').setAttribute('aria-expanded','false');  document.body.style.overflow='';}
 function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,10);body.innerHTML=m.length?m.map(function(c){return '<a href="'+c.url+'">'+c.name+' <span>↗</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none">No results</a>';}}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
