@@ -114,10 +114,20 @@ function openMobileMenu() {
   var menu = document.getElementById('mobile-menu');
   var btn = document.getElementById('hamburger');
   if (!menu) return;
+  menu.style.display = 'flex';
+  menu.style.position = 'fixed';
+  menu.style.inset = '0';
+  menu.style.top = '0';
+  menu.style.left = '0';
+  menu.style.right = '0';
+  menu.style.bottom = '0';
+  menu.style.background = '#ffffff';
+  menu.style.zIndex = '9999';
+  menu.style.flexDirection = 'column';
+  menu.style.overflowY = 'auto';
   menu.classList.add('open');
   if (btn) { btn.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
   document.body.style.overflow = 'hidden';
-  // focus the search input after transition
   setTimeout(function() {
     var s = document.getElementById('mob-search');
     if (s) s.focus();
@@ -128,6 +138,7 @@ function closeMobileMenu() {
   var menu = document.getElementById('mobile-menu');
   var btn = document.getElementById('hamburger');
   if (!menu) return;
+  menu.style.display = 'none';
   menu.classList.remove('open');
   if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
   document.body.style.overflow = '';
