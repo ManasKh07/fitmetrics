@@ -22,16 +22,19 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
-
+<style>
+.gauge-wrap{margin-top:16px}.macro-bar{display:flex;border-radius:var(--radius-sm);overflow:hidden;height:28px;margin-bottom:10px}.macro-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;transition:width .5s cubic-bezier(.34,1.56,.64,1);overflow:hidden;white-space:nowrap;min-width:0}.macro-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.macro-card{background:var(--card-bg);border-radius:var(--radius-sm);padding:10px 12px;border:1px solid var(--border)}.macro-card-label{font-size:11px;color:var(--ink-muted);margin-bottom:2px}.macro-card-val{font-size:18px;font-weight:800;font-family:'Syne',sans-serif}.macro-card-sub{font-size:11px;color:var(--ink-muted);margin-top:1px}
+</style>
 </head>
 <body>
+
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
     <nav>
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
-      <a href="macro-calculator.html">Macros</a>
+      <a href="macro-calculator.html" class="active">Macros</a>
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
@@ -39,138 +42,171 @@
       <a href="percentage-calculator.html">%</a>
     </nav>
     <div class="header-search-wrap">
-      <input type="text" class="header-search-input" id="hdr-search"
-        placeholder="Search calculators..."
-        oninput="searchCalcs(this.value)"
-        autocomplete="off">
+      <input type="text" class="header-search-input" id="hdr-search" placeholder="Search calculators..." oninput="searchCalcs(this.value)" autocomplete="off">
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb">
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header"><span class="logo">FitMetrics</span><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close">✕</button></div>
+  <div class="mobile-menu-search"><input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off"></div>
+  <div class="mobile-menu-body" id="mob-body">
+    <a href="bmi-calculator.html">BMI Calculator <span>↗</span></a>
+    <a href="tdee-calculator.html">TDEE Calculator <span>↗</span></a>
+    <a href="macro-calculator.html">Macro Calculator <span>↗</span></a>
+    <a href="body-fat-calculator.html">Body Fat Calculator <span>↗</span></a>
+    <a href="water-calculator.html">Water Intake <span>↗</span></a>
+    <a href="age-calculator.html">Age Calculator <span>↗</span></a>
+    <a href="percentage-calculator.html">Percentage Calculator <span>↗</span></a>
+    <a href="../calculator.html?id=calorie-deficit">Calorie Deficit <span>↗</span></a>
+    <a href="../calculator.html?id=protein-intake">Protein Intake <span>↗</span></a>
+    <a href="../calculator.html?id=carb-intake">Carb Intake <span>↗</span></a>
+    <a href="../calculator.html?id=fat-intake">Fat Intake <span>↗</span></a>
+    <a href="../all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators →</a>
+  </div>
+</div>
+
+<nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Macro Calculator</span></div>
-</nav><div class="page-hero">
+</nav>
+<div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Nutrition Tool</div>
     <h1>Macro Calculator</h1>
     <p>Your daily protein, carb and fat targets — adjusted for your actual goal, not just a generic split.</p>
   </div>
 </div>
+
 <main class="container">
   <div class="calculator-layout">
     <div class="calc-box">
       <div class="input-group"><label>Sex</label><select id="mc_g"><option value="male">Male</option><option value="female">Female</option></select></div>
-      <div class="input-group"><label>Age</label><input type="number" id="mc_age" placeholder="e.g. 28"></div>
+      <div class="input-group"><label>Age</label><input type="number" id="mc_age" placeholder="e.g. 28" inputmode="numeric"></div>
       <div class="input-group"><label>Weight</label>
-        <div class="input-row"><input type="number" id="mc_w" placeholder="e.g. 75">
-        <select id="mc_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select></div>
+        <div class="input-row">
+          <input type="number" id="mc_w" placeholder="e.g. 75" inputmode="decimal">
+          <select id="mc_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select>
+        </div>
       </div>
       <div class="input-group"><label>Height</label>
         <div class="input-row">
-          <input type="number" id="mc_hcm" placeholder="e.g. 175">
-          <input type="number" id="mc_hft" placeholder="ft" style="display:none">
-          <input type="number" id="mc_hin" placeholder="in" style="display:none">
+          <input type="number" id="mc_hcm" placeholder="e.g. 175" inputmode="decimal">
+          <input type="number" id="mc_hft" placeholder="ft" style="display:none" inputmode="decimal">
+          <input type="number" id="mc_hin" placeholder="in" style="display:none" inputmode="decimal">
           <select id="mc_hu" class="unit-select" onchange="toggleMacroH()"><option value="cm">cm</option><option value="ft">ft+in</option></select>
         </div>
       </div>
       <div class="input-group"><label>Activity</label>
-        <select id="mc_act"><option value="1.2">Sedentary</option><option value="1.375">Light exercise</option><option value="1.55" selected>Moderate exercise</option><option value="1.725">Very active</option></select>
+        <select id="mc_act">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Light exercise</option>
+          <option value="1.55" selected>Moderate exercise</option>
+          <option value="1.725">Very active</option>
+        </select>
       </div>
       <div class="input-group"><label>Goal</label>
-        <select id="mc_goal"><option value="-500">Lose Weight</option><option value="0" selected>Maintain Weight</option><option value="300">Build Muscle</option></select>
+        <select id="mc_goal">
+          <option value="-500">Lose Weight</option>
+          <option value="0" selected>Maintain Weight</option>
+          <option value="300">Build Muscle</option>
+        </select>
       </div>
       <button onclick="calcMacro()">Calculate Macros</button>
       <div id="mc_result" class="result" style="display:none"></div>
+      <div id="macro-gauge" class="gauge-wrap"></div>
       <div id="mc_interp" class="result-interpretation" style="display:none"></div>
     </div>
     <div class="side-panel">
       <h3>Popular Macro Splits</h3>
       <table>
-        <tr><th>Goal</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr>
+        <tr><th>Goal</th><th>P</th><th>C</th><th>F</th></tr>
         <tr><td>Weight Loss</td><td>35%</td><td>40%</td><td>25%</td></tr>
         <tr><td>Maintenance</td><td>30%</td><td>40%</td><td>30%</td></tr>
         <tr><td>Muscle Gain</td><td>30%</td><td>50%</td><td>20%</td></tr>
         <tr><td>Low Carb</td><td>40%</td><td>20%</td><td>40%</td></tr>
-        <tr><td>Ketogenic</td><td>25%</td><td>5%</td><td>70%</td></tr>
+        <tr><td>Keto</td><td>25%</td><td>5%</td><td>70%</td></tr>
       </table>
       <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Protein: 4 kcal/g · Carbs: 4 kcal/g · Fat: 9 kcal/g</p>
     </div>
   </div>
+
   <div class="recommended-section">
-  <h3>Recommended Calculators</h3>
-  <div class="recommended-grid">
-    <a href="tdee-calculator.html" class="recommended-card">
-      <div class="rec-icon">🔥</div>
-      <div class="rec-info"><strong>TDEE Calculator</strong><span>Your calorie baseline</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=protein-intake" class="recommended-card">
-      <div class="rec-icon">🥩</div>
-      <div class="rec-info"><strong>Protein Intake</strong><span>Protein target by goal</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=calorie-deficit" class="recommended-card">
-      <div class="rec-icon">📉</div>
-      <div class="rec-info"><strong>Calorie Deficit</strong><span>Weight loss calories</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=carb-intake" class="recommended-card">
-      <div class="rec-icon">🍚</div>
-      <div class="rec-info"><strong>Carb Intake</strong><span>Daily carb target</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid">
+      <a href="tdee-calculator.html" class="recommended-card"><div class="rec-icon">🔥</div><div class="rec-info"><strong>TDEE Calculator</strong><span>Your calorie baseline</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=protein-intake" class="recommended-card"><div class="rec-icon">🥩</div><div class="rec-info"><strong>Protein Intake</strong><span>Protein target by goal</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=calorie-deficit" class="recommended-card"><div class="rec-icon">📉</div><div class="rec-info"><strong>Calorie Deficit</strong><span>Weight loss calories</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=carb-intake" class="recommended-card"><div class="rec-icon">🍚</div><div class="rec-info"><strong>Carb Intake</strong><span>Daily carb target</span></div><span class="rec-arrow">↗</span></a>
+    </div>
   </div>
-</div>
+
   <article class="article">
-    <h2>How to Actually Use Your Macro Numbers</h2>
-    <p>Macronutrients — protein, carbs, and fat — are how your body gets energy. The ratio matters for different goals: more protein preserves muscle when cutting, more carbs fuel performance, adequate fat keeps hormones working. This calculator uses the Mifflin-St Jeor equation to estimate your TDEE, then adjusts for your goal and distributes calories across macros based on what the research supports.</p>
-    <p>The numbers are a starting point. Track for 2–4 weeks, see what actually happens to your weight and energy, and adjust from there. Learn more: <a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>. For a more detailed protein target, try the <a href="../calculator.html?id=protein-intake">Protein Intake Calculator</a>.</p>
-    <div class="faq-section"><h2>FAQs</h2>
+    <h2>How to actually use your macro numbers</h2>
+    <p>Macronutrients — protein, carbs, and fat — are how your body gets energy. The ratio matters for different goals: more protein preserves muscle when cutting, more carbs fuel performance, adequate fat keeps hormones working. This calculator uses the Mifflin-St Jeor equation to estimate your TDEE, then adjusts for your goal and distributes calories based on research-backed splits.</p>
+    <p>Track for 2–4 weeks, see what actually happens to your weight and energy, and adjust from there. Learn more: <a href="../blog/macro-nutrition-guide.html">Understanding Macronutrients</a>.</p>
+    <div class="faq-section">
+      <h2>FAQs</h2>
       <details><summary>How many calories are in each macro?</summary><p>Protein: 4 kcal/g. Carbs: 4 kcal/g. Fat: 9 kcal/g. Alcohol is 7 kcal/g, which is why it adds up fast without filling you up.</p></details>
-      <details><summary>Do macros actually matter, or just total calories?</summary><p>Both. Total calories determine whether you gain or lose weight. Macros determine what kind of weight you gain or lose — more protein means more of your deficit comes from fat rather than muscle. For most people, getting protein right matters most.</p></details>
-      <details><summary>Do I need to track macros every single day?</summary><p>Not forever. Most people find that tracking for 2–4 weeks builds enough intuition about what's in their food to stay roughly on target without logging. Think of it as a calibration exercise rather than a permanent commitment.</p></details>
+      <details><summary>Do macros actually matter, or just total calories?</summary><p>Both. Total calories determine whether you gain or lose weight. Macros determine what kind of weight you gain or lose — more protein means more of your deficit comes from fat rather than muscle.</p></details>
+      <details><summary>Do I need to track macros every single day?</summary><p>Not forever. Most people find that tracking for 2–4 weeks builds enough intuition about what's in their food to stay roughly on target without logging every meal.</p></details>
     </div>
   </article>
 </main>
+
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
-    <div class="footer-links">
-      <a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a>
-    </div>
+    <div class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a></div>
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
 
 <script>
+function drawMacroGauge(p,c,f){
+  var el=document.getElementById('macro-gauge');if(!el)return;
+  var pCal=p*4,cCal=c*4,fCal=f*9,tot=pCal+cCal+fCal||1;
+  var pP=Math.round(pCal/tot*100),cP=Math.round(cCal/tot*100),fP=100-pP-cP;
+  var items=[{l:'Protein',g:Math.round(p),cal:Math.round(pCal),pct:pP,c:'#378ADD',tc:'#042C53'},{l:'Carbs',g:Math.round(c),cal:Math.round(cCal),pct:cP,c:'#EF9F27',tc:'#412402'},{l:'Fat',g:Math.round(f),cal:Math.round(fCal),pct:fP,c:'#E24B4A',tc:'#501313'}];
+  var bar=items.map(function(it){return '<div class="macro-seg" style="width:'+it.pct+'%;background:'+it.c+';color:'+it.tc+'">'+(it.pct>9?it.l+' '+it.pct+'%':'')+'</div>';}).join('');
+  var cards=items.map(function(it){return '<div class="macro-card"><div class="macro-card-label">'+it.l+'</div><div class="macro-card-val" style="color:'+it.c+'">'+it.g+'g</div><div class="macro-card-sub">'+it.cal+' kcal · '+it.pct+'%</div></div>';}).join('');
+  el.innerHTML='<div class="macro-bar">'+bar+'</div><div class="macro-cards">'+cards+'</div><div style="font-size:11px;color:var(--ink-muted);margin-top:6px">Total: '+Math.round(tot)+' kcal</div>';
+}
 function toggleMacroH(){var u=document.getElementById('mc_hu').value;document.getElementById('mc_hcm').style.display=u==='cm'?'':'none';document.getElementById('mc_hft').style.display=u==='ft'?'':'none';document.getElementById('mc_hin').style.display=u==='ft'?'':'none';}
 function calcMacro(){
-  var g=document.getElementById('mc_g').value, age=parseFloat(document.getElementById('mc_age').value);
-  var wu=document.getElementById('mc_wu').value, hu=document.getElementById('mc_hu').value;
-  var w=parseFloat(document.getElementById('mc_w').value); var h;
-  if(hu==='cm') h=parseFloat(document.getElementById('mc_hcm').value);
-  else{var ft=parseFloat(document.getElementById('mc_hft').value)||0;var inp=parseFloat(document.getElementById('mc_hin').value)||0;h=(ft*12+inp)*2.54;}
+  var g=document.getElementById('mc_g').value,age=parseFloat(document.getElementById('mc_age').value);
+  var wu=document.getElementById('mc_wu').value,hu=document.getElementById('mc_hu').value;
+  var w=parseFloat(document.getElementById('mc_w').value),h;
+  if(hu==='cm')h=parseFloat(document.getElementById('mc_hcm').value);
+  else{var ft=parseFloat(document.getElementById('mc_hft').value)||0,inp=parseFloat(document.getElementById('mc_hin').value)||0;h=(ft*12+inp)*2.54;}
   if(!age||!w||!h){alert('Please fill in all fields');return;}
-  if(wu==='lb') w=w*0.4536;
+  if(wu==='lb')w*=0.4536;
   var bmr=g==='male'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161;
   var act=parseFloat(document.getElementById('mc_act').value);
   var goal=parseFloat(document.getElementById('mc_goal').value);
   var tdee=Math.round(bmr*act)+goal;
   var splits={'-500':[0.35,0.40,0.25],'0':[0.30,0.40,0.30],'300':[0.30,0.50,0.20]};
-  var gk=String(goal); var sp=splits[gk]||splits['0'];
-  var pG=Math.round(tdee*sp[0]/4), cG=Math.round(tdee*sp[1]/4), fG=Math.round(tdee*sp[2]/9);
+  var sp=splits[String(goal)]||splits['0'];
+  var pG=tdee*sp[0]/4,cG=tdee*sp[1]/4,fG=tdee*sp[2]/9;
   var r=document.getElementById('mc_result');
   r.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center">'
-    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+pG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Protein</div></div>'
-    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+cG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Carbs</div></div>'
-    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+fG+'g</div><div style="font-size:12px;color:var(--ink-soft)">Fat</div></div>'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+Math.round(pG)+'g</div><div style="font-size:12px;color:var(--ink-soft)">Protein</div></div>'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+Math.round(cG)+'g</div><div style="font-size:12px;color:var(--ink-soft)">Carbs</div></div>'
+    +'<div><div style="font-family:Syne,sans-serif;font-size:28px;font-weight:800">'+Math.round(fG)+'g</div><div style="font-size:12px;color:var(--ink-soft)">Fat</div></div>'
     +'</div>';
   r.style.background='var(--accent)';r.style.display='block';
+  drawMacroGauge(pG,cG,fG);
   var ri=document.getElementById('mc_interp');
-  ri.innerHTML='Target: <strong>'+tdee+' kcal/day</strong> — Protein '+pG+'g ('+Math.round(pG*4)+' kcal) · Carbs '+cG+'g ('+Math.round(cG*4)+' kcal) · Fat '+fG+'g ('+Math.round(fG*9)+' kcal)<br><br>To hit your protein target, aim for <strong>'+Math.round(pG/3)+'–'+Math.round(pG/4)+'g per meal</strong> across 3–4 meals. Good protein sources: chicken (31g/100g), Greek yogurt (10g/100g), eggs (13g/100g), lentils (9g/100g).';
+  ri.innerHTML='Target: <strong>'+tdee+' kcal/day</strong> — Protein '+Math.round(pG)+'g · Carbs '+Math.round(cG)+'g · Fat '+Math.round(fG)+'g<br><br>Aim for <strong>'+Math.round(pG/4)+'–'+Math.round(pG/3)+'g protein per meal</strong> across 3–4 meals. Good sources: chicken (31g/100g), Greek yogurt (10g/100g), eggs (13g/100g), lentils (9g/100g).';
   ri.style.display='block';
 }
+function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('mob-search').focus();},100);}
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,10);body.innerHTML=m.length?m.map(function(c){return '<a href="'+c.url+'">'+c.name+' <span>↗</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none">No results</a>';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
-
 <script src="/search.js"></script>
-</body></html>
+</body>
+</html>

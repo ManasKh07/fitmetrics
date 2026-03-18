@@ -22,9 +22,12 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
-
+<style>
+.gauge-wrap{margin-top:16px}.water-bar-wrap{background:var(--card-bg);border-radius:999px;height:16px;overflow:hidden;margin-bottom:10px}.water-bar-fill{height:100%;border-radius:999px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}.macro-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.macro-card{background:var(--card-bg);border-radius:var(--radius-sm);padding:10px 12px;border:1px solid var(--border)}.macro-card-label{font-size:11px;color:var(--ink-muted);margin-bottom:2px}.macro-card-val{font-size:18px;font-weight:800;font-family:'Syne',sans-serif}.macro-card-sub{font-size:11px;color:var(--ink-muted);margin-top:1px}
+</style>
 </head>
 <body>
+
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
@@ -34,41 +37,63 @@
       <a href="macro-calculator.html">Macros</a>
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
-      <a href="water-calculator.html">Water</a>
+      <a href="water-calculator.html" class="active">Water</a>
       <a href="age-calculator.html">Age</a>
       <a href="percentage-calculator.html">%</a>
     </nav>
     <div class="header-search-wrap">
-      <input type="text" class="header-search-input" id="hdr-search"
-        placeholder="Search calculators..."
-        oninput="searchCalcs(this.value)"
-        autocomplete="off">
+      <input type="text" class="header-search-input" id="hdr-search" placeholder="Search calculators..." oninput="searchCalcs(this.value)" autocomplete="off">
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb">
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header"><span class="logo">FitMetrics</span><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close">✕</button></div>
+  <div class="mobile-menu-search"><input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off"></div>
+  <div class="mobile-menu-body" id="mob-body">
+    <a href="bmi-calculator.html">BMI Calculator <span>↗</span></a>
+    <a href="tdee-calculator.html">TDEE Calculator <span>↗</span></a>
+    <a href="macro-calculator.html">Macro Calculator <span>↗</span></a>
+    <a href="body-fat-calculator.html">Body Fat Calculator <span>↗</span></a>
+    <a href="water-calculator.html">Water Intake <span>↗</span></a>
+    <a href="age-calculator.html">Age Calculator <span>↗</span></a>
+    <a href="percentage-calculator.html">Percentage Calculator <span>↗</span></a>
+    <a href="../calculator.html?id=fiber-intake">Fibre Intake <span>↗</span></a>
+    <a href="../calculator.html?id=protein-intake">Protein Intake <span>↗</span></a>
+    <a href="../calculator.html?id=sleep-calculator">Sleep Calculator <span>↗</span></a>
+    <a href="../all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators →</a>
+  </div>
+</div>
+
+<nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Water Intake Calculator</span></div>
-</nav><div class="page-hero">
+</nav>
+<div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Wellness Tool</div>
     <h1>Water Intake Calculator</h1>
     <p>"8 glasses a day" isn't based on much. Here's a more personalised estimate.</p>
   </div>
 </div>
+
 <main class="container">
   <div class="calculator-layout">
     <div class="calc-box">
       <div class="input-group"><label>Body Weight</label>
-        <div class="input-row"><input type="number" id="wt_w" placeholder="e.g. 70">
-        <select id="wt_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select></div>
+        <div class="input-row">
+          <input type="number" id="wt_w" placeholder="e.g. 70" inputmode="decimal">
+          <select id="wt_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select>
+        </div>
       </div>
       <div class="input-group"><label>Activity Level</label>
         <select id="wt_act">
-          <option value="1.0">Sedentary (little exercise)</option>
-          <option value="1.15" selected>Lightly active (some walking)</option>
-          <option value="1.3">Moderately active (regular exercise)</option>
-          <option value="1.5">Very active (daily intense exercise)</option>
+          <option value="1.0">Sedentary</option>
+          <option value="1.15" selected>Lightly active</option>
+          <option value="1.3">Moderately active</option>
+          <option value="1.5">Very active</option>
         </select>
       </div>
       <div class="input-group"><label>Climate</label>
@@ -80,6 +105,7 @@
       </div>
       <button onclick="calcWater()">Calculate Water Needs</button>
       <div id="wt_result" class="result" style="display:none"></div>
+      <div id="water-gauge" class="gauge-wrap"></div>
       <div id="wt_interp" class="result-interpretation" style="display:none"></div>
     </div>
     <div class="side-panel">
@@ -93,73 +119,77 @@
         <tr><td>90 kg</td><td>2.97 L</td><td>3.9 L</td></tr>
         <tr><td>100 kg</td><td>3.30 L</td><td>4.3 L</td></tr>
       </table>
-      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: 33 ml per kg body weight (baseline)</p>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: 33 ml × kg body weight</p>
     </div>
   </div>
+
   <div class="recommended-section">
-  <h3>Recommended Calculators</h3>
-  <div class="recommended-grid">
-    <a href="tdee-calculator.html" class="recommended-card">
-      <div class="rec-icon">🔥</div>
-      <div class="rec-info"><strong>TDEE Calculator</strong><span>Daily calorie needs</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=fiber-intake" class="recommended-card">
-      <div class="rec-icon">🌾</div>
-      <div class="rec-info"><strong>Fibre Intake</strong><span>Daily fibre target</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=protein-intake" class="recommended-card">
-      <div class="rec-icon">🥩</div>
-      <div class="rec-info"><strong>Protein Intake</strong><span>Daily protein goal</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=sleep-calculator" class="recommended-card">
-      <div class="rec-icon">😴</div>
-      <div class="rec-info"><strong>Sleep Calculator</strong><span>Optimal sleep times</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid">
+      <a href="tdee-calculator.html" class="recommended-card"><div class="rec-icon">🔥</div><div class="rec-info"><strong>TDEE Calculator</strong><span>Daily calorie needs</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=fiber-intake" class="recommended-card"><div class="rec-icon">🌾</div><div class="rec-info"><strong>Fibre Intake</strong><span>Daily fibre target</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=protein-intake" class="recommended-card"><div class="rec-icon">🥩</div><div class="rec-info"><strong>Protein Intake</strong><span>Daily protein goal</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=sleep-calculator" class="recommended-card"><div class="rec-icon">😴</div><div class="rec-info"><strong>Sleep Calculator</strong><span>Optimal sleep times</span></div><span class="rec-arrow">↗</span></a>
+    </div>
   </div>
-</div>
+
   <article class="article">
-    <h2>How Much Water Do You Actually Need?</h2>
-    <p>The "8 glasses a day" rule has almost no scientific basis — it came from a 1945 US dietary recommendation that included fluid from food, and somehow lost that context along the way. Actual needs depend on your body weight, how active you are, the climate you're in, and what you eat. Heavier people and active people need more. Hot days add to it. Fruit and vegetables contribute meaningfully too.</p>
-    <p>The 33ml/kg baseline this calculator uses is a reasonable starting estimate. For a deeper look: <a href="../blog/hydration-guide.html">Daily Water Intake — The Real Answer</a>.</p>
-    <div class="faq-section"><h2>FAQs</h2>
-      <details><summary>Does coffee count toward my daily water intake?</summary><p>Yes. Despite caffeine's mild diuretic effect, research consistently shows that regular coffee drinkers don't end up more dehydrated — the fluid in the drink offsets the diuretic effect. Tea counts too.</p></details>
-      <details><summary>How do I know if I'm drinking enough?</summary><p>Look at your urine. Pale yellow (like weak lemonade) means you're well hydrated. Dark yellow or amber means drink more. Completely clear can actually mean you're overdoing it.</p></details>
-      <details><summary>How much extra should I drink when exercising?</summary><p>Roughly 400–600ml per hour of moderate exercise as a starting point, more in heat or for intense training. Thirst is actually a fairly reliable guide once you're not chronically dehydrated to begin with.</p></details>
+    <h2>How much water do you actually need?</h2>
+    <p>The "8 glasses a day" rule has almost no scientific basis — it came from a 1945 US dietary recommendation that included fluid from food, and somehow lost that context along the way. Actual needs depend on body weight, activity level, climate, and diet. Heavier, more active people in hot climates need significantly more.</p>
+    <p>The 33 ml/kg baseline this calculator uses is a reasonable starting estimate. For a deeper look: <a href="../blog/hydration-guide.html">Daily Water Intake — The Real Answer</a>.</p>
+    <div class="faq-section">
+      <h2>FAQs</h2>
+      <details><summary>Does coffee count toward my daily water intake?</summary><p>Yes. Despite caffeine's mild diuretic effect, research consistently shows that regular coffee drinkers don't end up more dehydrated — the fluid in the drink offsets the effect. Tea counts too.</p></details>
+      <details><summary>How do I know if I'm drinking enough?</summary><p>Look at your urine colour. Pale yellow (like weak lemonade) means you're well hydrated. Dark yellow or amber means drink more. Completely clear can actually mean you're overdoing it.</p></details>
+      <details><summary>How much extra should I drink when exercising?</summary><p>Roughly 400–600 ml per hour of moderate exercise. Thirst is a fairly reliable guide once you're not chronically dehydrated.</p></details>
     </div>
   </article>
 </main>
+
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
-    <div class="footer-links">
-      <a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a>
-    </div>
+    <div class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a></div>
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
 
 <script>
+function _clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function drawWaterGauge(litres){
+  var el=document.getElementById('water-gauge');if(!el||!litres)return;
+  var pct=_clamp(litres/3.5*100,2,100);
+  var c=litres>=3?'#639922':litres>=2?'#378ADD':'#E24B4A';
+  var glasses=Math.round(litres/0.25);
+  el.innerHTML='<div class="water-bar-wrap"><div class="water-bar-fill" style="width:'+pct.toFixed(0)+'%;background:'+c+'"></div></div>'
+    +'<div class="macro-cards">'
+    +'<div class="macro-card"><div class="macro-card-label">Daily target</div><div class="macro-card-val" style="color:'+c+'">'+litres.toFixed(2)+'L</div></div>'
+    +'<div class="macro-card"><div class="macro-card-label">In glasses (250ml)</div><div class="macro-card-val">'+glasses+'</div></div>'
+    +'<div class="macro-card"><div class="macro-card-label">Per hour (16hrs)</div><div class="macro-card-val">'+(Math.round(litres/16*10)/10)+'L</div></div>'
+    +'</div>';
+}
 function calcWater(){
   var wu=document.getElementById('wt_wu').value;
   var w=parseFloat(document.getElementById('wt_w').value);
   if(!w){alert('Please enter your weight');return;}
-  if(wu==='lb') w=w*0.4536;
+  if(wu==='lb')w*=0.4536;
   var act=parseFloat(document.getElementById('wt_act').value);
   var climate=parseFloat(document.getElementById('wt_climate').value);
-  var litres=(w*0.033*act*climate).toFixed(2);
+  var litres=parseFloat((w*0.033*act*climate).toFixed(2));
   var glasses=Math.round(litres/0.25);
   var r=document.getElementById('wt_result');
   r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+litres+' L</span> <span style="font-size:14px;font-weight:600;color:var(--ink-soft)">per day</span>';
   r.style.background='var(--accent)';r.style.display='block';
+  drawWaterGauge(litres);
   var ri=document.getElementById('wt_interp');
-  ri.innerHTML='You should drink approximately <strong>'+litres+' litres ('+glasses+' glasses)</strong> per day. <br><br><strong>Simple schedule:</strong> 500ml on waking · 500ml with breakfast · 500ml mid-morning · 500ml with lunch · 500ml mid-afternoon · '+Math.round((litres-2.5)*1000)+'ml with dinner/evening.<br><br>About 20% of daily fluid comes from food (especially fruits and vegetables). If you exercise, add an extra 400–600ml per hour of training.';
+  ri.innerHTML='Drink approximately <strong>'+litres+' litres ('+glasses+' glasses)</strong> per day.<br><br><strong>Simple schedule:</strong> 500ml on waking · 500ml with breakfast · 500ml mid-morning · 500ml with lunch · 500ml mid-afternoon · '+Math.round((litres-2.5)*1000)+'ml with dinner/evening.<br><br>About 20% of daily fluid comes from food. If you exercise, add 400–600ml per hour of training.';
   ri.style.display='block';
 }
+function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('mob-search').focus();},100);}
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,10);body.innerHTML=m.length?m.map(function(c){return '<a href="'+c.url+'">'+c.name+' <span>↗</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none">No results</a>';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
-
 <script src="/search.js"></script>
-</body></html>
+</body>
+</html>

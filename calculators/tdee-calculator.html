@@ -22,9 +22,12 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
-
+<style>
+.gauge-wrap{margin-top:16px}.gauge-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}.gauge-bar-lbl{font-size:11px;color:var(--ink-soft);width:140px;flex-shrink:0;text-align:right}.gauge-bar-track{flex:1;height:10px;background:var(--card-bg);border-radius:999px;overflow:hidden}.gauge-bar-fill{height:100%;border-radius:999px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}.gauge-bar-val{font-size:12px;font-weight:600;width:44px;color:var(--ink)}
+</style>
 </head>
 <body>
+
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
@@ -32,151 +35,167 @@
       <a href="../index.html">Home</a>
       <a href="bmi-calculator.html">BMI</a>
       <a href="macro-calculator.html">Macros</a>
-      <a href="tdee-calculator.html">TDEE</a>
+      <a href="tdee-calculator.html" class="active">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
       <a href="water-calculator.html">Water</a>
       <a href="age-calculator.html">Age</a>
       <a href="percentage-calculator.html">%</a>
     </nav>
     <div class="header-search-wrap">
-      <input type="text" class="header-search-input" id="hdr-search"
-        placeholder="Search calculators..."
-        oninput="searchCalcs(this.value)"
-        autocomplete="off">
+      <input type="text" class="header-search-input" id="hdr-search" placeholder="Search calculators..." oninput="searchCalcs(this.value)" autocomplete="off">
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb">
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header"><span class="logo">FitMetrics</span><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close">✕</button></div>
+  <div class="mobile-menu-search"><input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off"></div>
+  <div class="mobile-menu-body" id="mob-body">
+    <a href="bmi-calculator.html">BMI Calculator <span>↗</span></a>
+    <a href="tdee-calculator.html">TDEE Calculator <span>↗</span></a>
+    <a href="macro-calculator.html">Macro Calculator <span>↗</span></a>
+    <a href="body-fat-calculator.html">Body Fat Calculator <span>↗</span></a>
+    <a href="water-calculator.html">Water Intake <span>↗</span></a>
+    <a href="age-calculator.html">Age Calculator <span>↗</span></a>
+    <a href="percentage-calculator.html">Percentage Calculator <span>↗</span></a>
+    <a href="../calculator.html?id=calorie-deficit">Calorie Deficit <span>↗</span></a>
+    <a href="../calculator.html?id=calorie-surplus">Calorie Surplus <span>↗</span></a>
+    <a href="../calculator.html?id=protein-intake">Protein Intake <span>↗</span></a>
+    <a href="../calculator.html?id=ideal-weight">Ideal Weight <span>↗</span></a>
+    <a href="../calculator.html?id=heart-rate-zones">Heart Rate Zones <span>↗</span></a>
+    <a href="../calculator.html?id=sleep-calculator">Sleep Calculator <span>↗</span></a>
+    <a href="../all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators →</a>
+  </div>
+</div>
+
+<nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>TDEE Calculator</span></div>
-</nav><div class="page-hero">
+</nav>
+<div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Nutrition Tool</div>
     <h1>TDEE Calculator</h1>
     <p>How many calories does your body actually burn per day? This is the number everything else is built on.</p>
   </div>
 </div>
+
 <main class="container">
   <div class="calculator-layout">
     <div class="calc-box">
-      <div class="input-group"><label>Sex</label>
-        <select id="td_gender"><option value="male">Male</option><option value="female">Female</option></select>
-      </div>
-      <div class="input-group"><label>Age</label>
-        <input type="number" id="td_age" placeholder="e.g. 28">
-      </div>
+      <div class="input-group"><label>Sex</label><select id="td_gender"><option value="male">Male</option><option value="female">Female</option></select></div>
+      <div class="input-group"><label>Age</label><input type="number" id="td_age" placeholder="e.g. 28" inputmode="numeric"></div>
       <div class="input-group"><label>Weight</label>
         <div class="input-row">
-          <input type="number" id="td_weight" placeholder="e.g. 75">
+          <input type="number" id="td_weight" placeholder="e.g. 75" inputmode="decimal">
           <select id="td_wu" class="unit-select"><option value="kg">kg</option><option value="lb">lb</option></select>
         </div>
       </div>
       <div class="input-group"><label>Height</label>
         <div class="input-row">
-          <input type="number" id="td_height_cm" placeholder="e.g. 175">
-          <input type="number" id="td_height_ft" placeholder="ft" style="display:none">
-          <input type="number" id="td_height_in" placeholder="in" style="display:none">
-          <select id="td_hu" class="unit-select" onchange="toggleTdeeHeight()">
-            <option value="cm">cm</option><option value="ft">ft+in</option>
-          </select>
+          <input type="number" id="td_height_cm" placeholder="e.g. 175" inputmode="decimal">
+          <input type="number" id="td_height_ft" placeholder="ft" style="display:none" inputmode="decimal">
+          <input type="number" id="td_height_in" placeholder="in" style="display:none" inputmode="decimal">
+          <select id="td_hu" class="unit-select" onchange="toggleTdeeHeight()"><option value="cm">cm</option><option value="ft">ft+in</option></select>
         </div>
       </div>
       <div class="input-group"><label>Activity Level</label>
         <select id="td_act">
           <option value="1.2">Sedentary (desk job, no exercise)</option>
-          <option value="1.375">Light (exercise 1–3 days/week)</option>
-          <option value="1.55" selected>Moderate (exercise 3–5 days/week)</option>
-          <option value="1.725">Very Active (hard exercise 6–7 days)</option>
+          <option value="1.375">Light (1–3 days/week)</option>
+          <option value="1.55" selected>Moderate (3–5 days/week)</option>
+          <option value="1.725">Very Active (6–7 days/week)</option>
           <option value="1.9">Athlete (2× daily training)</option>
         </select>
       </div>
       <button onclick="calcTDEE()">Calculate TDEE</button>
       <div id="tdee_result" class="result" style="display:none"></div>
+      <div id="tdee-gauge" class="gauge-wrap"></div>
       <div id="tdee_interp" class="result-interpretation" style="display:none"></div>
     </div>
     <div class="side-panel">
       <h3>Activity Multipliers</h3>
       <table>
-        <tr><th>Activity Level</th><th>Multiplier</th><th>Example</th></tr>
-        <tr><td>Sedentary</td><td>× 1.2</td><td>Office work, no exercise</td></tr>
-        <tr><td>Light</td><td>× 1.375</td><td>Walking, 1–3 workouts/week</td></tr>
-        <tr><td>Moderate</td><td>× 1.55</td><td>3–5 workouts/week</td></tr>
-        <tr><td>Very Active</td><td>× 1.725</td><td>Hard daily training</td></tr>
-        <tr><td>Athlete</td><td>× 1.9</td><td>Twice-daily training</td></tr>
+        <tr><th>Level</th><th>×</th><th>Example</th></tr>
+        <tr><td>Sedentary</td><td>1.2</td><td>Office, no exercise</td></tr>
+        <tr><td>Light</td><td>1.375</td><td>1–3 workouts/wk</td></tr>
+        <tr><td>Moderate</td><td>1.55</td><td>3–5 workouts/wk</td></tr>
+        <tr><td>Very Active</td><td>1.725</td><td>Daily hard training</td></tr>
+        <tr><td>Athlete</td><td>1.9</td><td>2× daily training</td></tr>
       </table>
-      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: Mifflin-St Jeor (most accurate for general population)</p>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Formula: Mifflin-St Jeor</p>
     </div>
   </div>
+
   <div class="recommended-section">
-  <h3>Recommended Calculators</h3>
-  <div class="recommended-grid">
-    <a href="../calculator.html?id=calorie-deficit" class="recommended-card">
-      <div class="rec-icon">📉</div>
-      <div class="rec-info"><strong>Calorie Deficit</strong><span>Lose weight safely</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=calorie-surplus" class="recommended-card">
-      <div class="rec-icon">📈</div>
-      <div class="rec-info"><strong>Calorie Surplus</strong><span>Build muscle effectively</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="macro-calculator.html" class="recommended-card">
-      <div class="rec-icon">🥗</div>
-      <div class="rec-info"><strong>Macro Calculator</strong><span>Protein, carbs & fat split</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=resting-metabolic-rate" class="recommended-card">
-      <div class="rec-icon">🧪</div>
-      <div class="rec-info"><strong>Resting Metabolic Rate</strong><span>Calories at rest only</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid">
+      <a href="../calculator.html?id=calorie-deficit" class="recommended-card"><div class="rec-icon">📉</div><div class="rec-info"><strong>Calorie Deficit</strong><span>Lose weight safely</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=calorie-surplus" class="recommended-card"><div class="rec-icon">📈</div><div class="rec-info"><strong>Calorie Surplus</strong><span>Build muscle</span></div><span class="rec-arrow">↗</span></a>
+      <a href="macro-calculator.html" class="recommended-card"><div class="rec-icon">🥗</div><div class="rec-info"><strong>Macro Calculator</strong><span>Protein, carbs & fat</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=resting-metabolic-rate" class="recommended-card"><div class="rec-icon">🧪</div><div class="rec-info"><strong>Resting Metabolic Rate</strong><span>Calories at rest</span></div><span class="rec-arrow">↗</span></a>
+    </div>
   </div>
-</div>
+
   <article class="article">
-    <h2>What TDEE Is and Why It Matters</h2>
-    <p>TDEE (Total Daily Energy Expenditure) is the total calories your body burns in a day — including your resting metabolism, physical activity, and the energy used just to digest food. It's the most important number in nutrition because everything else — losing fat, building muscle, maintaining weight — depends on how your intake compares to it.</p>
-    <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong>, which research consistently shows to be the most accurate formula for estimating BMR in the general population. The result is an estimate — real TDEE can only be measured in a metabolic chamber. Use it as a starting point, track results over 2–3 weeks, and adjust. For next steps: <a href="../calculator.html?id=calorie-deficit">Calorie Deficit Calculator</a> for fat loss, <a href="../calculator.html?id=calorie-surplus">Calorie Surplus Calculator</a> for muscle gain. Full guide: <a href="../blog/calories-per-day.html">How Many Calories Should You Eat?</a></p>
+    <h2>What TDEE is and why it matters</h2>
+    <p>TDEE (Total Daily Energy Expenditure) is the total calories your body burns in a day — including resting metabolism, physical activity, and the energy used to digest food. It's the most important number in nutrition because everything else depends on how your intake compares to it.</p>
+    <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong>, which research consistently shows to be the most accurate BMR formula for the general population. For next steps: <a href="../calculator.html?id=calorie-deficit">Calorie Deficit</a> for fat loss, <a href="../calculator.html?id=calorie-surplus">Calorie Surplus</a> for muscle gain. Full guide: <a href="../blog/calories-per-day.html">How Many Calories Should You Eat?</a></p>
     <div class="faq-section">
       <h2>FAQs</h2>
-      <details><summary>How accurate is this estimate?</summary><p>Mifflin-St Jeor is typically within 10% of true TDEE for most people. That's accurate enough to be a useful starting point, but not precise enough to follow blindly. Track your actual weight for 2–3 weeks and adjust ±100–200 kcal based on what happens.</p></details>
-      <details><summary>How often should I recalculate?</summary><p>Every 4–6 weeks if your weight has changed meaningfully, or if your activity level shifts. As you lose weight, your TDEE goes down — which is why weight loss often slows over time without adjusting intake.</p></details>
-      <details><summary>Why is my TDEE different on other calculators?</summary><p>Different formulas give slightly different results. Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle all estimate BMR differently. Mifflin-St Jeor has the best validation data for the general population, which is why this calculator uses it.</p></details>
+      <details><summary>How accurate is this estimate?</summary><p>Mifflin-St Jeor is typically within 10% of true TDEE for most people. Track your actual weight for 2–3 weeks and adjust ±100–200 kcal based on results.</p></details>
+      <details><summary>How often should I recalculate?</summary><p>Every 4–6 weeks if your weight has changed, or if your activity level shifts. As you lose weight, your TDEE goes down.</p></details>
+      <details><summary>Why is my TDEE different on other calculators?</summary><p>Different formulas give slightly different results. Mifflin-St Jeor has the best validation data for the general population, which is why this calculator uses it.</p></details>
     </div>
   </article>
 </main>
+
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
-    <div class="footer-links">
-      <a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a>
-    </div>
+    <div class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a><a href="../disclaimer.html">Disclaimer</a></div>
     <p class="footer-copy">© 2026 FitMetrics</p>
   </div>
 </footer>
 
 <script>
+function _clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function drawTDEEGauge(tdee,bmr){
+  var el=document.getElementById('tdee-gauge');
+  if(!el||!tdee){if(el)el.innerHTML='';return;}
+  var lose=Math.round(tdee-500),maint=Math.round(tdee),gain=Math.round(tdee+300);
+  var mx=Math.max(gain,4000);
+  var items=[{l:'BMR (rest only)',v:bmr,c:'#B5D4F4'},{l:'Weight loss (−500 kcal)',v:lose,c:'#5DCAA5'},{l:'Maintenance',v:maint,c:'#639922'},{l:'Muscle gain (+300 kcal)',v:gain,c:'#EF9F27'}];
+  el.innerHTML=items.map(function(it){var w=_clamp(it.v/mx*100,2,100);return '<div class="gauge-bar-row"><div class="gauge-bar-lbl">'+it.l+'</div><div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:'+w+'%;background:'+it.c+'"></div></div><div class="gauge-bar-val">'+it.v+'</div></div>';}).join('')+'<div style="font-size:11px;color:var(--ink-muted);margin-top:4px">kcal / day</div>';
+}
 function toggleTdeeHeight(){var u=document.getElementById('td_hu').value;document.getElementById('td_height_cm').style.display=u==='cm'?'':'none';document.getElementById('td_height_ft').style.display=u==='ft'?'':'none';document.getElementById('td_height_in').style.display=u==='ft'?'':'none';}
 function calcTDEE(){
-  var g=document.getElementById('td_gender').value, age=parseFloat(document.getElementById('td_age').value);
-  var wu=document.getElementById('td_wu').value, hu=document.getElementById('td_hu').value;
-  var w=parseFloat(document.getElementById('td_weight').value);
-  var h;
-  if(hu==='cm') h=parseFloat(document.getElementById('td_height_cm').value);
-  else { var ft=parseFloat(document.getElementById('td_height_ft').value)||0; var inp=parseFloat(document.getElementById('td_height_in').value)||0; h=(ft*12+inp)*2.54; }
+  var g=document.getElementById('td_gender').value,age=parseFloat(document.getElementById('td_age').value);
+  var wu=document.getElementById('td_wu').value,hu=document.getElementById('td_hu').value;
+  var w=parseFloat(document.getElementById('td_weight').value),h;
+  if(hu==='cm')h=parseFloat(document.getElementById('td_height_cm').value);
+  else{var ft=parseFloat(document.getElementById('td_height_ft').value)||0;var inp=parseFloat(document.getElementById('td_height_in').value)||0;h=(ft*12+inp)*2.54;}
   if(!age||!w||!h){alert('Please fill in all fields');return;}
-  if(wu==='lb') w=w*0.4536;
-  var bmr=g==='male'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161;
+  if(wu==='lb')w*=0.4536;
+  var bmr=Math.round(g==='male'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161);
   var act=parseFloat(document.getElementById('td_act').value);
   var tdee=Math.round(bmr*act);
-  var lose=Math.round(tdee-500), gain=Math.round(tdee+300);
+  var lose=Math.round(tdee-500),gain=Math.round(tdee+300);
   var r=document.getElementById('tdee_result');
   r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:var(--ink)">'+tdee+'</span> <span style="font-size:14px;font-weight:600;color:var(--ink-soft)">kcal / day</span>';
   r.style.background='var(--accent)';r.style.display='block';
+  drawTDEEGauge(tdee,bmr);
   var ri=document.getElementById('tdee_interp');
-  ri.innerHTML='Your body burns approximately <strong>'+tdee+' kcal per day</strong>. <br><br><strong>To lose weight:</strong> eat ~'+lose+' kcal/day (−500 kcal deficit → ~0.5 kg/week)<br><strong>To maintain:</strong> eat ~'+tdee+' kcal/day<br><strong>To build muscle:</strong> eat ~'+gain+' kcal/day (+300 kcal surplus)<br><br>Your BMR (at complete rest) is approximately <strong>'+Math.round(bmr)+' kcal/day</strong>. Never eat below this without medical supervision.';
+  ri.innerHTML='Your body burns approximately <strong>'+tdee+' kcal/day</strong>.<br><br><strong>Weight loss:</strong> ~'+lose+' kcal/day (−500 → ~0.5 kg/week)<br><strong>Maintenance:</strong> ~'+tdee+' kcal/day<br><strong>Muscle gain:</strong> ~'+gain+' kcal/day (+300 surplus)<br><br>BMR (complete rest): <strong>'+bmr+' kcal/day</strong>. Never eat below this without medical supervision.';
   ri.style.display='block';
 }
+function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('mob-search').focus();},100);}
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,10);body.innerHTML=m.length?m.map(function(c){return '<a href="'+c.url+'">'+c.name+' <span>↗</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none">No results</a>';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
-
 <script src="/search.js"></script>
-</body></html>
+</body>
+</html>

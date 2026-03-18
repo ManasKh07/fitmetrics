@@ -21,16 +21,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a healthy BMI?","acceptedAnswer":{"@type":"Answer","text":"A BMI between 18.5 and 24.9 is considered healthy for most adults."}},{"@type":"Question","name":"Is BMI accurate for athletes?","acceptedAnswer":{"@type":"Answer","text":"BMI may overestimate health risk in athletes with high muscle mass. Use body fat percentage alongside BMI."}}]}</script>
+<style>
+.gauge-wrap{margin-top:16px}.zone-row{display:flex;gap:3px;border-radius:10px;overflow:hidden;height:22px;margin-bottom:4px}.zone-seg{flex-shrink:0;transition:opacity .3s}.zone-seg.active{outline:2px solid var(--ink);outline-offset:1px;border-radius:3px}.zone-pointer{position:relative;height:10px;margin-bottom:3px}.zone-dot{position:absolute;width:10px;height:10px;background:var(--ink);border:2px solid var(--white);border-radius:50%;top:0;transform:translateX(-50%);transition:left .5s cubic-bezier(.34,1.56,.64,1)}.gauge-zone-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-muted);margin-bottom:8px}.gauge-result-row{display:flex;align-items:baseline;gap:8px;margin-top:10px}.gauge-big{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;transition:color .4s}.gauge-cat{font-size:13px;color:var(--ink-soft)}
+</style>
 </head>
 <body>
+
 <header class="header">
   <div class="container header-flex">
     <a href="../index.html" class="logo">FitMetrics</a>
     <nav>
       <a href="../index.html">Home</a>
-      <a href="bmi-calculator.html">BMI</a>
+      <a href="bmi-calculator.html" class="active">BMI</a>
       <a href="macro-calculator.html">Macros</a>
       <a href="tdee-calculator.html">TDEE</a>
       <a href="body-fat-calculator.html">Body Fat</a>
@@ -39,31 +42,61 @@
       <a href="percentage-calculator.html">%</a>
     </nav>
     <div class="header-search-wrap">
-      <input type="text" class="header-search-input" id="hdr-search"
-        placeholder="Search calculators..."
-        oninput="searchCalcs(this.value)"
-        autocomplete="off">
+      <input type="text" class="header-search-input" id="hdr-search" placeholder="Search calculators..." oninput="searchCalcs(this.value)" autocomplete="off">
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb">
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header">
+    <span class="logo">FitMetrics</span>
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  </div>
+  <div class="mobile-menu-search">
+    <input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off">
+  </div>
+  <div class="mobile-menu-body" id="mob-body">
+    <a href="bmi-calculator.html">BMI Calculator <span>↗</span></a>
+    <a href="tdee-calculator.html">TDEE Calculator <span>↗</span></a>
+    <a href="macro-calculator.html">Macro Calculator <span>↗</span></a>
+    <a href="body-fat-calculator.html">Body Fat Calculator <span>↗</span></a>
+    <a href="water-calculator.html">Water Intake <span>↗</span></a>
+    <a href="age-calculator.html">Age Calculator <span>↗</span></a>
+    <a href="percentage-calculator.html">Percentage Calculator <span>↗</span></a>
+    <a href="../calculator.html?id=calorie-deficit">Calorie Deficit <span>↗</span></a>
+    <a href="../calculator.html?id=calorie-surplus">Calorie Surplus <span>↗</span></a>
+    <a href="../calculator.html?id=protein-intake">Protein Intake <span>↗</span></a>
+    <a href="../calculator.html?id=ideal-weight">Ideal Weight <span>↗</span></a>
+    <a href="../calculator.html?id=heart-rate-zones">Heart Rate Zones <span>↗</span></a>
+    <a href="../calculator.html?id=sleep-calculator">Sleep Calculator <span>↗</span></a>
+    <a href="../all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators →</a>
+  </div>
+</div>
+
+<nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>BMI Calculator</span></div>
-</nav><div class="page-hero">
+</nav>
+
+<div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Body Composition Tool</div>
     <h1>BMI Calculator</h1>
     <p>A quick weight-to-height check. Useful as a starting point — not the whole story.</p>
   </div>
 </div>
+
 <main class="container">
   <div class="calculator-layout">
-
     <div class="calc-box">
       <div class="input-group">
         <label for="weight">Weight</label>
         <div class="input-row">
-          <input type="number" id="weight" placeholder="e.g. 70">
+          <input type="number" id="weight" placeholder="e.g. 70" inputmode="decimal">
           <select id="weight_unit" class="unit-select" onchange="toggleWeightUnit()">
             <option value="kg">kg</option>
             <option value="lb">lb</option>
@@ -73,9 +106,9 @@
       <div class="input-group">
         <label>Height</label>
         <div class="input-row">
-          <input type="number" id="height_cm" placeholder="e.g. 175">
-          <input type="number" id="height_ft" placeholder="ft" style="display:none">
-          <input type="number" id="height_in" placeholder="in" style="display:none">
+          <input type="number" id="height_cm" placeholder="e.g. 175" inputmode="decimal">
+          <input type="number" id="height_ft" placeholder="ft" style="display:none" inputmode="decimal">
+          <input type="number" id="height_in" placeholder="in" style="display:none" inputmode="decimal">
           <select id="height_unit" class="unit-select" onchange="toggleHeightUnit()">
             <option value="cm">cm</option>
             <option value="ft">ft+in</option>
@@ -84,62 +117,48 @@
       </div>
       <button onclick="calcBMI()">Calculate BMI</button>
       <div id="bmi_result" class="result" style="display:none"></div>
+      <div id="bmi-gauge" class="gauge-wrap"></div>
       <div id="bmi_interp" class="result-interpretation" style="display:none"></div>
     </div>
 
     <div class="side-panel">
       <h3>BMI Categories</h3>
       <table>
-        <tr><th>Category</th><th>BMI Range</th><th>Health Risk</th></tr>
+        <tr><th>Category</th><th>BMI</th><th>Risk</th></tr>
         <tr><td>Underweight</td><td>&lt; 18.5</td><td>Moderate</td></tr>
-        <tr><td>Healthy Weight</td><td>18.5 – 24.9</td><td>Lowest</td></tr>
-        <tr><td>Overweight</td><td>25.0 – 29.9</td><td>Increased</td></tr>
-        <tr><td>Obese Class I</td><td>30.0 – 34.9</td><td>High</td></tr>
-        <tr><td>Obese Class II</td><td>35.0 – 39.9</td><td>Very High</td></tr>
-        <tr><td>Obese Class III</td><td>≥ 40.0</td><td>Extremely High</td></tr>
+        <tr><td>Healthy Weight</td><td>18.5–24.9</td><td>Lowest</td></tr>
+        <tr><td>Overweight</td><td>25.0–29.9</td><td>Increased</td></tr>
+        <tr><td>Obese Class I</td><td>30.0–34.9</td><td>High</td></tr>
+        <tr><td>Obese Class II</td><td>35.0–39.9</td><td>Very High</td></tr>
+        <tr><td>Obese Class III</td><td>≥ 40.0</td><td>Extreme</td></tr>
       </table>
-      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Source: World Health Organization (WHO)</p>
+      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Source: WHO</p>
     </div>
   </div>
 
   <div class="recommended-section">
-  <h3>Recommended Calculators</h3>
-  <div class="recommended-grid">
-    <a href="tdee-calculator.html" class="recommended-card">
-      <div class="rec-icon">🔥</div>
-      <div class="rec-info"><strong>TDEE Calculator</strong><span>Find your daily calorie needs</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="body-fat-calculator.html" class="recommended-card">
-      <div class="rec-icon">📊</div>
-      <div class="rec-info"><strong>Body Fat Calculator</strong><span>More accurate than BMI</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=ideal-weight" class="recommended-card">
-      <div class="rec-icon">⚖</div>
-      <div class="rec-info"><strong>Ideal Weight</strong><span>Based on your height</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=waist-to-height" class="recommended-card">
-      <div class="rec-icon">📏</div>
-      <div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid">
+      <a href="tdee-calculator.html" class="recommended-card"><div class="rec-icon">🔥</div><div class="rec-info"><strong>TDEE Calculator</strong><span>Daily calorie needs</span></div><span class="rec-arrow">↗</span></a>
+      <a href="body-fat-calculator.html" class="recommended-card"><div class="rec-icon">📊</div><div class="rec-info"><strong>Body Fat Calculator</strong><span>More accurate than BMI</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=ideal-weight" class="recommended-card"><div class="rec-icon">⚖</div><div class="rec-info"><strong>Ideal Weight</strong><span>Based on your height</span></div><span class="rec-arrow">↗</span></a>
+      <a href="../calculator.html?id=waist-to-height" class="recommended-card"><div class="rec-icon">📏</div><div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div><span class="rec-arrow">↗</span></a>
+    </div>
   </div>
-</div>
 
   <article class="article">
-    <h2>What Your BMI Result Actually Means</h2>
-    <p>BMI (Body Mass Index) divides your weight in kg by the square of your height in metres. It's fast, requires no equipment, and gives a rough indication of whether weight is in a healthy range. It's also genuinely limited: it can't distinguish muscle from fat, doesn't account for age or sex differences in body composition, and tends to misclassify muscular athletes as overweight and some older adults as healthy when they're not.</p>
+    <h2>What your BMI result actually means</h2>
+    <p>BMI (Body Mass Index) divides your weight in kg by the square of your height in metres. It's fast, requires no equipment, and gives a rough indication of whether weight is in a healthy range. It's also genuinely limited: it can't distinguish muscle from fat, doesn't account for age or sex differences in body composition, and tends to misclassify muscular athletes as overweight.</p>
     <p>Use BMI as one data point, not a verdict. Pair it with <a href="body-fat-calculator.html">body fat percentage</a> and <a href="../calculator.html?id=waist-to-height">waist-to-height ratio</a> for a more complete picture. Read more: <a href="../blog/what-is-bmi.html">What Is BMI and When Should You Actually Care?</a></p>
     <div class="faq-section">
       <h2>FAQs</h2>
-      <details><summary>What is a healthy BMI?</summary><p>18.5–24.9 for most adults. That said, research suggests people of Asian descent face higher health risks at lower BMI values, and the WHO now uses adjusted cutoffs for some populations.</p></details>
+      <details><summary>What is a healthy BMI?</summary><p>18.5–24.9 for most adults. Research suggests people of Asian descent face higher health risks at lower BMI values, and the WHO uses adjusted cutoffs for some populations.</p></details>
       <details><summary>Is BMI accurate for athletes?</summary><p>Not really. A muscular person can have a BMI of 27 and be in excellent health. BMI can't tell the difference between 10 kg of fat and 10 kg of muscle. Body fat percentage is a much better measure for anyone who trains seriously.</p></details>
-      <details><summary>What should I do if my BMI is high?</summary><p>Talk to a doctor rather than panic — BMI is a screening signal, not a diagnosis. Your GP will look at blood pressure, blood sugar, cholesterol, family history, and other factors before drawing any conclusions.</p></details>
+      <details><summary>What should I do if my BMI is high?</summary><p>Talk to a doctor — BMI is a screening signal, not a diagnosis. Your GP will look at blood pressure, blood sugar, cholesterol, family history, and other factors before drawing any conclusions.</p></details>
     </div>
   </article>
 </main>
+
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
@@ -150,41 +169,42 @@
   </div>
 </footer>
 
-
 <script>
-function toggleWeightUnit() {
-  var u = document.getElementById('weight_unit').value;
-  document.getElementById('weight').placeholder = u==='kg' ? 'e.g. 70' : 'e.g. 154';
+function _clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function drawBMIGauge(bmi){
+  var el=document.getElementById('bmi-gauge');
+  if(!el||!bmi||bmi<5||bmi>70){if(el)el.innerHTML='';return;}
+  var zones=[{l:'Underweight',max:18.5,c:'#378ADD'},{l:'Healthy',max:25,c:'#639922'},{l:'Overweight',max:30,c:'#EF9F27'},{l:'Obese I',max:35,c:'#D85A30'},{l:'Obese II+',max:50,c:'#E24B4A'}];
+  var mn=10,mx=50,pct=_clamp((bmi-mn)/(mx-mn)*100,1,99);
+  var cat=zones.find(function(z){return bmi<z.max;})||zones[zones.length-1];
+  var segs=zones.map(function(z,i){var prev=i===0?mn:zones[i-1].max;var w=(z.max-prev)/(mx-mn)*100;var act=cat===z;return '<div class="zone-seg'+(act?' active':'')+'" style="width:'+w+'%;background:'+z.c+';opacity:'+(act?1:0.3)+';"></div>';}).join('');
+  el.innerHTML='<div class="zone-pointer"><div class="zone-dot" style="left:'+pct+'%"></div></div><div class="zone-row">'+segs+'</div><div class="gauge-zone-labels"><span>10</span><span>18.5</span><span>25</span><span>30</span><span>35</span><span>50</span></div><div class="gauge-result-row"><span class="gauge-big" style="color:'+cat.c+'">'+bmi+'</span><span class="gauge-cat">'+cat.l+'</span></div>';
 }
-function toggleHeightUnit() {
-  var u = document.getElementById('height_unit').value;
-  var cm = document.getElementById('height_cm');
-  var ft = document.getElementById('height_ft');
-  var inp = document.getElementById('height_in');
-  if (u==='cm') { cm.style.display=''; ft.style.display='none'; inp.style.display='none'; }
-  else { cm.style.display='none'; ft.style.display=''; inp.style.display=''; }
-}
-function calcBMI() {
-  var wu = document.getElementById('weight_unit').value;
-  var hu = document.getElementById('height_unit').value;
-  var w = parseFloat(document.getElementById('weight').value);
-  var hM;
-  if (hu==='cm') hM = parseFloat(document.getElementById('height_cm').value)/100;
-  else { var ft=parseFloat(document.getElementById('height_ft').value)||0; var inp=parseFloat(document.getElementById('height_in').value)||0; hM=(ft*12+inp)*0.0254; }
-  if (!w||!hM) { alert('Please fill in all fields'); return; }
-  if (wu==='lb') w=w*0.4536;
-  var bmi=(w/(hM*hM)).toFixed(1);
-  var cats=[['Underweight','bmi < 18.5 — you may benefit from nutritional guidance. Speak to a doctor.',18.5],['Healthy Weight','great result — you are in the healthy weight range for your height.',25],['Overweight','modest lifestyle changes could reduce future health risks.',30],['Obese Class I','consider speaking with a healthcare professional about weight management.',35],['Obese Class II','medical support is recommended. Please consult your doctor.',40],['Obese Class III','please consult your doctor. Medical support is important at this level.',999]];
-  var cat = cats.find(c=>bmi<c[2]);
-  var color = bmi<18.5?'#3B8BD4':bmi<25?'#639922':bmi<30?'#EF9F27':bmi<35?'#D85A30':'#E24B4A';
-  var r = document.getElementById('bmi_result');
-  r.innerHTML = '<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:'+color+'">'+bmi+'</span> <span style="font-size:14px;font-weight:600;color:'+color+'">'+cat[0]+'</span>';
+function toggleWeightUnit(){document.getElementById('weight').placeholder=document.getElementById('weight_unit').value==='kg'?'e.g. 70':'e.g. 154';}
+function toggleHeightUnit(){var u=document.getElementById('height_unit').value;document.getElementById('height_cm').style.display=u==='cm'?'':'none';document.getElementById('height_ft').style.display=u==='ft'?'':'none';document.getElementById('height_in').style.display=u==='ft'?'':'none';}
+function calcBMI(){
+  var wu=document.getElementById('weight_unit').value,hu=document.getElementById('height_unit').value;
+  var w=parseFloat(document.getElementById('weight').value),hM;
+  if(hu==='cm')hM=parseFloat(document.getElementById('height_cm').value)/100;
+  else{var ft=parseFloat(document.getElementById('height_ft').value)||0,inp=parseFloat(document.getElementById('height_in').value)||0;hM=(ft*12+inp)*0.0254;}
+  if(!w||!hM){alert('Please fill in all fields');return;}
+  if(wu==='lb')w*=0.4536;
+  var bmi=parseFloat((w/(hM*hM)).toFixed(1));
+  var cats=[['Underweight','you may benefit from nutritional guidance. Speak to a doctor.',18.5,'#3B8BD4'],['Healthy Weight','great result — you are in the healthy weight range.',25,'#639922'],['Overweight','modest lifestyle changes could reduce future health risks.',30,'#EF9F27'],['Obese Class I','consider speaking with a healthcare professional.',35,'#D85A30'],['Obese Class II','medical support is recommended.',40,'#E24B4A'],['Obese Class III','please consult your doctor urgently.',999,'#E24B4A']];
+  var cat=cats.find(function(c){return bmi<c[2];})||cats[cats.length-1];
+  var r=document.getElementById('bmi_result');
+  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:'+cat[3]+'">'+bmi+'</span> <span style="font-size:14px;font-weight:600;color:'+cat[3]+'">'+cat[0]+'</span>';
   r.style.background='var(--card-bg)';r.style.display='block';
-  var ri = document.getElementById('bmi_interp');
-  ri.innerHTML = 'Your BMI of <strong>'+bmi+'</strong> is classified as <strong>'+cat[0]+'</strong> — '+cat[1]+'<br><br>For context: a BMI between 18.5 and 24.9 is the healthy range. Your ideal weight range for your height is approximately <strong>'+(Math.round(hM*hM*18.5*10)/10)+'–'+(Math.round(hM*hM*24.9*10)/10)+' kg</strong>.';
+  drawBMIGauge(bmi);
+  var ri=document.getElementById('bmi_interp');
+  ri.innerHTML='Your BMI of <strong>'+bmi+'</strong> is classified as <strong>'+cat[0]+'</strong> — '+cat[1]+'<br><br>Healthy range for your height: approximately <strong>'+(Math.round(hM*hM*18.5*10)/10)+'–'+(Math.round(hM*hM*24.9*10)/10)+' kg</strong>.';
   ri.style.display='block';
 }
+function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('mob-search').focus();},100);}
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,10);body.innerHTML=m.length?m.map(function(c){return '<a href="'+c.url+'">'+c.name+' <span>↗</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none">No results</a>';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
-
 <script src="/search.js"></script>
-</body></html>
+</body>
+</html>
