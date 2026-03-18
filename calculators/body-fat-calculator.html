@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Body Fat Calculator — Estimate Your Body Fat %</title>
+<title>Free Body Fat Calculator — US Navy Method | FitMetrics</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SE671355DP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SE671355DP');</script>
-<meta name="description" content="Estimate your body fat percentage quickly using waist and height measurements. Free and instant.">
+<meta name="description" content="Estimate your body fat percentage using the US Navy circumference method. Enter waist, neck and height. Free and instant.">
 <link rel="canonical" href="https://quickbmi.in/calculators/body-fat-calculator.html">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/favicon-192.png">
-<meta property="og:title" content="Free Body Fat Calculator — Estimate Your Body Fat %">
-<meta property="og:description" content="Estimate your body fat percentage quickly using waist and height measurements. Free and instant.">
+<meta property="og:title" content="Free Body Fat Calculator — US Navy Method | FitMetrics">
+<meta property="og:description" content="Estimate your body fat percentage using the US Navy circumference method. Free and instant.">
 <meta property="og:url" content="https://quickbmi.in/calculators/body-fat-calculator.html">
 <meta property="og:image" content="https://quickbmi.in/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,6 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FitMetrics","url":"https://quickbmi.in","logo":"https://quickbmi.in/favicon-512.png"}</script>
-
 </head>
 <body>
 <header class="header">
@@ -47,31 +46,81 @@
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
   </div>
-</header><nav class="breadcrumb" aria-label="breadcrumb">
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Body Fat Calculator</span></div>
-</nav><div class="page-hero">
+</nav>
+<div class="page-hero">
   <div class="container">
     <div class="page-hero-label">Body Composition Tool</div>
     <h1>Body Fat Calculator</h1>
-    <p>Estimate your body fat percentage using just a tape measure. No calipers, no lab.</p>
+    <p>Estimate your body fat percentage using the US Navy circumference method. A tape measure is all you need.</p>
   </div>
 </div>
 <main class="container">
   <div class="calculator-layout">
     <div class="calc-box">
-      <div class="input-group"><label>Sex</label><select id="bf_g"><option value="male">Male</option><option value="female">Female</option></select></div>
-      <div class="input-group"><label>Waist Circumference</label>
-        <div class="input-row"><input type="number" id="bf_waist" placeholder="e.g. 80">
-        <select id="bf_wu" class="unit-select"><option value="cm">cm</option><option value="in">inches</option></select></div>
+
+      <div class="input-group">
+        <label>Sex</label>
+        <select id="bf_g" onchange="toggleHipField()">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
       </div>
-      <div class="input-group"><label>Height</label>
-        <div class="input-row"><input type="number" id="bf_h" placeholder="e.g. 175">
-        <select id="bf_hu" class="unit-select"><option value="cm">cm</option><option value="ft">ft</option></select></div>
+
+      <div class="input-group">
+        <label>Units</label>
+        <select id="bf_unit" class="unit-select" onchange="updateBFPlaceholders()">
+          <option value="cm">Centimetres (cm)</option>
+          <option value="in">Inches (in)</option>
+        </select>
       </div>
+
+      <div class="input-group">
+        <label for="bf_height">Height</label>
+        <div class="input-row">
+          <input type="number" id="bf_height" placeholder="e.g. 175" min="100" max="250" step="0.1">
+          <span class="unit-label" id="bf_height_unit_label">cm</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="bf_waist">
+          Waist — measure at narrowest point (navel level for men)
+        </label>
+        <div class="input-row">
+          <input type="number" id="bf_waist" placeholder="e.g. 80" min="40" max="200" step="0.1">
+          <span class="unit-label" id="bf_waist_unit_label">cm</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="bf_neck">Neck — measure just below the larynx</label>
+        <div class="input-row">
+          <input type="number" id="bf_neck" placeholder="e.g. 37" min="20" max="80" step="0.1">
+          <span class="unit-label" id="bf_neck_unit_label">cm</span>
+        </div>
+      </div>
+
+      <!-- Hip field — only shown for females -->
+      <div class="input-group" id="bf_hip_group" style="display:none">
+        <label for="bf_hip">Hip — measure at widest point</label>
+        <div class="input-row">
+          <input type="number" id="bf_hip" placeholder="e.g. 95" min="50" max="200" step="0.1">
+          <span class="unit-label" id="bf_hip_unit_label">cm</span>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:var(--ink-muted);margin:0 0 16px;">
+        Tip: Measure each site twice and use the average. Exhale normally before measuring waist — don't suck in.
+      </p>
+
       <button onclick="calcBF()">Calculate Body Fat</button>
       <div id="bf_result" class="result" style="display:none"></div>
       <div id="bf_interp" class="result-interpretation" style="display:none"></div>
     </div>
+
     <div class="side-panel">
       <h3>Body Fat Categories (ACE)</h3>
       <table>
@@ -83,44 +132,53 @@
         <tr><td>Obese</td><td>32%+</td><td>25%+</td></tr>
       </table>
       <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Source: American Council on Exercise (ACE)</p>
+      <div style="margin-top:16px;padding:12px 14px;background:var(--card-bg);border-radius:var(--radius-sm);font-size:12px;color:var(--ink-soft);">
+        <strong>Formula:</strong> US Navy Circumference Method (Hodgdon &amp; Beckett, 1984)<br>
+        <strong>Accuracy:</strong> ±3–5% of true body fat
+      </div>
     </div>
   </div>
+
   <div class="recommended-section">
-  <h3>Recommended Calculators</h3>
-  <div class="recommended-grid">
-    <a href="bmi-calculator.html" class="recommended-card">
-      <div class="rec-icon">⚖</div>
-      <div class="rec-info"><strong>BMI Calculator</strong><span>Weight-to-height ratio</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=waist-to-height" class="recommended-card">
-      <div class="rec-icon">📏</div>
-      <div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=waist-to-hip" class="recommended-card">
-      <div class="rec-icon">📐</div>
-      <div class="rec-info"><strong>Waist-to-Hip Ratio</strong><span>Cardiovascular risk</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
-    <a href="../calculator.html?id=army-body-fat" class="recommended-card">
-      <div class="rec-icon">🪖</div>
-      <div class="rec-info"><strong>Army Body Fat</strong><span>Full circumference method</span></div>
-      <span class="rec-arrow">↗</span>
-    </a>
+    <h3>Recommended Calculators</h3>
+    <div class="recommended-grid">
+      <a href="bmi-calculator.html" class="recommended-card">
+        <div class="rec-icon">⚖</div>
+        <div class="rec-info"><strong>BMI Calculator</strong><span>Weight-to-height ratio</span></div>
+        <span class="rec-arrow">↗</span>
+      </a>
+      <a href="../calculator.html?id=waist-to-height" class="recommended-card">
+        <div class="rec-icon">📏</div>
+        <div class="rec-info"><strong>Waist-to-Height</strong><span>Abdominal fat risk</span></div>
+        <span class="rec-arrow">↗</span>
+      </a>
+      <a href="../calculator.html?id=waist-to-hip" class="recommended-card">
+        <div class="rec-icon">📐</div>
+        <div class="rec-info"><strong>Waist-to-Hip Ratio</strong><span>Cardiovascular risk</span></div>
+        <span class="rec-arrow">↗</span>
+      </a>
+      <a href="../calculator.html?id=army-body-fat" class="recommended-card">
+        <div class="rec-icon">🪖</div>
+        <div class="rec-info"><strong>Army Body Fat</strong><span>Full Army circumference method</span></div>
+        <span class="rec-arrow">↗</span>
+      </a>
+    </div>
   </div>
-</div>
+
   <article class="article">
     <h2>Why Body Fat % Tells You More Than Weight</h2>
     <p>Two people can weigh exactly the same and look completely different — because one has more muscle and less fat. Body fat percentage captures this. It tells you what proportion of your body is actually fat tissue versus everything else (muscle, bone, organs, water). That's information weight and BMI simply can't give you.</p>
-    <p>This calculator uses a simplified waist-to-height method. For a more detailed circumference-based estimate, try the <a href="../calculator.html?id=army-body-fat">Army Body Fat Calculator</a> which also uses neck measurements. Read the full guide: <a href="../blog/body-fat-guide.html">Healthy Body Fat Percentage Explained</a>.</p>
-    <div class="faq-section"><h2>FAQs</h2>
-      <details><summary>How accurate is this method?</summary><p>Within roughly 3–5% of your actual body fat. Good enough to track trends and see if you're moving in the right direction. For clinical precision, a DEXA scan is the gold standard — but that requires a clinic and costs money.</p></details>
-      <details><summary>What is a healthy body fat percentage?</summary><p>For men, 14–24% covers the fitness-to-acceptable range. For women, 21–31%. Athletes are typically below those numbers. Essential fat (the minimum needed for survival) is 2–5% for men and 10–13% for women.</p></details>
+    <p>This calculator uses the <strong>US Navy circumference method</strong> (Hodgdon &amp; Beckett, 1984) — the same formula used in the original military fitness standards. It uses your waist and neck measurements (plus hip for women) alongside height to estimate body fat. Typical accuracy is within ±3–5% of a DEXA scan result, making it one of the most reliable free methods available. Read the full guide: <a href="../blog/body-fat-guide.html">Healthy Body Fat Percentage Explained</a>.</p>
+    <div class="faq-section">
+      <h2>FAQs</h2>
+      <details><summary>Where exactly do I measure?</summary><p><strong>Waist (men):</strong> at the level of the navel, after a normal exhale. <strong>Waist (women):</strong> at the narrowest point of the torso. <strong>Neck:</strong> just below the larynx (Adam's apple), sloping slightly downward at the front. <strong>Hip (women only):</strong> at the widest point of the hips and buttocks. Always measure twice and average.</p></details>
+      <details><summary>How accurate is this method?</summary><p>Within roughly ±3–5% of your actual body fat for most people. That's accurate enough to track meaningful changes over time. For the highest accuracy, a DEXA scan (dual-energy X-ray absorptiometry) is the gold standard — but that requires a clinic appointment and costs money.</p></details>
+      <details><summary>What is a healthy body fat percentage?</summary><p>For men, 14–24% covers the fitness-to-acceptable range. For women, 21–31%. Athletes are typically below those numbers. Essential fat (the minimum required for normal physiological function) is 2–5% for men and 10–13% for women.</p></details>
       <details><summary>Can I lose body fat without losing weight?</summary><p>Yes — this is called body recomposition. You gain muscle at roughly the same rate as you lose fat, so the scale barely moves. It happens most effectively in beginners, people returning after a long break, and those eating enough protein while in a small deficit or at maintenance.</p></details>
     </div>
   </article>
 </main>
+
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo">FitMetrics</span><p>Made by one person who got tired of calculator sites with 12 popups.</p></div>
@@ -132,33 +190,106 @@
 </footer>
 
 <script>
-function calcBF(){
-  var g=document.getElementById('bf_g').value;
-  var wu=document.getElementById('bf_wu').value, hu=document.getElementById('bf_hu').value;
-  var w=parseFloat(document.getElementById('bf_waist').value), h=parseFloat(document.getElementById('bf_h').value);
-  if(!w||!h){alert('Please fill in all fields');return;}
-  if(wu==='in') w=w*2.54;
-  if(hu==='ft') h=h*30.48;
-  var bf=(1.0-(0.082*h-41.875)/(w+0.0001));
-  bf=((1-(0.082*h)/(w))*100);
-  var whr=w/h;
-  var bfv=(whr>0.5?(whr-0.5)*200+10:10).toFixed(1);
-  var cat,color;
-  if(g==='male'){
-    if(bfv<6)cat='Essential fat';else if(bfv<14)cat='Athlete';else if(bfv<18)cat='Fitness';else if(bfv<25)cat='Acceptable';else cat='Obese';
-    color=bfv<14?'#639922':bfv<18?'#3B8BD4':bfv<25?'#EF9F27':'#E24B4A';
-  }else{
-    if(bfv<14)cat='Essential fat';else if(bfv<21)cat='Athlete';else if(bfv<25)cat='Fitness';else if(bfv<32)cat='Acceptable';else cat='Obese';
-    color=bfv<21?'#639922':bfv<25?'#3B8BD4':bfv<32?'#EF9F27':'#E24B4A';
+// Show/hide hip field based on sex
+function toggleHipField() {
+  var g = document.getElementById('bf_g').value;
+  document.getElementById('bf_hip_group').style.display = g === 'female' ? 'block' : 'none';
+}
+
+// Update unit labels when unit select changes
+function updateBFPlaceholders() {
+  var u = document.getElementById('bf_unit').value;
+  var isCm = u === 'cm';
+  document.getElementById('bf_height_unit_label').textContent = isCm ? 'cm' : 'in';
+  document.getElementById('bf_waist_unit_label').textContent  = isCm ? 'cm' : 'in';
+  document.getElementById('bf_neck_unit_label').textContent   = isCm ? 'cm' : 'in';
+  document.getElementById('bf_hip_unit_label').textContent    = isCm ? 'cm' : 'in';
+  document.getElementById('bf_height').placeholder = isCm ? 'e.g. 175' : 'e.g. 69';
+  document.getElementById('bf_waist').placeholder  = isCm ? 'e.g. 80'  : 'e.g. 31';
+  document.getElementById('bf_neck').placeholder   = isCm ? 'e.g. 37'  : 'e.g. 14.5';
+  document.getElementById('bf_hip').placeholder    = isCm ? 'e.g. 95'  : 'e.g. 37';
+}
+
+function calcBF() {
+  var g    = document.getElementById('bf_g').value;
+  var unit = document.getElementById('bf_unit').value;
+
+  var height = parseFloat(document.getElementById('bf_height').value);
+  var waist  = parseFloat(document.getElementById('bf_waist').value);
+  var neck   = parseFloat(document.getElementById('bf_neck').value);
+  var hip    = g === 'female' ? parseFloat(document.getElementById('bf_hip').value) : 0;
+
+  // Basic validation
+  if (!height || !waist || !neck || (g === 'female' && !hip)) {
+    alert('Please fill in all fields for your sex.');
+    return;
   }
-  var r=document.getElementById('bf_result');
-  r.innerHTML='<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:'+color+'">'+bfv+'%</span> <span style="font-size:14px;font-weight:600;color:'+color+'">'+cat+'</span>';
-  r.style.background='var(--card-bg)';r.style.display='block';
-  var ri=document.getElementById('bf_interp');
-  ri.innerHTML='Estimated body fat: <strong>'+bfv+'%</strong> (<strong>'+cat+'</strong> category for '+g+'s).<br><br>This estimate is based on your waist-to-height ratio. For a more precise measurement, the <a href="../calculator.html?id=army-body-fat">Army body fat calculator</a> uses additional neck and hip measurements, while a DEXA scan provides the most accurate result. To reduce body fat, combine a moderate <a href="../calculator.html?id=calorie-deficit">calorie deficit</a> with resistance training.';
-  ri.style.display='block';
+  if (neck >= waist) {
+    alert('Neck measurement should be smaller than waist. Please check your entries.');
+    return;
+  }
+
+  // Convert inches → cm if needed
+  if (unit === 'in') {
+    height *= 2.54;
+    waist  *= 2.54;
+    neck   *= 2.54;
+    hip    *= 2.54;
+  }
+
+  // US Navy formula (Hodgdon & Beckett, 1984)
+  var bf;
+  if (g === 'male') {
+    // Male: 86.010 × log10(waist − neck) − 70.041 × log10(height) + 36.76
+    bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76;
+  } else {
+    // Female: 163.205 × log10(waist + hip − neck) − 97.684 × log10(height) − 78.387
+    bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
+  }
+
+  bf = parseFloat(bf.toFixed(1));
+
+  // Sanity check
+  if (bf < 2 || bf > 70 || isNaN(bf)) {
+    alert('The result looks unusual — please double-check your measurements.');
+    return;
+  }
+
+  // Category and colour
+  var cat, color;
+  if (g === 'male') {
+    if      (bf < 6)  { cat = 'Essential Fat'; color = '#3B8BD4'; }
+    else if (bf < 14) { cat = 'Athlete';        color = '#639922'; }
+    else if (bf < 18) { cat = 'Fitness';        color = '#3B8BD4'; }
+    else if (bf < 25) { cat = 'Acceptable';     color = '#EF9F27'; }
+    else              { cat = 'Obese';           color = '#E24B4A'; }
+  } else {
+    if      (bf < 14) { cat = 'Essential Fat'; color = '#3B8BD4'; }
+    else if (bf < 21) { cat = 'Athlete';        color = '#639922'; }
+    else if (bf < 25) { cat = 'Fitness';        color = '#3B8BD4'; }
+    else if (bf < 32) { cat = 'Acceptable';     color = '#EF9F27'; }
+    else              { cat = 'Obese';           color = '#E24B4A'; }
+  }
+
+  // Lean mass display
+  var weightEl = ''; // weight not entered in this calc, skip lean mass
+
+  var r = document.getElementById('bf_result');
+  r.innerHTML = '<span style="font-family:Syne,sans-serif;font-size:36px;font-weight:800;color:' + color + '">' + bf + '%</span>'
+              + ' <span style="font-size:14px;font-weight:600;color:' + color + '">' + cat + '</span>';
+  r.style.background = 'var(--card-bg)';
+  r.style.display = 'block';
+
+  var ri = document.getElementById('bf_interp');
+  ri.innerHTML = 'Estimated body fat: <strong>' + bf + '%</strong> — classified as <strong>' + cat + '</strong> for ' + (g === 'male' ? 'men' : 'women') + '.'
+    + '<br><br>'
+    + 'Formula used: <strong>US Navy circumference method</strong> (Hodgdon &amp; Beckett, 1984). Typical accuracy: ±3–5%.'
+    + '<br><br>'
+    + 'To reduce body fat, combine a moderate <a href="../calculator.html?id=calorie-deficit">calorie deficit</a> with resistance training and adequate <a href="../calculator.html?id=protein-intake">protein intake</a>. For a clinical-grade measurement, a DEXA scan is the most accurate option.';
+  ri.style.display = 'block';
 }
 </script>
 
 <script src="/search.js"></script>
-</body></html>
+</body>
+</html>
