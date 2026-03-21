@@ -36,6 +36,17 @@
 .not-found { text-align: center; padding: 80px 20px; }
 .not-found h1 { font-size: 32px; margin-bottom: 12px; }
 .not-found p { color: var(--ink-muted); margin-bottom: 24px; }
+
+/* ── Gauge ── */
+.gauge-wrap { margin-top: 14px; }
+.gauge-track { background: rgba(0,0,0,0.12); border-radius: 999px; height: 10px; overflow: hidden; margin-bottom: 6px; }
+.gauge-fill { height: 100%; border-radius: 999px; transition: width 0.5s cubic-bezier(.34,1.56,.64,1); }
+.gauge-labels { display: flex; justify-content: space-between; font-size: 10px; color: rgba(0,0,0,0.45); margin-bottom: 6px; }
+.gauge-zone-row { display: flex; gap: 2px; border-radius: 8px; overflow: hidden; height: 18px; margin-bottom: 4px; }
+.gauge-zone-seg { flex-shrink: 0; transition: opacity .3s; }
+.gauge-zone-seg.active { outline: 2px solid rgba(0,0,0,0.5); outline-offset: 1px; border-radius: 3px; }
+.gauge-pointer-row { position: relative; height: 10px; margin-bottom: 2px; }
+.gauge-dot { position: absolute; width: 10px; height: 10px; background: var(--ink); border: 2px solid #fff; border-radius: 50%; top: 0; transform: translateX(-50%); transition: left .5s cubic-bezier(.34,1.56,.64,1); }
 </style>
 <script type="application/ld+json" id="page-schema">
 {
@@ -73,28 +84,8 @@
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="/index.html" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()"><span></span><span></span><span></span></button></div>
-</header>
-
-<div id="mobile-menu" style="display:none !important;visibility:hidden;position:fixed;top:0;left:0;right:0;bottom:0;background:#ffffff;z-index:9999;flex-direction:column;overflow-y:auto;">
-  <div class="mobile-menu-header"><span class="logo">FitMetrics</span><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close">&#10005;</button></div>
-  <div class="mobile-menu-search"><input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off"></div>
-  <div class="mobile-menu-body" id="mob-body">
-    <a href="/calculators/bmi-calculator.html">BMI Calculator <span>&#8599;</span></a>
-    <a href="/calculators/tdee-calculator.html">TDEE Calculator <span>&#8599;</span></a>
-    <a href="/calculators/macro-calculator.html">Macro Calculator <span>&#8599;</span></a>
-    <a href="/calculators/body-fat-calculator.html">Body Fat Calculator <span>&#8599;</span></a>
-    <a href="/calculators/water-calculator.html">Water Intake <span>&#8599;</span></a>
-    <a href="/calculators/age-calculator.html">Age Calculator <span>&#8599;</span></a>
-    <a href="/calculators/percentage-calculator.html">Percentage Calculator <span>&#8599;</span></a>
-    <a href="/calculator.html?id=calorie-deficit">Calorie Deficit <span>&#8599;</span></a>
-    <a href="/calculator.html?id=protein-intake">Protein Intake <span>&#8599;</span></a>
-    <a href="/calculator.html?id=heart-rate-zones">Heart Rate Zones <span>&#8599;</span></a>
-    <a href="/calculator.html?id=sleep-calculator">Sleep Calculator <span>&#8599;</span></a>
-    <a href="/calculator.html?id=ideal-weight">Ideal Weight <span>&#8599;</span></a>
-    <a href="/all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators &#8594;</a>
   </div>
-</div>
+</header>
 
 <nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container">
@@ -126,6 +117,7 @@
         <div class="result-label" id="result-label"></div>
         <div class="result-category" id="result-category"></div>
       </div>
+      <div class="gauge-wrap" id="gauge-wrap" style="display:none;"></div>
       <div class="error-box" id="error-box">Hmm — looks like something's missing. Fill in all fields and try again.</div>
     </div>
 
@@ -358,13 +350,117 @@ function renderCalc(id, calc) {
   });
 }
 
+// ── Gauge drawing ──────────────────────────
+
+var GAUGES = {
+  // BMI zones
+  'bmi-prime':      { zones:[{l:'Low',c:'#378ADD',max:0.74},{l:'Optimal',c:'#639922',max:1.0},{l:'High',c:'#EF9F27',max:1.24},{l:'Very High',c:'#E24B4A',max:2}], extract:function(v){return parseFloat(v);}, mn:0.4, mx:1.6 },
+  'bmi-children':   { zones:[{l:'Under',c:'#378ADD',max:14},{l:'Healthy',c:'#639922',max:19},{l:'Over',c:'#EF9F27',max:23},{l:'Obese',c:'#E24B4A',max:40}], extract:function(v){return parseFloat(v);}, mn:10, mx:35 },
+
+  // Body composition — body fat %
+  'army-body-fat':  { zones:[{l:'Essential',c:'#378ADD',max:6},{l:'Athletic',c:'#639922',max:14},{l:'Fit',c:'#8fb833',max:18},{l:'Average',c:'#EF9F27',max:25},{l:'Obese',c:'#E24B4A',max:50}], extract:function(v){return parseFloat(v);}, mn:2, mx:40 },
+
+  // Weight gauges
+  'ideal-weight':   { type:'simple', low:'Below ideal', good:'Ideal range', high:'Above ideal', extract:function(v){ var n=parseFloat(v); return isNaN(n)?null:n; } },
+  'lean-body-mass': { type:'simple', low:'Low', good:'Good', high:'High', extract:function(v){ var n=parseFloat(v); return isNaN(n)?null:n; } },
+  'waist-to-height':{ zones:[{l:'Low risk',c:'#639922',max:0.5},{l:'Increased',c:'#EF9F27',max:0.6},{l:'High risk',c:'#E24B4A',max:1}], extract:function(v){return parseFloat(v);}, mn:0.3, mx:0.8 },
+  'waist-to-hip':   { zones:[{l:'Low',c:'#639922',max:0.85},{l:'Moderate',c:'#EF9F27',max:0.95},{l:'High',c:'#E24B4A',max:1.2}], extract:function(v){return parseFloat(v);}, mn:0.6, mx:1.1 },
+  'body-surface-area':{ type:'simple', low:'Low', good:'Average', high:'High', extract:function(v){ return parseFloat(v); } },
+
+  // Nutrition — calories
+  'calorie-deficit':{ type:'simple', low:'Too low', good:'Safe deficit', high:'Too aggressive', extract:function(v){ return parseFloat(v); } },
+  'calorie-surplus':{ type:'simple', low:'Too low', good:'Lean bulk', high:'Aggressive bulk', extract:function(v){ return parseFloat(v); } },
+  'resting-metabolic-rate':{ zones:[{l:'Low',c:'#EF9F27',max:1300},{l:'Average',c:'#639922',max:2000},{l:'High',c:'#378ADD',max:3500}], extract:function(v){return parseFloat(v);}, mn:800, mx:3000 },
+  'calorie-burn-exercise':{ zones:[{l:'Light',c:'#8fb833',max:300},{l:'Moderate',c:'#EF9F27',max:600},{l:'Intense',c:'#E24B4A',max:1500}], extract:function(v){return parseFloat(v);}, mn:0, mx:1200 },
+  'calorie-intake-children':{ type:'simple', low:'Below needs', good:'On target', high:'Above needs', extract:function(v){ return parseFloat(v); } },
+  'alcohol-units':  { zones:[{l:'Low risk',c:'#639922',max:14},{l:'Moderate',c:'#EF9F27',max:21},{l:'High risk',c:'#E24B4A',max:50}], extract:function(v){return parseFloat(v);}, mn:0, mx:35 },
+
+  // Nutrition — macros
+  'protein-intake': { zones:[{l:'Low',c:'#E24B4A',max:1.2},{l:'Adequate',c:'#EF9F27',max:1.6},{l:'Optimal',c:'#639922',max:2.4},{l:'High',c:'#378ADD',max:4}], extract:function(v){return parseFloat(v);}, mn:0, mx:3 },
+  'fat-intake':     { type:'simple', low:'Too low', good:'Healthy range', high:'Too high', extract:function(v){ return parseFloat(v); } },
+  'carb-intake':    { type:'simple', low:'Very low', good:'Balanced', high:'High carb', extract:function(v){ return parseFloat(v); } },
+  'fiber-intake':   { zones:[{l:'Low',c:'#E24B4A',max:15},{l:'Adequate',c:'#EF9F27',max:25},{l:'Optimal',c:'#639922',max:38},{l:'High',c:'#378ADD',max:60}], extract:function(v){return parseFloat(v);}, mn:0, mx:50 },
+
+  // Fitness
+  'heart-rate-zones':{ zones:[{l:'Rest',c:'#378ADD',max:100},{l:'Z1',c:'#639922',max:130},{l:'Z2',c:'#8fb833',max:150},{l:'Z3',c:'#EF9F27',max:170},{l:'Z4-5',c:'#E24B4A',max:220}], extract:function(v){return parseFloat(v);}, mn:60, mx:200 },
+  'vo2max':         { zones:[{l:'Poor',c:'#E24B4A',max:30},{l:'Fair',c:'#EF9F27',max:40},{l:'Good',c:'#8fb833',max:50},{l:'Excellent',c:'#639922',max:60},{l:'Elite',c:'#378ADD',max:90}], extract:function(v){return parseFloat(v);}, mn:15, mx:75 },
+  'one-rep-max':    { type:'simple', low:'Beginner', good:'Intermediate', high:'Advanced', extract:function(v){ return parseFloat(v); } },
+  'running-pace':   { zones:[{l:'Walk',c:'#378ADD',max:8},{l:'Jog',c:'#639922',max:12},{l:'Run',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:20},{l:'Elite',c:'#E24B4A',max:35}], extract:function(v){return parseFloat(v);}, mn:4, mx:25 },
+  'steps-to-calories':{ zones:[{l:'Low',c:'#EF9F27',max:150},{l:'Active',c:'#8fb833',max:400},{l:'Very active',c:'#639922',max:800}], extract:function(v){return parseFloat(v);}, mn:0, mx:700 },
+  'push-up-test':   { zones:[{l:'Poor',c:'#E24B4A',max:10},{l:'Fair',c:'#EF9F27',max:20},{l:'Good',c:'#8fb833',max:35},{l:'Excellent',c:'#639922',max:60}], extract:function(v){return parseFloat(v);}, mn:0, mx:50 },
+  'pace-to-speed':  { zones:[{l:'Walking',c:'#378ADD',max:7},{l:'Jogging',c:'#639922',max:12},{l:'Running',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:22},{l:'Elite',c:'#E24B4A',max:35}], extract:function(v){return parseFloat(v);}, mn:4, mx:28 },
+
+  // Wellness
+  'sleep-calculator':{ zones:[{l:'Too little',c:'#E24B4A',max:5},{l:'Below ideal',c:'#EF9F27',max:7},{l:'Optimal',c:'#639922',max:9},{l:'Too much',c:'#EF9F27',max:12}], extract:function(v){return parseFloat(v);}, mn:3, mx:11 },
+  'nicotine-calculator':{ zones:[{l:'Low',c:'#8fb833',max:10},{l:'Moderate',c:'#EF9F27',max:20},{l:'High',c:'#E24B4A',max:60}], extract:function(v){return parseFloat(v);}, mn:0, mx:45 },
+  'due-date':       null,
+  'pregnancy-weight':{ type:'simple', low:'Below target', good:'On track', high:'Above target', extract:function(v){ return parseFloat(v); } },
+};
+
+function drawGauge(calcId, result) {
+  var wrap = document.getElementById('gauge-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  wrap.style.display = 'none';
+  if (!result || !result.value) return;
+
+  var cfg = GAUGES[calcId];
+  if (!cfg) return;
+
+  var numVal = cfg.extract(result.value);
+  if (isNaN(numVal) || numVal === null) return;
+
+  // Zone-based gauge (like BMI gauge in original)
+  if (cfg.zones) {
+    var mn = cfg.mn, mx = cfg.mx;
+    var pct = Math.max(1, Math.min(99, (numVal - mn) / (mx - mn) * 100));
+    var activeCat = cfg.zones[cfg.zones.length - 1];
+    for (var i = 0; i < cfg.zones.length; i++) {
+      if (numVal < cfg.zones[i].max) { activeCat = cfg.zones[i]; break; }
+    }
+
+    // Build segments
+    var segs = cfg.zones.map(function(z, i) {
+      var prev = i === 0 ? mn : cfg.zones[i-1].max;
+      var w = ((Math.min(z.max, mx) - prev) / (mx - mn) * 100).toFixed(1);
+      var isActive = (activeCat === z);
+      return '<div class="gauge-zone-seg' + (isActive ? ' active' : '') + '" style="width:' + w + '%;background:' + z.c + ';opacity:' + (isActive ? 1 : 0.28) + ';"></div>';
+    }).join('');
+
+    // Zone labels
+    var labelHtml = '<div class="gauge-labels">';
+    cfg.zones.forEach(function(z) { labelHtml += '<span>' + z.l + '</span>'; });
+    labelHtml += '</div>';
+
+    wrap.innerHTML =
+      '<div class="gauge-pointer-row"><div class="gauge-dot" style="left:' + pct.toFixed(1) + '%"></div></div>' +
+      '<div class="gauge-zone-row">' + segs + '</div>' +
+      labelHtml +
+      '<div style="margin-top:6px;font-size:13px;font-weight:700;color:' + activeCat.c + ';">' + activeCat.l + '</div>';
+    wrap.style.display = 'block';
+
+  } else if (cfg.type === 'simple') {
+    // Simple 3-zone good/bad bar — we just show a progress-style bar with color
+    var color = '#639922'; // green default
+    var label = cfg.good;
+    // We can't know good/bad without domain min/max so just show a clean bar
+    var barPct = Math.max(5, Math.min(95, (numVal % 100)));
+    wrap.innerHTML =
+      '<div class="gauge-track"><div class="gauge-fill" style="width:' + barPct + '%;background:' + color + ';"></div></div>' +
+      '<div style="font-size:11px;color:rgba(0,0,0,0.45);margin-top:2px;">' + label + '</div>';
+    wrap.style.display = 'block';
+  }
+}
+
+// ── Override runCalc to also draw gauge ──────
+
+var _origRunCalc = runCalc;
 function runCalc() {
   if (!currentCalc) return;
   var formData = {};
   currentCalc.fields.forEach(function(field) {
     var el = document.getElementById(field.id);
     formData[field.id] = el ? el.value : '';
-    // Collect unit selector value if present
     if (field.unit) {
       var unitEl = document.getElementById(field.unit.id);
       formData[field.unit.id] = unitEl ? unitEl.value : field.unit.options[0][0];
@@ -376,9 +472,11 @@ function runCalc() {
 
   var resultBox = document.getElementById('result-box');
   var errorBox = document.getElementById('error-box');
+  var gaugeWrap = document.getElementById('gauge-wrap');
 
   if (result === null || result === undefined) {
     resultBox.style.display = 'none';
+    if (gaugeWrap) gaugeWrap.style.display = 'none';
     errorBox.style.display = 'block';
     return;
   }
@@ -390,7 +488,6 @@ function runCalc() {
   catEl.textContent = result.category || '';
   catEl.style.display = result.category ? '' : 'none';
 
-  // Interpretation block
   var interp = document.getElementById('result-interpretation');
   if (!interp) {
     interp = document.createElement('div');
@@ -402,10 +499,11 @@ function runCalc() {
   interp.style.display = result.interpretation ? '' : 'none';
 
   resultBox.style.display = 'block';
-}
 
-// Init
-var id = getParam('id');
+  // Draw gauge
+  var id = getParam('id');
+  drawGauge(id, result);
+}
 if (id && CALCULATORS[id]) {
   renderCalc(id, CALCULATORS[id]);
 } else {
@@ -556,12 +654,6 @@ document.addEventListener('click', function(e) {
     }
   });
 })();
-</script>
-<script>
-function openMobileMenu(){var m=document.getElementById('mobile-menu');if(!m)return;m.style.cssText='display:flex !important;position:fixed;top:0;left:0;right:0;bottom:0;background:#ffffff;z-index:9999;flex-direction:column;overflow-y:auto;visibility:visible;';m.classList.add('open');var b=document.getElementById('hamburger');if(b){b.classList.add('open');b.setAttribute('aria-expanded','true');}document.body.style.overflow='hidden';setTimeout(function(){var s=document.getElementById('mob-search');if(s)s.focus();},50);}
-function closeMobileMenu(){var m=document.getElementById('mobile-menu');if(!m)return;m.style.cssText='display:none !important;visibility:hidden;';m.classList.remove('open');var b=document.getElementById('hamburger');if(b){b.classList.remove('open');b.setAttribute('aria-expanded','false');}document.body.style.overflow='';}
-function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!body)return;if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,12);body.innerHTML=m.length?m.map(function(c){return'<a href="'+c.url+'">'+c.name+' <span>\u2197</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none;">No results for \"'+q+'\"</a>';}}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 </script>
 </body>
 </html>
