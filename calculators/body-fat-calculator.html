@@ -45,8 +45,28 @@
       <div class="hdr-search-results" id="hdr-results"></div>
     </div>
     <a href="#" class="nav-cta" onclick="goRandom(event)">Try Random ↗</a>
-  </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="openMobileMenu()"><span></span><span></span><span></span></button></div>
 </header>
+
+<div id="mobile-menu" style="display:none !important;visibility:hidden;position:fixed;top:0;left:0;right:0;bottom:0;background:#ffffff;z-index:9999;flex-direction:column;overflow-y:auto;">
+  <div class="mobile-menu-header"><span class="logo">FitMetrics</span><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close">&#10005;</button></div>
+  <div class="mobile-menu-search"><input type="text" id="mob-search" placeholder="Search 36 calculators..." oninput="mobileSearch(this.value)" autocomplete="off"></div>
+  <div class="mobile-menu-body" id="mob-body">
+    <a href="bmi-calculator.html">BMI Calculator <span>&#8599;</span></a>
+    <a href="tdee-calculator.html">TDEE Calculator <span>&#8599;</span></a>
+    <a href="macro-calculator.html">Macro Calculator <span>&#8599;</span></a>
+    <a href="body-fat-calculator.html">Body Fat Calculator <span>&#8599;</span></a>
+    <a href="water-calculator.html">Water Intake <span>&#8599;</span></a>
+    <a href="age-calculator.html">Age Calculator <span>&#8599;</span></a>
+    <a href="percentage-calculator.html">Percentage Calculator <span>&#8599;</span></a>
+    <a href="../calculator.html?id=calorie-deficit">Calorie Deficit <span>&#8599;</span></a>
+    <a href="../calculator.html?id=protein-intake">Protein Intake <span>&#8599;</span></a>
+    <a href="../calculator.html?id=heart-rate-zones">Heart Rate Zones <span>&#8599;</span></a>
+    <a href="../calculator.html?id=sleep-calculator">Sleep Calculator <span>&#8599;</span></a>
+    <a href="../calculator.html?id=ideal-weight">Ideal Weight <span>&#8599;</span></a>
+    <a href="../all-calculators.html" style="background:var(--accent);color:var(--ink);font-weight:700;margin-top:8px;">View All 36 Calculators &#8594;</a>
+  </div>
+</div>
 <nav class="breadcrumb" aria-label="breadcrumb">
   <div class="container"><a href="../index.html">Home</a><span class="bc-sep">›</span><a href="../all-calculators.html">Calculators</a><span class="bc-sep">›</span><span>Body Fat Calculator</span></div>
 </nav>
@@ -291,5 +311,11 @@ function calcBF() {
 </script>
 
 <script src="/search.js"></script>
+<script>
+function openMobileMenu(){var m=document.getElementById('mobile-menu');if(!m)return;m.style.cssText='display:flex !important;position:fixed;top:0;left:0;right:0;bottom:0;background:#ffffff;z-index:9999;flex-direction:column;overflow-y:auto;visibility:visible;';m.classList.add('open');var b=document.getElementById('hamburger');if(b){b.classList.add('open');b.setAttribute('aria-expanded','true');}document.body.style.overflow='hidden';setTimeout(function(){var s=document.getElementById('mob-search');if(s)s.focus();},50);}
+function closeMobileMenu(){var m=document.getElementById('mobile-menu');if(!m)return;m.style.cssText='display:none !important;visibility:hidden;';m.classList.remove('open');var b=document.getElementById('hamburger');if(b){b.classList.remove('open');b.setAttribute('aria-expanded','false');}document.body.style.overflow='';}
+function mobileSearch(q){q=(q||'').toLowerCase().trim();var body=document.getElementById('mob-body');if(!body)return;if(!q){body.querySelectorAll('a').forEach(function(a){a.style.display='';});return;}if(typeof CALC_LIST!=='undefined'){var m=CALC_LIST.filter(function(c){return c.name.toLowerCase().includes(q);}).slice(0,12);body.innerHTML=m.length?m.map(function(c){return'<a href="'+c.url+'">'+c.name+' <span>\u2197</span></a>';}).join(''):'<a style="color:var(--ink-muted);pointer-events:none;">No results for \"'+q+'\"</a>';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
+</script>
 </body>
 </html>
