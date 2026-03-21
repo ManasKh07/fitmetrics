@@ -114,17 +114,7 @@ function openMobileMenu() {
   var menu = document.getElementById('mobile-menu');
   var btn = document.getElementById('hamburger');
   if (!menu) return;
-  menu.style.display = 'flex';
-  menu.style.position = 'fixed';
-  menu.style.inset = '0';
-  menu.style.top = '0';
-  menu.style.left = '0';
-  menu.style.right = '0';
-  menu.style.bottom = '0';
-  menu.style.background = '#ffffff';
-  menu.style.zIndex = '9999';
-  menu.style.flexDirection = 'column';
-  menu.style.overflowY = 'auto';
+  menu.style.cssText = 'display:flex !important;position:fixed;top:0;left:0;right:0;bottom:0;background:#ffffff;z-index:9999;flex-direction:column;overflow-y:auto;visibility:visible;';
   menu.classList.add('open');
   if (btn) { btn.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
   document.body.style.overflow = 'hidden';
@@ -138,7 +128,7 @@ function closeMobileMenu() {
   var menu = document.getElementById('mobile-menu');
   var btn = document.getElementById('hamburger');
   if (!menu) return;
-  menu.style.display = 'none';
+  menu.style.cssText = 'display:none !important;visibility:hidden;';
   menu.classList.remove('open');
   if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
   document.body.style.overflow = '';
