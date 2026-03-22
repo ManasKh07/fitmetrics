@@ -39,13 +39,11 @@
 
 /* Gauge */
 .calc-gauge { margin-top: 14px; }
-.gauge-track { background: rgba(0,0,0,0.12); border-radius: 999px; height: 10px; overflow: hidden; margin: 4px 0 6px; }
-.gauge-fill { height: 100%; border-radius: 999px; transition: width 0.5s cubic-bezier(.34,1.56,.64,1); }
 .gauge-zone-row { display: flex; gap: 2px; border-radius: 8px; overflow: hidden; height: 18px; margin: 6px 0 3px; }
-.gauge-zone-seg { flex-shrink: 0; transition: opacity .3s; }
-.gauge-zone-seg.active { outline: 2px solid rgba(0,0,0,0.6); outline-offset: 1px; border-radius: 3px; }
+.gauge-zone-seg { flex-shrink: 0; }
+.gauge-zone-seg.gz-active { outline: 2px solid rgba(0,0,0,0.6); outline-offset: 1px; border-radius: 3px; }
 .gauge-pointer-row { position: relative; height: 10px; }
-.gauge-dot { position: absolute; width: 10px; height: 10px; background: var(--ink); border: 2px solid #fff; border-radius: 50%; top: 0; transform: translateX(-50%); transition: left 0.5s cubic-bezier(.34,1.56,.64,1); }
+.gauge-dot { position: absolute; width: 10px; height: 10px; background: #0e0e0e; border: 2px solid #fff; border-radius: 50%; top: 0; transform: translateX(-50%); transition: left 0.5s; }
 .gauge-zone-labels { display: flex; justify-content: space-between; font-size: 10px; color: rgba(0,0,0,0.4); margin-bottom: 4px; }
 .gauge-result-label { font-size: 13px; font-weight: 700; margin-top: 4px; }
 </style>
@@ -395,8 +393,6 @@ function runCalc() {
   interp.style.display = result.interpretation ? '' : 'none';
 
   resultBox.style.display = 'block';
-
-  // Draw gauge
   try { drawGauge(getParam('id'), result); } catch(e) {}
 }
 
@@ -407,38 +403,37 @@ if (id && CALCULATORS[id]) {
 } else {
   renderNotFound(id);
 }
-
-// ── Gauge ────────────────────────────────────
+// ── Gauges ─────────────────────────────────────────────────────────────────
 
 var GAUGE_CONFIGS = {
-  'waist-to-height': { zones:[{l:'Healthy',c:'#639922',max:0.5},{l:'Increased',c:'#EF9F27',max:0.6},{l:'High risk',c:'#E24B4A',max:1}], mn:0.3, mx:0.8 },
-  'waist-to-hip':    { zones:[{l:'Low',c:'#639922',max:0.85},{l:'Moderate',c:'#EF9F27',max:0.95},{l:'High',c:'#E24B4A',max:1.2}], mn:0.6, mx:1.15 },
-  'army-body-fat':   { zones:[{l:'Essential',c:'#378ADD',max:6},{l:'Athletic',c:'#639922',max:14},{l:'Fit',c:'#8fb833',max:18},{l:'Average',c:'#EF9F27',max:25},{l:'Obese',c:'#E24B4A',max:50}], mn:2, mx:42 },
-  'bmi-prime':       { zones:[{l:'Low',c:'#378ADD',max:0.74},{l:'Optimal',c:'#639922',max:1.0},{l:'High',c:'#EF9F27',max:1.24},{l:'Very High',c:'#E24B4A',max:2}], mn:0.4, mx:1.6 },
-  'bmi-children':    { zones:[{l:'Under',c:'#378ADD',max:14},{l:'Healthy',c:'#639922',max:19},{l:'Over',c:'#EF9F27',max:23},{l:'Obese',c:'#E24B4A',max:40}], mn:10, mx:35 },
-  'body-surface-area':{ zones:[{l:'Low',c:'#378ADD',max:1.5},{l:'Average',c:'#639922',max:2.2},{l:'High',c:'#EF9F27',max:3}], mn:1.0, mx:2.8 },
-  'resting-metabolic-rate':{ zones:[{l:'Low',c:'#EF9F27',max:1300},{l:'Average',c:'#639922',max:2000},{l:'High',c:'#378ADD',max:3500}], mn:800, mx:3000 },
-  'calorie-burn-exercise':{ zones:[{l:'Light',c:'#8fb833',max:300},{l:'Moderate',c:'#EF9F27',max:600},{l:'Intense',c:'#E24B4A',max:1500}], mn:0, mx:1200 },
-  'alcohol-units':   { zones:[{l:'Low risk',c:'#639922',max:14},{l:'Moderate',c:'#EF9F27',max:21},{l:'High risk',c:'#E24B4A',max:50}], mn:0, mx:40 },
-  'protein-intake':  { zones:[{l:'Low',c:'#E24B4A',max:1.2},{l:'Adequate',c:'#EF9F27',max:1.6},{l:'Optimal',c:'#639922',max:2.4},{l:'High',c:'#378ADD',max:4}], mn:0, mx:3.5 },
-  'fiber-intake':    { zones:[{l:'Low',c:'#E24B4A',max:15},{l:'Adequate',c:'#EF9F27',max:25},{l:'Optimal',c:'#639922',max:38},{l:'High',c:'#378ADD',max:60}], mn:0, mx:55 },
-  'vo2max':          { zones:[{l:'Poor',c:'#E24B4A',max:30},{l:'Fair',c:'#EF9F27',max:40},{l:'Good',c:'#8fb833',max:50},{l:'Excellent',c:'#639922',max:60},{l:'Elite',c:'#378ADD',max:90}], mn:15, mx:75 },
-  'one-rep-max':     { zones:[{l:'Beginner',c:'#EF9F27',max:60},{l:'Intermediate',c:'#8fb833',max:100},{l:'Advanced',c:'#639922',max:160},{l:'Elite',c:'#378ADD',max:300}], mn:0, mx:220 },
-  'push-up-test':    { zones:[{l:'Poor',c:'#E24B4A',max:10},{l:'Fair',c:'#EF9F27',max:20},{l:'Good',c:'#8fb833',max:35},{l:'Excellent',c:'#639922',max:60}], mn:0, mx:55 },
-  'steps-to-calories':{ zones:[{l:'Low',c:'#EF9F27',max:200},{l:'Active',c:'#8fb833',max:500},{l:'Very active',c:'#639922',max:1000}], mn:0, mx:800 },
-  'running-pace':    { zones:[{l:'Walk',c:'#378ADD',max:7},{l:'Jog',c:'#639922',max:12},{l:'Run',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:22},{l:'Elite',c:'#E24B4A',max:35}], mn:4, mx:28 },
-  'pace-to-speed':   { zones:[{l:'Walk',c:'#378ADD',max:7},{l:'Jog',c:'#639922',max:12},{l:'Run',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:22},{l:'Elite',c:'#E24B4A',max:35}], mn:4, mx:28 },
-  'heart-rate-zones':{ zones:[{l:'Rest',c:'#378ADD',max:100},{l:'Zone 1',c:'#639922',max:130},{l:'Zone 2',c:'#8fb833',max:150},{l:'Zone 3',c:'#EF9F27',max:170},{l:'Zone 4-5',c:'#E24B4A',max:220}], mn:60, mx:200 },
-  'sleep-calculator':{ zones:[{l:'Too little',c:'#E24B4A',max:5},{l:'Below ideal',c:'#EF9F27',max:7},{l:'Optimal',c:'#639922',max:9},{l:'Too much',c:'#EF9F27',max:12}], mn:3, mx:11 },
-  'nicotine-calculator':{ zones:[{l:'Low',c:'#8fb833',max:10},{l:'Moderate',c:'#EF9F27',max:20},{l:'High',c:'#E24B4A',max:60}], mn:0, mx:50 },
-  'calorie-deficit': { zones:[{l:'Mild',c:'#8fb833',max:1800},{l:'Moderate',c:'#639922',max:2200},{l:'Aggressive',c:'#EF9F27',max:2800},{l:'Too low',c:'#E24B4A',max:4000}], mn:1000, mx:3500 },
-  'calorie-surplus': { zones:[{l:'Lean bulk',c:'#639922',max:2800},{l:'Moderate',c:'#8fb833',max:3200},{l:'Aggressive',c:'#EF9F27',max:4000}], mn:2000, mx:3800 },
-  'ideal-weight':    { zones:[{l:'Light',c:'#378ADD',max:55},{l:'Average',c:'#639922',max:80},{l:'Heavy',c:'#EF9F27',max:120}], mn:40, mx:110 },
-  'lean-body-mass':  { zones:[{l:'Low',c:'#EF9F27',max:45},{l:'Average',c:'#639922',max:70},{l:'High',c:'#378ADD',max:120}], mn:30, mx:100 },
-  'pregnancy-weight':{ zones:[{l:'Below',c:'#EF9F27',max:8},{l:'On track',c:'#639922',max:16},{l:'Above',c:'#E24B4A',max:30}], mn:0, mx:25 },
-  'fat-intake':      { zones:[{l:'Very low',c:'#378ADD',max:40},{l:'Healthy',c:'#639922',max:80},{l:'High',c:'#EF9F27',max:150}], mn:20, mx:130 },
-  'carb-intake':     { zones:[{l:'Very low',c:'#378ADD',max:50},{l:'Moderate',c:'#639922',max:200},{l:'High',c:'#EF9F27',max:400}], mn:20, mx:350 },
-  'calorie-intake-children':{ zones:[{l:'Below needs',c:'#EF9F27',max:1400},{l:'On target',c:'#639922',max:2200},{l:'Above needs',c:'#E24B4A',max:3500}], mn:1000, mx:3000 },
+  'waist-to-height':      {zones:[{l:'Healthy',c:'#639922',max:0.5},{l:'Increased',c:'#EF9F27',max:0.6},{l:'High risk',c:'#E24B4A',max:1}],mn:0.3,mx:0.8},
+  'waist-to-hip':         {zones:[{l:'Low',c:'#639922',max:0.85},{l:'Moderate',c:'#EF9F27',max:0.95},{l:'High',c:'#E24B4A',max:1.2}],mn:0.6,mx:1.15},
+  'army-body-fat':        {zones:[{l:'Essential',c:'#378ADD',max:6},{l:'Athletic',c:'#639922',max:14},{l:'Fit',c:'#8fb833',max:18},{l:'Average',c:'#EF9F27',max:25},{l:'Obese',c:'#E24B4A',max:50}],mn:2,mx:42},
+  'bmi-prime':            {zones:[{l:'Low',c:'#378ADD',max:0.74},{l:'Optimal',c:'#639922',max:1.0},{l:'High',c:'#EF9F27',max:1.24},{l:'Very High',c:'#E24B4A',max:2}],mn:0.4,mx:1.6},
+  'bmi-children':         {zones:[{l:'Under',c:'#378ADD',max:14},{l:'Healthy',c:'#639922',max:19},{l:'Over',c:'#EF9F27',max:23},{l:'Obese',c:'#E24B4A',max:40}],mn:10,mx:35},
+  'body-surface-area':    {zones:[{l:'Low',c:'#378ADD',max:1.5},{l:'Average',c:'#639922',max:2.2},{l:'High',c:'#EF9F27',max:3}],mn:1.0,mx:2.8},
+  'lean-body-mass':       {zones:[{l:'Low',c:'#EF9F27',max:45},{l:'Average',c:'#639922',max:70},{l:'High',c:'#378ADD',max:120}],mn:30,mx:100},
+  'ideal-weight':         {zones:[{l:'Light frame',c:'#378ADD',max:55},{l:'Average',c:'#639922',max:80},{l:'Heavy frame',c:'#EF9F27',max:120}],mn:40,mx:110},
+  'resting-metabolic-rate':{zones:[{l:'Low',c:'#EF9F27',max:1300},{l:'Average',c:'#639922',max:2000},{l:'High',c:'#378ADD',max:3500}],mn:800,mx:3000},
+  'calorie-deficit':      {zones:[{l:'Very low',c:'#E24B4A',max:1400},{l:'Mild deficit',c:'#8fb833',max:1900},{l:'Moderate',c:'#639922',max:2400},{l:'Aggressive',c:'#EF9F27',max:3500}],mn:1000,mx:3200},
+  'calorie-surplus':      {zones:[{l:'Maintenance',c:'#8fb833',max:2600},{l:'Lean bulk',c:'#639922',max:3000},{l:'Aggressive',c:'#EF9F27',max:4000}],mn:2000,mx:3800},
+  'protein-intake':       {zones:[{l:'Low',c:'#E24B4A',max:1.2},{l:'Adequate',c:'#EF9F27',max:1.6},{l:'Optimal',c:'#639922',max:2.4},{l:'High',c:'#378ADD',max:4}],mn:0,mx:3.5},
+  'fat-intake':           {zones:[{l:'Very low',c:'#378ADD',max:40},{l:'Healthy',c:'#639922',max:80},{l:'High',c:'#EF9F27',max:150}],mn:20,mx:130},
+  'carb-intake':          {zones:[{l:'Very low',c:'#378ADD',max:50},{l:'Moderate',c:'#639922',max:200},{l:'High',c:'#EF9F27',max:400}],mn:20,mx:350},
+  'fiber-intake':         {zones:[{l:'Low',c:'#E24B4A',max:15},{l:'Adequate',c:'#EF9F27',max:25},{l:'Optimal',c:'#639922',max:38},{l:'High',c:'#378ADD',max:60}],mn:0,mx:55},
+  'calorie-burn-exercise':{zones:[{l:'Light',c:'#8fb833',max:300},{l:'Moderate',c:'#EF9F27',max:600},{l:'Intense',c:'#E24B4A',max:1500}],mn:0,mx:1200},
+  'calorie-intake-children':{zones:[{l:'Below needs',c:'#EF9F27',max:1400},{l:'On target',c:'#639922',max:2200},{l:'Above',c:'#E24B4A',max:3500}],mn:1000,mx:3000},
+  'alcohol-units':        {zones:[{l:'Low risk',c:'#639922',max:14},{l:'Moderate',c:'#EF9F27',max:21},{l:'High risk',c:'#E24B4A',max:50}],mn:0,mx:40},
+  'heart-rate-zones':     {zones:[{l:'Rest',c:'#378ADD',max:100},{l:'Zone 1',c:'#639922',max:130},{l:'Zone 2',c:'#8fb833',max:150},{l:'Zone 3',c:'#EF9F27',max:170},{l:'Zone 4-5',c:'#E24B4A',max:220}],mn:60,mx:200},
+  'vo2max':               {zones:[{l:'Poor',c:'#E24B4A',max:30},{l:'Fair',c:'#EF9F27',max:40},{l:'Good',c:'#8fb833',max:50},{l:'Excellent',c:'#639922',max:60},{l:'Elite',c:'#378ADD',max:90}],mn:15,mx:75},
+  'one-rep-max':          {zones:[{l:'Beginner',c:'#EF9F27',max:60},{l:'Intermediate',c:'#8fb833',max:100},{l:'Advanced',c:'#639922',max:160},{l:'Elite',c:'#378ADD',max:300}],mn:0,mx:220},
+  'push-up-test':         {zones:[{l:'Poor',c:'#E24B4A',max:10},{l:'Fair',c:'#EF9F27',max:20},{l:'Good',c:'#8fb833',max:35},{l:'Excellent',c:'#639922',max:60}],mn:0,mx:55},
+  'running-pace':         {zones:[{l:'Walk',c:'#378ADD',max:7},{l:'Jog',c:'#639922',max:12},{l:'Run',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:22},{l:'Elite',c:'#E24B4A',max:35}],mn:4,mx:28},
+  'pace-to-speed':        {zones:[{l:'Walk',c:'#378ADD',max:7},{l:'Jog',c:'#639922',max:12},{l:'Run',c:'#8fb833',max:16},{l:'Fast',c:'#EF9F27',max:22},{l:'Elite',c:'#E24B4A',max:35}],mn:4,mx:28},
+  'steps-to-calories':    {zones:[{l:'Low',c:'#EF9F27',max:200},{l:'Active',c:'#8fb833',max:500},{l:'Very active',c:'#639922',max:1000}],mn:0,mx:800},
+  'sleep-calculator':     {zones:[{l:'Too little',c:'#E24B4A',max:5},{l:'Below ideal',c:'#EF9F27',max:7},{l:'Optimal',c:'#639922',max:9},{l:'Too much',c:'#EF9F27',max:12}],mn:3,mx:11},
+  'nicotine-calculator':  {zones:[{l:'Low',c:'#8fb833',max:10},{l:'Moderate',c:'#EF9F27',max:20},{l:'High',c:'#E24B4A',max:60}],mn:0,mx:50},
+  'pregnancy-weight':     {zones:[{l:'Below',c:'#EF9F27',max:8},{l:'On track',c:'#639922',max:16},{l:'Above',c:'#E24B4A',max:30}],mn:0,mx:25}
 };
 
 function drawGauge(calcId, result) {
@@ -446,43 +441,31 @@ function drawGauge(calcId, result) {
   if (!wrap) return;
   wrap.innerHTML = '';
   wrap.style.display = 'none';
-
   var cfg = GAUGE_CONFIGS[calcId];
   if (!cfg || !result || !result.value) return;
-
-  // Extract first number from value string
   var numVal = parseFloat(String(result.value).replace(/[^0-9.\-]/g, ''));
   if (isNaN(numVal)) return;
-
-  var mn = cfg.mn, mx = cfg.mx;
-  var zones = cfg.zones;
+  var mn = cfg.mn, mx = cfg.mx, zones = cfg.zones;
   var pct = Math.max(1, Math.min(99, (numVal - mn) / (mx - mn) * 100));
-
-  // Find active zone
   var activeCat = zones[zones.length - 1];
   for (var i = 0; i < zones.length; i++) {
     if (numVal < zones[i].max) { activeCat = zones[i]; break; }
   }
-
-  // Build zone segments
   var segs = zones.map(function(z, i) {
     var prev = i === 0 ? mn : zones[i-1].max;
     var w = ((Math.min(z.max, mx) - Math.max(prev, mn)) / (mx - mn) * 100).toFixed(1);
-    var isActive = activeCat === z;
-    return '<div class="gauge-zone-seg' + (isActive ? ' active' : '') + '" style="width:' + w + '%;background:' + z.c + ';opacity:' + (isActive ? '1' : '0.25') + ';"></div>';
+    var isAct = activeCat === z;
+    return '<div class="gauge-zone-seg' + (isAct ? ' gz-active' : '') + '" style="width:' + w + '%;background:' + z.c + ';opacity:' + (isAct ? '1' : '0.25') + ';"></div>';
   }).join('');
-
-  // Zone labels
-  var lbls = zones.map(function(z){ return '<span>' + z.l + '</span>'; }).join('');
-
+  var lbls = zones.map(function(z) { return '<span>' + z.l + '</span>'; }).join('');
   wrap.innerHTML =
     '<div class="gauge-pointer-row"><div class="gauge-dot" style="left:' + pct.toFixed(1) + '%"></div></div>' +
     '<div class="gauge-zone-row">' + segs + '</div>' +
     '<div class="gauge-zone-labels">' + lbls + '</div>' +
     '<div class="gauge-result-label" style="color:' + activeCat.c + ';">' + activeCat.l + '</div>';
-
   wrap.style.display = 'block';
 }
+
 
 // FitMetrics — search.js
 // Loaded on every page. Works standalone — no redirect needed.
